@@ -1,0 +1,23 @@
+# What reweighting retained experts cannot recover
+
+The real layer-0 Qwen route capture lets us put a generous floor under a tempting cheap MoE map. Keep only some of the eight routed down outputs, and try to repair the missing outputs by changing the retained experts' scalar coefficients. Even coefficients chosen after seeing the complete answer leave substantial error. The experiment uses the selected GGUF runtime's actual output vectors and router scores, not official BF16 weights or synthetic routes.
+
+For a token, let `v_i = score_i * down_i` in FP64, with `y = sum_i v_i`. Given retained indices `S`, any scalar reweighting of those outputs lies in `span{v_i : i in S}`. The orthogonal projection of `y` onto that span is the unique minimum-error response in this family, up to non-unique coefficients when the vectors are dependent. Its residual is perpendicular to every retained vector; by Pythagoras no other choice of scalar coefficients has less squared error. We solve each token separately with FP64 least squares and give the oracle the complete eight-output target. These oracle coefficients cannot be produced without extra prediction work and are **not** an executable speedup.
+
+For `k=1,2,4`, a second oracle also chooses the best `k` of all eight outputs *after* seeing all eight. This bounds even a perfect dynamic subset selector plus arbitrary per-token scalar reweighting, but its decision itself requires information from outputs that a skipping engine would not compute. It is not a bound on vector corrections, shared learned representations, replacing the down matrices, or a final-logit observer.
+
+| Retained count | Held score-sum RMS | Held train-fitted global scalar RMS | Held per-token top-score-span oracle RMS | Held best-subset-and-coefficients oracle RMS | Conditional whole-model weight bytes/token |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 1 | .67903 | .66767 | .65345 | .55501 | 2.091 GB |
+| 2 | .47323 | .46240 | .44593 | .37081 | 2.168 GB |
+| 4 | .26429 | .26075 | .25394 | .20421 | 2.320 GB |
+| 6 | .13833 | .13751 | .13488 | not searched | 2.473 GB |
+| 7 | .08363 | .08341 | .08228 | not searched | 2.550 GB |
+
+These are ratios of summed squared FP64 output error to summed squared FP64 complete routed output over 126 held tokens. The fit set has 113 different tokens. At four experts, even the hindsight best subset and coefficients discard 20.4% relative RMS of this local routed sum. Reweighting the four highest-scored outputs only moves .2643 to a best-case .2539. The train-fitted scalar changes .2643 to .2608; it is a tiny improvement that cannot recover the missing directions. The six- and seven-output rows similarly show little scalar headroom. The best-subset lower floor does *not* say that top-score selection is optimal; its lower .2042 shows some selection headroom, but it requires a predictor and does not rescue this scalar-only map on the observed local metric.
+
+The byte column retains the 2.015 GB nonexpert stream and charges one full selected-expert image read per survivor, as in [the route-capture report](qwen-moe-routes.md). Four survivors save at most 306 MB, or 11.6% of the conditional 2.626 GB complete weight stream, before selection, routing, state and head work. A real grouped-expert runtime can cache or coalesce differently. Neither the byte ratio nor this local error is a measured latency or language-quality result. Approximate output arithmetic also does not preserve FP32 bits. The dense sub-bit pilot's complete-image quality failures are why this isolated layer-0 error must not select a model image.
+
+The input/output hashes, both text and token identities, pinned GGUF hash, script hash, scalar fits, all oracle arms and basis condition numbers are in [`data/qwen-moe/omission-span/receipt.json`](../../data/qwen-moe/omission-span/receipt.json). The source is `tools/qwen-moe/omission_span.py`. Reproduce on CPU with `OPENBLAS_NUM_THREADS=1 python3 tools/qwen-moe/omission_span.py ../../data/qwen-moe/route-capture --out ../../data/qwen-moe/omission-span/receipt.json`. No GPU, executable, model, installed runtime or service changed.
+
+The next useful question is not another scalar rescore of these eight vectors. A cheaper output requires a new *direction*: predict an omitted contribution from producer activations in a paid compressed coordinate, or train expert codes against the composed downstream observation on much more disjoint text. Match its complete-model quality and charged online work before native integration. The nearby [actual-route rank result](../kelana/research/moe/real-sum-rank/README.md) warns against fitting a new basis to this short capture alone.

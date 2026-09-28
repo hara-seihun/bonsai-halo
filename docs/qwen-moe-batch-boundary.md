@@ -1,0 +1,17 @@
+# The Qwen batch-logit graph cut needs no tensor read
+
+The selected Qwen target's singleton and two-token calls disagree at 248,319 of 248,320 output logit bits on the first continuation row of the pinned list prompt. The earlier diagnostic found that capturing all forty `ffn_moe_probs` tensors makes the rows agree, but the callback also reads GPU tensors. This panel separates the read from the graph boundary.
+
+I changed only the diagnostic callback, not the selected target runtime. `QWEN_PROBE_CUT_ONLY=1` requests a scheduler graph view ending at the selected node and returns without copying that tensor. `QWEN_PROBE_ROUTER_ONLY=1` excludes every other layer tensor from the earlier probe. The comparison uses the same model, prompt, four singleton-generated tokens, position, context 2048, batch 512, ubatch 256 and flash attention. Each arm enters through `tools/run-batch-compare` and restores the resident service.
+
+| Callback behavior | Width-two row-1 differing logits | Maximum absolute difference | Singleton winner margin |
+| --- | ---: | ---: | ---: |
+| Never request a cut, callback still installed | 248,319 | .197882652 | 2.09810066 |
+| Cut at every layer's router logits, no read | 248,319 | .197882652 | 2.09810066 |
+| Cut at every layer's normalized router probabilities, no read | **0** | **0** | 2.04358673 |
+
+The width-two winner's logit is 22.37257 in every arm. The singleton map changes when the probability cut is present. The callback's mere presence, its per-node interrogation and an end-of-graph synchronization do not explain the difference; neither does copying the probability tensor to the host. A graph boundary after the normalized probabilities is sufficient to change the singleton computation and make this particular two-token row bit-identical. Cutting before them is not. This is a result about graph execution, **not** proof that the probability kernel itself is numerically wrong. The graph view can alter fusion, backend dispatch, buffer reuse or synchronization downstream. It also does not yet establish that the cut repairs the MTP fork at generated token 71 or that inserting forty barriers would be fast.
+
+The scheduler's callback branch in `ggml-backend.cpp` forms `ggml_graph_view(&split->graph, j0, j1 + 1)`, computes that view, then synchronizes; the ordinary branch computes the full split asynchronously. The new no-read arm isolates the view boundary from `ggml_backend_tensor_get`. The next native experiment should capture backend dispatch identities and intermediate bits on a one-layer, one-token graph around probabilities, selected IDs, weights and first expert output, comparing full graph with an explicitly segmented graph. Observe with preallocated device-side checksums or separate post-execution copies so reading a tensor cannot create the boundary. If the arithmetic map differs at selection/weight application, identify its actual kernel and then test the uninstrumented full target at the token-71 near tie. A branch that keeps plain-greedy semantics needs installed acceptance and full-model timing; this report changes no serving default.
+
+[Receipt and raw wrapper logs](../../data/qwen-moe/acceptance/batch-layer-probe/boundary-receipt.json) retain hashes of the diagnostic source, binary, selected model, wrapper and three final-binary arms. The original capture-based controls and their hashes remain in the adjacent `receipt.json`. The selected runtime and service image were not changed; `systemctl --user is-active bonsai-halo.service` returned `active` after the panel.

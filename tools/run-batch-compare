@@ -1,0 +1,408 @@
+#!/usr/bin/env bash
+# Own the GPU reservation, resident-service pause and bounded process tree for
+# every full-model measurement entry point.
+set -euo pipefail
+root=$(cd "$(dirname "$0")/.." && pwd)
+readonly lock_path=/tmp/kelana-gpu-gpu-measure.lock
+readonly default_memory_gib=28
+readonly memory_headroom_gib=2
+readonly default_host_reserve_gib=8
+readonly minimum_host_reserve_gib=4
+# How long the payload may run before the scope and the `timeout` inside it end it. The default is
+# generous because a sweep is legitimately long; --runtime-max sets it per panel, and an agent whose
+# own tool call is bounded should set it to just over that bound. The reason is the failure this
+# guard exists for: a caller killed mid-panel leaves the payload alive in its systemd scope - the
+# scope outlives the wrapper that created it - still holding the GPU reservation through the
+# inherited fd and still keeping the resident service down, for as long as this value allows.
+runtime_max=20m
+scope_unit="bonsai-batch-compare-$$.scope"
+
+pin_clock=0
+clock_max=
+clock_fix=0
+clock_sweep=
+clock_log=
+memory_gib=$default_memory_gib
+host_reserve_gib=$default_host_reserve_gib
+while true; do
+    case "${1:-}" in
+        --help|-h)
+            printf '%s\n' 'usage: tools/run-batch-compare [--runtime-max 45s] [--memory-gib N] [--host-reserve-gib N] [--pin-clock|--clock-fix MHz] [--clock-log PATH] --exec COMMAND [ARGS...]' '       tools/run-batch-compare [same options] [tools/batch_compare arguments...]' 'Owns the GPU lock and temporarily pauses the resident service; --help has no side effects.'
+            exit 0 ;;
+        --pin-clock) pin_clock=1; shift ;;
+        --runtime-max)
+            runtime_max=${2:?--runtime-max needs a duration like 45s or 20m}
+            [[ "$runtime_max" =~ ^[1-9][0-9]*(s|m|min)?$ ]] || { echo 'run-batch-compare: --runtime-max takes seconds or Nm (45s, 20m)' >&2; exit 2; }
+            shift 2 ;;
+        --clock-max) clock_max=${2:?--clock-max needs MHz}; shift 2 ;;
+        --clock-fix) clock_max=${2:?--clock-fix needs MHz}; clock_fix=1; shift 2 ;;
+        --clock-log) clock_log=${2:?--clock-log needs a path}; shift 2 ;;
+        --clock-sweep) clock_sweep=${2:?--clock-sweep needs a MHz list}; shift 2 ;;
+        --memory-gib) memory_gib=${2:?--memory-gib needs GiB}; shift 2 ;;
+        --host-reserve-gib) host_reserve_gib=${2:?--host-reserve-gib needs GiB}; shift 2 ;;
+        *) break ;;
+    esac
+done
+if [[ ! "$memory_gib" =~ ^[1-9][0-9]{0,3}$ ]] || (( memory_gib < memory_headroom_gib + 2 )); then
+    echo "run-batch-compare: --memory-gib must be an integer of at least $((memory_headroom_gib + 2))" >&2
+    exit 2
+fi
+if [[ ! "$host_reserve_gib" =~ ^[1-9][0-9]{0,3}$ ]] || (( host_reserve_gib < minimum_host_reserve_gib )); then
+    echo "run-batch-compare: --host-reserve-gib must be an integer of at least $minimum_host_reserve_gib" >&2
+    exit 2
+fi
+readonly memory_gib host_reserve_gib
+readonly memory_high_gib=$((memory_gib - memory_headroom_gib))
+readonly memory_high="${memory_high_gib}G"
+readonly memory_max="${memory_gib}G"
+readonly device_max_bytes=$((memory_high_gib * 1024 * 1024 * 1024))
+readonly required_kib=$(((memory_gib + host_reserve_gib) * 1024 * 1024))
+mem_total_kib=$(awk '$1 == "MemTotal:" { print $2 }' /proc/meminfo)
+if [[ -z "$mem_total_kib" ]] || (( required_kib > mem_total_kib )); then
+    printf 'run-batch-compare: the %s GiB process limit plus %s GiB host reserve exceeds physical memory (%s KiB)\n' \
+        "$memory_gib" "$host_reserve_gib" "${mem_total_kib:-unknown}" >&2
+    exit 2
+fi
+if [[ -n "$clock_max" ]]; then
+    if (( clock_max < 600 || clock_max > 2900 )); then
+        echo "run-batch-compare: --clock-max must be 600..2900 MHz (OD_RANGE on gfx1151)" >&2
+        exit 2
+    fi
+    pin_clock=0
+fi
+
+# Consumers of the resident engine take this same file SHARED around admission,
+# so a maintenance holder waits for them by design. A leaked consumer lease is
+# indistinguishable from a live one by age alone, but not by engine state: while
+# bonsai-halo.service is masked AND not running, no shared holder can be serving
+# a request through it and none can be inside a legitimate start, because a
+# masked unit refuses to start. Holders in that state are reaped so a leak in a
+# consumer cannot make this GPU permanently unmeasurable.
+# Observed 2026-09-21: a pi-stack runner-host leaked one lease every five seconds
+# against a masked engine and blocked every exclusive panel on the machine.
+reap_dead_leases() {
+    local state file_state pids p child reaped=0
+    state=$(systemctl --user is-active bonsai-halo.service 2>/dev/null || true)
+    file_state=$(systemctl --user show bonsai-halo.service -p UnitFileState --value 2>/dev/null || true)
+    [[ "$state" != active ]] || return 0
+    [[ "$file_state" == masked || "$file_state" == masked-runtime ]] || return 0
+    mapfile -t pids < <(ps -eo pid,cmd --no-headers |
+        awk -v me="$$" -v lock="$lock_path" \
+            '$2 == "flock" && index($0, "--shared") && index($0, lock) && $1 != me { print $1 }')
+    for p in "${pids[@]}"; do
+        [[ -n "$p" ]] || continue
+        for child in $(pgrep -P "$p" 2>/dev/null); do kill -TERM "$child" 2>/dev/null || true; done
+        kill -TERM "$p" 2>/dev/null || true
+        reaped=$((reaped + 1))
+    done
+    (( reaped == 0 )) || printf 'run-batch-compare: reaped %d consumer lease(s) held against a masked, stopped engine\n' "$reaped" >&2
+}
+
+acquire_lock() {
+    # RUN_BATCH_COMPARE_LOCK_WAIT: seconds to queue behind another holder before exit 75 (default 130).
+    local deadline=$((SECONDS + ${RUN_BATCH_COMPARE_LOCK_WAIT:-130}))
+    while :; do
+        flock -w 5 -E 75 9 && return 0
+        (( SECONDS < deadline )) || return 75
+        reap_dead_leases
+    done
+}
+
+exec 9>"$lock_path"
+acquire_lock || exit 75
+export KELANA_GPU_RESEARCH_LOCK="$lock_path"
+export BONSAI_DEVICE_MEMORY_MAX_BYTES="$device_max_bytes"
+restore=0
+masked_here=0
+# The service is stopped by whichever run finds it up, and every run that starts while a queue is
+# already measuring finds it down and owes nothing. With engineers overlapping, the run that
+# finishes last is almost never the one that stopped it, so the engine stayed down after the queue
+# drained with nobody at fault. This marker carries the debt across the whole queue instead of
+# living in one process: whoever leaves the lock free pays it.
+readonly restore_marker=/tmp/kelana-gpu-gpu-measure.restore
+payload_started=0
+dpm_prior=
+od_set=0
+clock_sampler_pid=
+dpm_path=/sys/class/drm/card0/device/power_dpm_force_performance_level
+od_path=/sys/class/drm/card0/device/pp_od_clk_voltage
+sysfs_write() { printf '%s' "$2" | sudo -n tee "$1" >/dev/null 2>&1; }
+# The gfx clock's DPM governor ramps over seconds from 600 MHz to about 2.85 GHz,
+# so a short panel measures part of the ramp and an arm measured first is measured
+# slower. --pin-clock holds the performance level for the life of the lock and
+# restores the entry value with everything else. docs/clock-power.md has the panel.
+restore_dpm() {
+    local rc=0
+    if (( od_set )); then
+        # Reset the overdrive table before handing the level back, so the next
+        # panel cannot inherit a clock ceiling it never asked for.
+        sysfs_write "$od_path" r && sysfs_write "$od_path" c || {
+            echo 'run-batch-compare: could not reset the sclk overdrive table' >&2
+            rc=1
+        }
+        od_set=0
+    fi
+    if [[ -n "$dpm_prior" ]]; then
+        sysfs_write "$dpm_path" "$dpm_prior" || {
+            echo "run-batch-compare: could not restore performance level to $dpm_prior" >&2
+            rc=1
+        }
+        dpm_prior=
+    fi
+    return $rc
+}
+stop_clock_sampler() {
+    [[ -n "$clock_sampler_pid" ]] || return 0
+    kill -TERM "$clock_sampler_pid" 2>/dev/null || true
+    wait "$clock_sampler_pid" 2>/dev/null || true
+    clock_sampler_pid=
+}
+stop_scope() {
+    local state
+    state=$(systemctl --user show "$scope_unit" -p LoadState --value 2>/dev/null || true)
+    if [[ -z "$state" || "$state" == not-found ]]; then
+        return 0
+    fi
+    systemctl --user stop "$scope_unit" >/dev/null 2>&1
+}
+cleanup() {
+    rc=$?
+    trap - EXIT INT TERM HUP
+    if (( payload_started )); then
+        # The scope uses KillMode=control-group. Stop waits until descendants are
+        # gone, so none can retain driver allocations after fd 9 is released.
+        if ! stop_scope; then
+            systemctl --user kill --kill-whom=all --signal=KILL "$scope_unit" >/dev/null 2>&1 || true
+            stop_scope || rc=1
+        fi
+        systemctl --user reset-failed "$scope_unit" >/dev/null 2>&1 || true
+    fi
+    stop_clock_sampler
+    restore_dpm || rc=1
+    if (( masked_here )); then
+        systemctl --user unmask --runtime bonsai-halo.service || rc=1
+    fi
+    if (( restore )); then : > "$restore_marker"; fi
+    # Recreate the transient unit while still holding the exclusive reservation.
+    # Releasing it first lets the next panel mask the unit between our unmask and
+    # systemd-run; a failed restore then leaves the engine stopped after the queue.
+    if [[ -e "$restore_marker" ]]; then
+        marker_state=$(systemctl --user show bonsai-halo.service -p UnitFileState --value 2>/dev/null || true)
+        if [[ "$marker_state" == masked || "$marker_state" == masked-runtime ]]; then
+            systemctl --user unmask --runtime bonsai-halo.service || rc=1
+        fi
+        if systemctl --user cat bonsai-halo.service >/dev/null 2>&1; then
+            systemctl --user start bonsai-halo.service || rc=1
+        else
+            # The engine runs as a transient unit, so the name has to be free before systemd-run
+            # can recreate it. A run that stopped the service and then exited early (admission
+            # denial, a caller's timeout) leaves the unit loaded-but-inactive, sometimes still
+            # carrying the runtime mask fragment, and systemd-run refuses with "already loaded or
+            # has a fragment file" - which used to leave the lane with no resident engine until
+            # somebody noticed. Clearing it is idempotent and costs nothing when it is already gone.
+            systemctl --user stop bonsai-halo.service >/dev/null 2>&1 || true
+            systemctl --user reset-failed bonsai-halo.service >/dev/null 2>&1 || true
+            systemctl --user daemon-reload >/dev/null 2>&1 || true
+            python3 - <<'PY' || rc=1
+import json
+from pathlib import Path
+import subprocess
+manifest = json.loads((Path.home() / '.pi/agent/local-models.json').read_text())
+start = next(e['start'] for e in manifest['engines'] if e['id'] == 'bonsai-halo')
+subprocess.run(['systemd-run', '--user', '--unit=' + start['unit'],
+                '--working-directory=' + start['cwd'], '--property=Restart=on-failure',
+                *start['command']], check=True)
+PY
+        fi
+        if (( rc == 0 )); then rm -f "$restore_marker"; fi
+    fi
+    exec 9>&-
+    exit "$rc"
+}
+trap cleanup EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
+trap 'exit 129' HUP
+
+if systemctl --user is-active --quiet bonsai-halo.service; then
+    restore=1
+    systemctl --user stop bonsai-halo.service
+fi
+unit_state=$(systemctl --user show bonsai-halo.service -p UnitFileState --value 2>/dev/null || true)
+if [[ "$unit_state" != masked && "$unit_state" != masked-runtime ]]; then
+    systemctl --user mask --runtime bonsai-halo.service
+    masked_here=1
+fi
+if systemctl --user is-active --quiet bonsai-halo.service; then
+    echo 'bonsai-halo restarted during benchmark admission' >&2
+    exit 1
+fi
+
+mem_available_kib=$(awk '$1 == "MemAvailable:" { print $2 }' /proc/meminfo)
+if [[ -n "$mem_available_kib" ]] && (( mem_available_kib < required_kib )); then
+    for ((attempt = 0; attempt < 20 && mem_available_kib < required_kib; attempt++)); do
+        sleep 0.25
+        mem_available_kib=$(awk '$1 == "MemAvailable:" { print $2 }' /proc/meminfo)
+        [[ -n "$mem_available_kib" ]] || break
+    done
+fi
+if [[ -z "$mem_available_kib" ]] || (( mem_available_kib < required_kib )); then
+    printf 'run-batch-compare: admission denied: MemAvailable=%s KiB, need %s KiB for the %s GiB job limit plus %s GiB host reserve\n' \
+        "${mem_available_kib:-unknown}" "$required_kib" "$memory_gib" "$host_reserve_gib" >&2
+    exit 75
+fi
+
+export BONSAI_BENCH_SERVER_PAUSED=1
+export BONSAI_BENCH_SERVER_MASKED=1
+
+set_clock_fix() {
+    # Pin the shader clock at $1 MHz for the rest of this lock hold.
+    [[ -n "$dpm_prior" ]] || dpm_prior=$(cat "$dpm_path")
+    sysfs_write "$dpm_path" manual || { echo 'run-batch-compare: --clock-fix needs passwordless sudo' >&2; return 1; }
+    od_set=1
+    sysfs_write "$od_path" "s 0 $1" && sysfs_write "$od_path" "s 1 $1" && sysfs_write "$od_path" c
+}
+
+if [[ -n "$clock_sweep" ]]; then
+    for mhz in ${clock_sweep//,/ }; do
+        if (( mhz < 600 || mhz > 2900 )); then
+            echo "run-batch-compare: --clock-sweep values must be 600..2900 MHz" >&2
+            exit 2
+        fi
+    done
+fi
+
+if (( pin_clock )) || [[ -n "$clock_max" ]]; then
+    dpm_prior=$(cat "$dpm_path")
+    if (( pin_clock )); then
+        sysfs_write "$dpm_path" high || { dpm_prior=; echo 'run-batch-compare: --pin-clock needs passwordless sudo for the amdgpu performance level' >&2; exit 77; }
+        export BONSAI_CLOCK_PINNED=high
+    else
+        # pp_dpm_sclk level masks are rejected on this APU. The overdrive table is
+        # the one knob that moves the shader clock ceiling while leaving fclk at
+        # 2000 MHz and mclk at 1000 MHz, which is what makes a clock sweep a
+        # measurement of shader sensitivity rather than of the whole memory path.
+        sysfs_write "$dpm_path" manual || { dpm_prior=; echo 'run-batch-compare: --clock-max needs passwordless sudo' >&2; exit 77; }
+        od_set=1
+        # --clock-fix pins the floor as well as the ceiling. Without it the DPM
+        # governor still ramps from 600 MHz over several seconds, so a short
+        # panel measures the ramp instead of the clock it asked for.
+        if (( clock_fix )) && ! sysfs_write "$od_path" "s 0 $clock_max"; then
+            echo "run-batch-compare: the sclk overdrive table refused s 0 $clock_max" >&2
+            exit 77
+        fi
+        if ! { sysfs_write "$od_path" "s 1 $clock_max" && sysfs_write "$od_path" c; }; then
+            echo "run-batch-compare: the sclk overdrive table refused s 1 $clock_max" >&2
+            exit 77
+        fi
+        export BONSAI_CLOCK_PINNED="$( ((clock_fix)) && echo fix || echo max )$clock_max"
+    fi
+fi
+# Every panel is sampled, not only the ones that asked. This is an APU: the CPU,
+# the GPU, the fabric and LPDDR5X share one socket budget, and the SMU resolves
+# contention for it by moving the shader clock. A panel taken beside a peer's
+# twelve-way compile runs several hundred MHz below one taken on a quiet machine,
+# and until 2026-09-22 nothing in a run's output said so. The sampler costs one
+# 20 ms poll of sysfs and prints one line; --clock-log additionally keeps the
+# series. docs/power-budget.md owns the measurement.
+start_clock_sampler() {
+    local args=()
+    if [[ -n "$clock_log" ]]; then
+        local path=${clock_log//@CLK/$1}
+        mkdir -p "$(dirname "$path")"
+        args=(--json "$path")
+    fi
+    # stdout is the full JSON document and goes nowhere; stderr is the one-line
+    # verdict and belongs beside the payload's own output, where a reader of the
+    # panel will see it.
+    python3 "$root/tools/gpu_clock.py" "${args[@]}" sample --duration 1200 >/dev/null &
+    clock_sampler_pid=$!
+}
+cd "$root"
+payload=()
+if [[ "${1:-}" == --engine ]]; then
+    shift
+    payload=("$root/bonsai-halo" "$@")
+elif [[ "${1:-}" == --exec ]]; then
+    # Any GPU probe, under the same lock, service mask, memory admission and
+    # bounded scope as a benchmark. A probe that runs beside the resident engine
+    # is measuring the engine too.
+    shift
+    payload=("$@")
+elif [[ "${1:-}" == --state-check ]]; then
+    shift
+    payload=("$root/tools/direct-commit/sequence_state_check" "$@")
+elif [[ "${1:-}" == --profile-tool || "${1:-}" == --profile-read-check ]]; then
+    profile_tool=batch_profile
+    [[ "$1" != --profile-read-check ]] || profile_tool=profile_read_check
+    shift
+    if [[ -n "${BONSAI_PROFILE_COUNTERS:-}" ]]; then
+        case "$BONSAI_PROFILE_COUNTERS" in
+            # MemUnitBusy counts stall time as busy, so it cannot tell a saturated return path from
+            # a merely occupied one. MemUnitStalled is the half that separates them and WriteUnitStalled
+            # does the same for the store side; both are needed to read a busy number.
+            FETCH_SIZE|L2CacheHit|MemUnitBusy|MemUnitStalled|WriteUnitStalled|OccupancyPercent) ;;
+            *) echo 'Select one supported counter group per run: FETCH_SIZE, L2CacheHit, MemUnitBusy, MemUnitStalled, WriteUnitStalled, OccupancyPercent' >&2; exit 2 ;;
+        esac
+        payload=(rocprofv3 --kernel-trace --pmc "$BONSAI_PROFILE_COUNTERS" --output-format csv
+            -d "${BONSAI_PROFILE_OUTPUT:?set counter output directory}" -- "$root/tools/$profile_tool" "$@")
+    elif [[ "${BONSAI_PROFILE_TRACE:-0}" == 1 ]]; then
+        payload=(rocprofv3 --kernel-trace --output-format csv
+            -d "${BONSAI_PROFILE_OUTPUT:?set trace output directory}" -- "$root/tools/$profile_tool" "$@")
+    else
+        payload=("$root/tools/$profile_tool" "$@")
+    fi
+else
+    payload=("$root/tools/batch_compare" "$@")
+fi
+
+run_payload() {
+    # Every run gets its own scope unit, so a sweep cannot reuse a name that the
+    # previous iteration is still tearing down.
+    scope_unit="bonsai-batch-compare-$$-${1}.scope"
+    shift
+    payload_started=1
+    set +e
+    # The service manager must not expand shell variables inside a bash -c payload.
+    systemd-run --user --scope --quiet --expand-environment=no --unit="$scope_unit" \
+        --property=MemoryHigh="$memory_high" \
+        --property=MemoryMax="$memory_max" \
+        --property=MemorySwapMax=0 \
+        --property=TasksMax=512 \
+        --property=RuntimeMaxSec="$runtime_max" \
+        timeout --signal=TERM --kill-after=15s "$runtime_max" "$@"
+    local prc=$?
+    set -e
+    # A scope normally disappears with its last process. Explicit stop also covers
+    # a payload that forked a child past its foreground parent.
+    if stop_scope; then
+        payload_started=0
+    else
+        prc=1
+    fi
+    return $prc
+}
+
+if [[ -z "$clock_sweep" ]]; then
+    start_clock_sampler "${clock_max:-auto}"
+    run_payload 0 "${payload[@]}"
+    exit $?
+fi
+
+# One lock hold, one clock point per iteration. @CLK in the payload arguments
+# becomes the MHz of the point, so each iteration writes its own output file.
+rc=0
+idx=0
+for mhz in ${clock_sweep//,/ }; do
+    idx=$((idx + 1))
+    set_clock_fix "$mhz" || { rc=77; break; }
+    sleep 0.4
+    this=()
+    for arg in "${payload[@]}"; do this+=("${arg//@CLK/$mhz}"); done
+    echo "== clock $mhz MHz =="
+    start_clock_sampler "$mhz"
+    run_payload "$idx" "${this[@]}" || rc=$?
+    stop_clock_sampler
+    (( rc == 0 )) || break
+done
+exit "$rc"

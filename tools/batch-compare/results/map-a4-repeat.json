@@ -1,0 +1,140 @@
+{
+ "timing": {
+  "decode|32 streams x 16 steps|0": {
+   "median_tokens_per_s": 133.01607132933057,
+   "per_round_tokens_per_s": [
+    133.20968325139322,
+    133.01607132933057,
+    132.9033416005597,
+    133.0357919280639,
+    39.5625760991653
+   ],
+   "wall_s": [
+    3.843564427923411,
+    3.8491589390905574,
+    3.8524238279787824,
+    3.8485883579123765,
+    12.941523290006444
+   ],
+   "relative_to_mode0": 1.0,
+   "spread_fraction": 0.7040285148729871,
+   "gfx_mhz_mean": 2693.1765472731495,
+   "board_w_mean": 110.78783814011403
+  },
+  "decode|32 streams x 16 steps|5": {
+   "median_tokens_per_s": 160.04717665407094,
+   "per_round_tokens_per_s": [
+    156.35985792623893,
+    159.99935940630166,
+    160.46375273381847,
+    160.0880370142201,
+    160.04717665407094
+   ],
+   "wall_s": [
+    3.2744977310067043,
+    3.200012811925262,
+    3.1907517509534955,
+    3.198240227997303,
+    3.1990567450411618
+   ],
+   "relative_to_mode0": 1.2032168372934038,
+   "spread_fraction": 0.025641781963138117,
+   "gfx_mhz_mean": 2890.1085471100278,
+   "board_w_mean": 115.42440123666273
+  },
+  "decode|32 streams x 16 steps|11": {
+   "median_tokens_per_s": 204.9041038994144,
+   "per_round_tokens_per_s": [
+    202.79020115607705,
+    205.5366736931293,
+    204.9041038994144,
+    205.3451322718724,
+    180.95580396366253
+   ],
+   "wall_s": [
+    2.524776823935099,
+    2.4910396320046857,
+    2.4987298460910097,
+    2.4933632189640775,
+    2.829420161084272
+   ],
+   "relative_to_mode0": 1.540446217149944,
+   "spread_fraction": 0.1199627985076048,
+   "gfx_mhz_mean": 2863.1902322289457,
+   "board_w_mean": 119.6278576567235
+  }
+ },
+ "multistep": {},
+ "quality": {},
+ "stalled_samples": {
+  "decode|32 streams x 16 steps|0|round4": {
+   "wall_s": 12.941523290006444,
+   "median_wall_s": 3.8491589390905574,
+   "ratio": 3.3621691114329884,
+   "excess_s": 9.092364350915886,
+   "worst_pass_or_step_s": 2.7783275089459494,
+   "gpu_busy_percent_mean": 44.23164377072477,
+   "host": {},
+   "verdict": "no host diagnostics in this record, so the stall cannot be attributed"
+  }
+ },
+ "reference_pairs": [],
+ "reference_pairs_source": "--reference-pairs",
+ "device_memory": {
+  "a4_image_option": "both",
+  "after_load_bytes": 15426065992.0,
+  "after_prepare_batch_bytes": 27743618632.0,
+  "batch_rows_prepared": 128,
+  "ffn_batch_module_bytes": 12314664960.0,
+  "ffn_batch_weight_budget_bytes": 12299796480.0,
+  "ffn_batch_weight_bytes_all_modes": 16577986560.0,
+  "images": [
+   {
+    "bytes_all_layers": 267386880.0,
+    "image": 0,
+    "name": "SCALES",
+    "resident": true,
+    "resident_bytes": 267386880.0
+   },
+   {
+    "bytes_all_layers": 4278190080.0,
+    "image": 1,
+    "name": "SLICE2",
+    "resident": true,
+    "resident_bytes": 4278190080.0
+   },
+   {
+    "bytes_all_layers": 4278190080.0,
+    "image": 2,
+    "name": "LANE2",
+    "resident": false,
+    "resident_bytes": 0.0
+   },
+   {
+    "bytes_all_layers": 4278190080.0,
+    "image": 3,
+    "name": "PAIR",
+    "resident": true,
+    "resident_bytes": 4278190080.0
+   },
+   {
+    "bytes_all_layers": 3476029440.0,
+    "image": 4,
+    "name": "DENSE5",
+    "resident": true,
+    "resident_bytes": 3476029440.0
+   }
+  ],
+  "modes_mask": 258,
+  "modes_mask_hex": "0x102",
+  "modes_mask_requests_all_images": false,
+  "module_modes_served": {
+   "0": null,
+   "11": true,
+   "5": true
+  },
+  "note": "engine device_bytes before and after prepare_batch; the module total is the prepared weight images plus the shared activation workspace",
+  "resident_image_bytes_total": 12299796480.0
+ },
+ "quality_skipped": []
+}

@@ -1,0 +1,22 @@
+# Eight stripes recover parallelism without an expert task queue
+
+The [one-CTA-per-expert schedule](qwen-moe-mmq-persistent.md) avoids the compact queue's builder and claims, but leaves up to sixteen gate/up tile bodies and thirty-two down tile bodies in one CTA. That is a serious serialization cost on a GPU. I split each expert's tile list into a fixed number of CTA stripes, without building a list. CTA `(expert e, stripe s)` reads the existing sorted `expert_bounds`, chooses the same J=16/64 body as the [two-width construction](qwen-moe-mmq-two-width.md), and visits logical tile indices `s, s+k, s+2k, ...`. Each index maps to an independent `(column, output-row)` tile. Down indexes its twice-as-long output-row list separately. The K loop, input order, store mask, packed weights and per-tile arithmetic do not change in this proposed lowering.
+
+For a group with T tiles, the stripe lists partition `[0,T)` exactly. They have `min(T,k)` active CTAs and maximum chain `ceil(T/k)`. This chain is optimal among assignments of T indivisible tile bodies to k CTAs, by pigeonhole. It is **not** a hardware latency lower bound: a CTA could use a different fused tile body or cooperate across output rows. In this fixed-stripe grammar, each J body launches `256k` CTAs per layer, whether groups are present or not; no builder, descriptor, counter or host readback is needed. Native feasibility still needs an implementation, including proof that its CTA resource usage and output stores keep the intended FP32 map.
+
+The CPU witness replays all 80 train/held layer captures against the independent compact descriptor construction. At each k it checks every gate/up encoded tile and every down `(expert,column,row)` tile as a unique complete set, after checking each capture's hash. The held 126-row prompt across forty layers gives:
+
+| Stripes per expert | Gate/up launched CTAs per projection | Active CTAs | Longest gate/up chain | Longest down chain | J=64 active CTAs per layer |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 1 | 20,480 | 4,958 | 16 | 32 | 4–21 |
+| 2 | 40,960 | 9,916 | 8 | 16 | 8–42 |
+| 4 | 81,920 | 19,832 | 4 | 8 | 16–84 |
+| **8** | **163,840** | **39,664** | **2** | **4** | **32–168** |
+| 16 | 327,680 | 75,088 | 1 | 2 | 32–184 |
+| 32 | 655,360 | 75,088 | 1 | 1 | 32–184 |
+
+These are per gate or up call. Down launches the same CTA count at k=8, has 39,664 active CTAs and performs twice the tile bodies. Gate/up perform 75,088 useful tile bodies per projection; down performs 150,176. Train has 74,304 gate/up bodies and k=8 activates 39,104 CTAs. The selected J=64 full grid schedules 163,840 gate/up entries over this held prompt; launching both naive split grids would schedule 1,474,560. Thus k=8 has the selected route's **scheduled CTA count**, while doing the mixed-width tiles with at most two bodies per gate/up CTA and four down bodies per CTA. Since a held J=16 group has sixteen gate/up and thirty-two down tile bodies, k at most eight cannot reduce those longest chains below two and four in this grammar. k=8 attains both lower bounds at this launch budget. Compared with the indirect descriptor queue, it avoids 225,264 gate/up-plus-down claims and forty builders on held, at the price of returning from 124,176 inactive gate/up CTAs per projection and less parallelism within large groups.
+
+This is a useful *dispatch construction*, not a speedup. The J=64 body can have just 32 live stripes in a layer, so it may underfill the machine even with k=8. Static CTA counts say nothing about wave residency, launch gaps, memory replay or grouping the three projections. The direct next experiment is a native k=8 arm against selected J=64 and the compact queue, holding the exact prompt, output-head rows, captured route sorting and model fixed. Compare full-model prompt and independent-stream generation plus finite logit bits; measure each J body and dispatch overhead under the GPU wrapper. k=4 is the lower-launch control. If the J=64 sparse tail loses, a queue may still be worth its builder even though this construction meets the selected grid budget.
+
+[Receipt](../../data/qwen-moe/all-layer-routes/mmq-striped.json), SHA-256 `0af0653bc18856067df71222a2051e9ffc6c59a7357391f2ce4879589728a820`, retains input/model/native-source hashes, the six stripe points and per-layer counts. Reproduce with `python3 tools/qwen-moe/mmq_striped_bound.py --output ../../data/qwen-moe/all-layer-routes/mmq-striped.json`. No GPU, executable, model image or service changed.

@@ -1,0 +1,157 @@
+GDN block-map equivalence, float64, d=dv=128, seed=7
+
+Reference: serial_source, a transcription of gdn_token (post-update output).
+Reported numbers are max|difference| relative to the largest reference entry.
+
+--- slow decay, unit k,q, gamma_m = 5.555e-01
+case                                  m    outputs O   final state
+identity A pre-update output          8     3.59e-16      0.00e+00
+identity B deferred decay             8     4.19e-16      6.77e-16
+block chunk (WY/triangular)           8     8.38e-16      5.81e-16
+block sub-chunked c=8                 8     8.38e-16      5.81e-16
+block sub-chunked c=16                8     8.38e-16      5.81e-16
+attention form (Qeff, A, Psi)         8     7.18e-16      8.71e-16
+factored state, materialise r=8       8     4.79e-16      5.81e-16
+  (identity B rescales)               8            0
+
+--- slow decay, unit k,q, gamma_m = 8.380e-02
+case                                  m    outputs O   final state
+identity A pre-update output         32     3.52e-16      0.00e+00
+identity B deferred decay            32     5.87e-16      4.29e-16
+block chunk (WY/triangular)          32     9.40e-16      3.43e-16
+block sub-chunked c=8                32     9.40e-16      3.43e-16
+block sub-chunked c=16               32     9.40e-16      3.43e-16
+attention form (Qeff, A, Psi)        32     8.22e-16      4.29e-16
+factored state, materialise r=8      32     5.87e-16      3.43e-16
+  (identity B rescales)              32            0
+
+--- slow decay, unit k,q, gamma_m = 6.297e-05
+case                                  m    outputs O   final state
+identity A pre-update output        128     4.20e-16      0.00e+00
+identity B deferred decay           128     3.90e-16      4.35e-16
+block chunk (WY/triangular)         128     7.20e-16      3.80e-16
+block sub-chunked c=8               128     7.20e-16      3.80e-16
+block sub-chunked c=16              128     7.20e-16      3.26e-16
+attention form (Qeff, A, Psi)       128     4.80e-16      4.89e-16
+factored state, materialise r=8     128     4.80e-16      3.26e-16
+  (identity B rescales)             128            0
+
+--- slow decay, raw k,q, gamma_m = 5.683e-01
+case                                  m    outputs O   final state
+identity A pre-update output          8     5.84e-16      0.00e+00
+identity B deferred decay             8     3.31e-15      3.10e-15
+block chunk (WY/triangular)           8     1.65e-15      1.69e-15
+block sub-chunked c=8                 8     1.65e-15      1.69e-15
+block sub-chunked c=16                8     1.65e-15      1.69e-15
+attention form (Qeff, A, Psi)         8     7.98e-15      7.46e-15
+factored state, materialise r=8       8     1.17e-15      1.27e-15
+  (identity B rescales)               8            0
+
+--- slow decay, raw k,q, gamma_m = 6.909e-02
+case                                  m    outputs O   final state
+identity A pre-update output         32     6.54e-16      0.00e+00
+identity B deferred decay            32     2.45e-15      2.52e-15
+block chunk (WY/triangular)          32     7.03e-15      8.30e-15
+block sub-chunked c=8                32     4.74e-15      6.13e-15
+block sub-chunked c=16               32     6.22e-15      7.57e-15
+attention form (Qeff, A, Psi)        32     7.45e-01      7.45e-01
+factored state, materialise r=8      32     2.94e-15      3.49e-15
+  (identity B rescales)              32            0
+
+--- slow decay, raw k,q, gamma_m = 4.962e-05
+case                                  m    outputs O   final state
+identity A pre-update output        128     5.15e-16      0.00e+00
+identity B deferred decay           128     1.82e-14      1.83e-14
+block chunk (WY/triangular)         128     1.24e-14      1.27e-14
+block sub-chunked c=8               128     1.64e-14      1.63e-14
+block sub-chunked c=16              128     1.35e-14      1.37e-14
+attention form (Qeff, A, Psi)       128     1.00e+00      1.00e+00
+factored state, materialise r=8     128     1.41e-14      1.44e-14
+  (identity B rescales)             128            0
+
+--- fast decay, unit k,q, gamma_m = 8.746e-09
+case                                  m    outputs O   final state
+identity A pre-update output          8     3.69e-16      0.00e+00
+identity B deferred decay             8     3.69e-16      2.09e-16
+block chunk (WY/triangular)           8     3.69e-16      4.19e-16
+block sub-chunked c=8                 8     3.69e-16      4.19e-16
+block sub-chunked c=16                8     3.69e-16      4.19e-16
+attention form (Qeff, A, Psi)         8     3.69e-16      2.09e-16
+factored state, materialise r=8       8     3.69e-16      2.09e-16
+  (identity B rescales)               8            0
+
+--- fast decay, unit k,q, gamma_m = 1.163e-29
+case                                  m    outputs O   final state
+identity A pre-update output         32     3.83e-16      0.00e+00
+identity B deferred decay            32     3.83e-16      2.07e-16
+block chunk (WY/triangular)          32     6.90e-16      2.07e-16
+block sub-chunked c=8                32     7.67e-16      3.11e-16
+block sub-chunked c=16               32     7.67e-16      2.07e-16
+attention form (Qeff, A, Psi)        32     7.67e-16      2.07e-16
+factored state, materialise r=8      32     3.83e-16      2.07e-16
+  (identity B rescales)              32            0
+
+--- fast decay, unit k,q, gamma_m = 2.559e-133
+case                                  m    outputs O   final state
+identity A pre-update output        128     3.68e-16      0.00e+00
+identity B deferred decay           128     3.68e-16      2.23e-16
+block chunk (WY/triangular)         128     5.20e-16      1.67e-16
+block sub-chunked c=8               128     5.20e-16      2.23e-16
+block sub-chunked c=16              128     5.20e-16      1.67e-16
+attention form (Qeff, A, Psi)       128     5.20e-16      1.12e-16
+factored state, materialise r=8     128     3.68e-16      1.12e-16
+  (identity B rescales)             128            4
+
+--- fast decay, raw k,q, gamma_m = 4.006e-09
+case                                  m    outputs O   final state
+identity A pre-update output          8     4.48e-16      0.00e+00
+identity B deferred decay             8     5.98e-16      6.90e-16
+block chunk (WY/triangular)           8     8.97e-16      6.32e-16
+block sub-chunked c=8                 8     8.97e-16      6.32e-16
+block sub-chunked c=16                8     8.97e-16      6.32e-16
+attention form (Qeff, A, Psi)         8     1.20e-15      4.02e-16
+factored state, materialise r=8       8     4.48e-16      4.60e-16
+  (identity B rescales)               8            0
+
+--- fast decay, raw k,q, gamma_m = 1.738e-30
+case                                  m    outputs O   final state
+identity A pre-update output         32     1.16e-15      0.00e+00
+identity B deferred decay            32     1.16e-15      2.77e-16
+block chunk (WY/triangular)          32     1.69e-15      1.38e-16
+block sub-chunked c=8                32     2.11e-15      2.77e-16
+block sub-chunked c=16               32     1.69e-15      2.77e-16
+attention form (Qeff, A, Psi)        32     1.47e-15      2.77e-16
+factored state, materialise r=8      32     1.47e-15      1.38e-16
+  (identity B rescales)              32            0
+
+--- fast decay, raw k,q, gamma_m = 3.980e-118
+case                                  m    outputs O   final state
+identity A pre-update output        128     6.18e-16      0.00e+00
+identity B deferred decay           128     2.06e-15      2.98e-16
+block chunk (WY/triangular)         128     2.57e-15      1.99e-16
+block sub-chunked c=8               128     2.68e-15      1.99e-16
+block sub-chunked c=16              128     2.57e-15      2.98e-16
+attention form (Qeff, A, Psi)       128     2.39e-15      1.99e-16
+factored state, materialise r=8     128     1.34e-15      1.99e-16
+  (identity B rescales)             128            3
+
+prod_t (I - beta_t k_t k_t^T) vs I - K^T T0^T K, m=64: 7.30e-15
+homogeneous + particular == full chunk map (linearity in S0,V): 2.45e-16
+homogeneous part == gamma_m S0 prod(I - beta k k^T):            5.04e-15
+
+float32 association study, m=32 (numpy has no FMA: this measures
+reordering sensitivity, not the kernel's bits)
+variant                                O vs f64  state vs f64
+serial, kernel summation order         1.19e-07      1.25e-07
+block sub-chunked c=8                  1.96e-07      1.71e-07
+block sub-chunked c=16                 3.94e-07      2.35e-07
+block sub-chunked c=32                 3.94e-07      1.19e-07
+block c=8 vs serial f32 (each other)     1.72e-07      1.92e-07
+
+Neither float32 column is the exact real map, and neither reproduces the
+other's bits. For ||k|| <= 1 and beta in (0,1) the per-token operator
+g_t (I - beta_t k_t k_t^T) has norm at most 1, so an error injected at one
+token is not amplified by later tokens; errors are still injected at every
+token and accumulate. These are observations on these random operands, not
+a bound, and they say nothing about the triangular system's condition
+number, which is not established here for unit k either.

@@ -1,0 +1,2 @@
+# Full-vocabulary logit dumps are large and reproducible from a rerun; run.json and reports are not.
+*.f32

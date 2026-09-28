@@ -1,0 +1,92 @@
+{
+ "timing": {
+  "prefill|128 rows/pass, 256 tokens|18": {
+   "median_tokens_per_s": 480.17159991407146,
+   "per_round_tokens_per_s": [
+    487.79987548768116,
+    482.09722360965907,
+    480.17159991407146,
+    473.331277059365,
+    478.6318037922383
+   ],
+   "wall_s": [
+    0.524805382010527,
+    0.5310132219456136,
+    0.5331427349010482,
+    0.5408474199939519,
+    0.5348578969715163
+   ],
+   "relative_to_mode0": null,
+   "spread_fraction": 0.030132141157255824,
+   "gfx_mhz_mean": 2700.8470970154226,
+   "board_w_mean": 123.66846957571444
+  }
+ },
+ "multistep": {},
+ "quality": {},
+ "stalled_samples": {},
+ "reference_pairs": [],
+ "reference_pairs_source": "--reference-pairs",
+ "device_memory": {
+  "a4_image_option": "both",
+  "after_load_bytes": 7172625992.0,
+  "after_prepare_batch_bytes": 17948135496.0,
+  "batch_rows_prepared": 128,
+  "ffn_batch_module_bytes": 8838635520.0,
+  "ffn_batch_weight_budget_bytes": 8823767040.0,
+  "ffn_batch_weight_bytes_all_modes": 16577986560.0,
+  "ffn_state_created": true,
+  "images": [
+   {
+    "bytes_all_layers": 267386880.0,
+    "image": 0,
+    "name": "SCALES",
+    "resident": true,
+    "resident_bytes": 267386880.0
+   },
+   {
+    "bytes_all_layers": 4278190080.0,
+    "image": 1,
+    "name": "SLICE2",
+    "resident": true,
+    "resident_bytes": 4278190080.0
+   },
+   {
+    "bytes_all_layers": 4278190080.0,
+    "image": 2,
+    "name": "LANE2",
+    "resident": true,
+    "resident_bytes": 4278190080.0
+   },
+   {
+    "bytes_all_layers": 4278190080.0,
+    "image": 3,
+    "name": "PAIR",
+    "resident": false,
+    "resident_bytes": 0.0
+   },
+   {
+    "bytes_all_layers": 3476029440.0,
+    "image": 4,
+    "name": "DENSE5",
+    "resident": false,
+    "resident_bytes": 0.0
+   }
+  ],
+  "modes_mask": 128,
+  "modes_mask_hex": "0x80",
+  "module_modes_served": {
+   "18": true
+  },
+  "note": "engine device_bytes before and after prepare_batch; the module total is the prepared weight images plus the shared activation workspace",
+  "resident_image_bytes_total": 8823767040.0,
+  "sequence_commit_modes": [
+   16,
+   18,
+   19
+  ],
+  "wide_sequence_prepared": true,
+  "workspace_only": false
+ },
+ "quality_skipped": []
+}

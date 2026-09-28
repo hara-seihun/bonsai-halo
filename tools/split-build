@@ -1,0 +1,86 @@
+#!/usr/bin/env python3
+"""Compile one translation unit as the four commands hipcc would run, one per invocation.
+
+Why this exists: `kernels/halo_rows.o` takes about 75 seconds on this box and an agent working
+here is held to bounded tool calls, so a single `hipcc -c` of that file cannot finish inside one
+of them. `hipcc -###` prints the exact pipeline it would run - device codegen, device link,
+offload bundling, host codegen with the bundle embedded - and each of those steps does fit. This
+runs them one at a time against stable paths, so a killed call only loses the step it was in.
+
+The commands are hipcc's own, not a reimplementation: nothing here chooses a flag. The object a
+completed run produces is the object `make` would have produced.
+
+    tools/split-build kernels/halo_rows.hip kernels/halo_rows.o          # plan, then run each step
+    tools/split-build kernels/halo_rows.hip kernels/halo_rows.o --step 0
+    tools/split-build kernels/halo_rows.hip kernels/halo_rows.o --all    # if your call has the time
+
+`--all` runs every step in order, which is what an unbounded caller wants. Flags default to the
+Makefile's, and `--flags` replaces them for a build that needs different ones.
+"""
+import argparse
+import os
+import re
+import shlex
+import subprocess
+import sys
+
+MAKE_FLAGS = ["--offload-arch=gfx1151", "-MMD", "-O3", "-std=c++17", "-Wall", "-Wno-unused-function",
+              "-Isrc", "-Ikernels", "-I../bonsai-hip/include",
+              "-I../bonsai-hip/ggml/include"]
+
+TEMP = re.compile(r'/tmp/[A-Za-z0-9_.+-]+-[0-9a-f]{6}\.(?:o|out|hipfb|d|bc|s)\b')
+
+
+def plan(src, obj, flags):
+    """The command list hipcc would run, with its random temporaries made stable."""
+    argv = ["hipcc"] + flags + ["-c", src, "-o", obj, "-###"]
+    proc = subprocess.run(argv, capture_output=True, text=True)
+    lines = [l.strip() for l in proc.stderr.splitlines() if l.startswith(' "')]
+    if not lines:
+        sys.exit("split-build: hipcc -### printed no commands:\n" + proc.stderr)
+    tmpdir = os.path.join("/tmp", "split-build-" + re.sub(r'\W', '_', os.path.abspath(obj)))
+    os.makedirs(tmpdir, exist_ok=True)
+    seen = {}
+
+    def stable(token):
+        def one(m):
+            path = m.group(0)
+            if path not in seen:
+                seen[path] = os.path.join(tmpdir, "t%d%s" % (len(seen), os.path.splitext(path)[1]))
+            return seen[path]
+        return TEMP.sub(one, token)
+
+    return tmpdir, [[stable(t) for t in shlex.split(l)] for l in lines]
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("source")
+    ap.add_argument("object")
+    ap.add_argument("--step", type=int, help="run one step and stop")
+    ap.add_argument("--all", action="store_true", help="run every step in order")
+    ap.add_argument("--flags", help="replace the Makefile's compile flags")
+    args = ap.parse_args()
+    flags = shlex.split(args.flags) if args.flags else MAKE_FLAGS
+    tmpdir, steps = plan(args.source, args.object, flags)
+
+    if args.step is None and not args.all:
+        print("%s -> %s, %d steps, temporaries in %s" % (args.source, args.object, len(steps), tmpdir))
+        for i, argv in enumerate(steps):
+            print("  %d  %s" % (i, os.path.basename(argv[0])))
+        print("run: %s %s %s --step N" % (sys.argv[0], args.source, args.object))
+        return 0
+
+    todo = range(len(steps)) if args.all else [args.step]
+    for i in todo:
+        if i < 0 or i >= len(steps):
+            sys.exit("split-build: step %d of %d" % (i, len(steps)))
+        print("step %d: %s" % (i, os.path.basename(steps[i][0])), flush=True)
+        rc = subprocess.run(steps[i]).returncode
+        if rc != 0:
+            return rc
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

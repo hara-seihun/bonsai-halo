@@ -1,0 +1,15 @@
+# Row-4's changed key admits one common pre-RoPE producer under a position-only change
+
+The [gathered 31+1 permutation experiment](qwen-moe-gdn-permutation-equiv.md) gives the same logical row-4 token and recorded position 9 to two graphs, yet its newest layer-3 saved K changes in 31 FP16 words. [The angular diagnosis](qwen-moe-gdn-k-origin.md) localized all changes to the 22 IMRoPE temporal pairs, fitting a displacement of −9. An angular fit alone could hide a changed pre-RoPE producer. Here is a stronger, **constructive compatibility result**, still at the saved-key observation boundary.
+
+For each temporal pair, let `B` be the swapped two-word FP16 key and `A` the normal two-word key. Under **ideal real arithmetic** and nearest-FP16 rounding, find a *single* real pre-RoPE two-vector `x` satisfying `round16(x) = B` (temporal position zero) and `round16(R(9 · 10^7^(−i/32)) x) = A` (temporal position nine). Each observed word defines a rounding interval bounded by midpoints to its adjacent FP16 values. A two-variable linear program with four interval constraints maximizes its minimum normalized distance to a rounding boundary; the script saves the actual witness, both requested FP16 bit patterns and its margin. For the non-temporal 468 words, both observations are already identical and their unchanged positional rotations admit a common preimage by inverse rotation.
+
+**All 22/22 temporal pairs admit a common preimage**, reproducing all 1,024 saved normal/swapped key halfwords in the combined ideal map. The smallest slack is **0.09319 of an FP16 rounding-bin width**, or **8.028e-6 absolute**. A separate simple FP32 rotation check rounds all 22 witnesses to their observed normal words as well; it does not reproduce `rope_yarn`, `powf`, compiler contraction or the actual native execution. The receipt records the 22 numerical witnesses and source, official config, both complete state and preceding angle-receipt hashes.
+
+This means **upstream K-producer corruption is not required to explain the observed row-4 saved K**: changing only its temporal IMRoPE coordinate 9→0 is sufficient within this specified real/FP16 grammar. It is not proof that the actual graph used position zero or that the actual pre-RoPE K matched; another producer could yield the same rounded cells, and no native FP32 identity or whole-model speedup is claimed. It also does not explain row 1's zero K/V or row 0's changed fresh QKV. The now-narrow native experiment is a no-cut side-band capture of row 4's temporal `inp_pos` value **at the layer-3 ROPE device read**, with complete heads and saved state. If both reads are 9, compare the pre-RoPE K producer and output lifetime; if swapped reads zero, repair the position address/lifetime before changing any K projection arithmetic. The stable-32 serving guard remains selected.
+
+[CPU receipt](../../data/qwen-moe/gdn-permutation-equiv/row4-position-receipt.json) and its 22 witnesses are reproducible without GPU or service changes:
+
+```sh
+python3 tools/qwen-moe/gdn_row4_position.py
+```

@@ -1,0 +1,22 @@
+# The swapped 31+1 Qwen GDN failure has no cache-row dependency
+
+The installed [guarded in-place writer](qwen-moe-gdn-fused.md) gains 18.66% on stable complete 32-stream generated calls. Its rejected, broader predecessor changed one full head and state after swapping two sequence IDs. Was that failure caused by a cache source overwritten by another CTA or by the preceding 31-row call? The retained native trace and full-head outputs answer **no for this specific split's main-state rows**. This excludes a tempting row-snapshot repair for that failure; it does not identify the first differing computation.
+
+The rejected debug trace, with the zero-row value printed, has exactly these final two GDN graph constructions after the common seed:
+
+| call | `head` | `zero` | `n_rs = n_seqs` | `n_tok` | first sources | main destination rows |
+|---|---:|---:|---:|---:|---|---|
+| first | 1 | -1 | 31 | 1 | 1, 2 | 1…31 |
+| second | 0 | -1 | 1 | 1 | 0 | 0 |
+
+Both were selected for direct writing in the *rejected* candidate; the installed guard correctly routes both to gather. The recorded complete-head comparison is **95/96 identical full 248,320-float rows**. Only row 64, the first row of the reordered step, differs, in **all 248,320 FP32 words**. This does not imply a particular layer first differed. Both selected source and rejected outputs are identified by SHA-256 in the [receipt](../../data/qwen-moe/gdn-fused/singleton-map-receipt.json), regenerated with [`gdn_singleton_map.py`](../tools/qwen-moe/gdn_singleton_map.py).
+
+## State-map proof and scope
+
+For each layer independently, let `S[r]` be the complete 524,288-float recurrent row, and let `F_t` be the unchanged deterministic per-row GDN recurrence with the current token's operands. In the gathered map, a call with sources `m_i` and destinations `d_i` forms `T_i = F_t(S[m_i])` after the gather, then stores `S'[d_i] = T_i`. In the direct writer, each CTA first loads the same shard into registers and stores `F_t(S[m_i])` into `d_i`. Source inspection in the selected native revision shows this load-before-store in `ggml/src/ggml-cuda/gated_delta_net.cu`, the gathered and direct graph branches in `src/models/delta-net-base.cpp`, and the zero/extra-row operations in `src/llama-graph.cpp`.
+
+In the traced first call `m_i = d_i = 1+i`, `0 ≤ i < 31`. Each CTA's state shard is disjoint, hence CTA ordering cannot change the row-map result. The next call reads and writes only row 0, which is disjoint from every prior destination. There is no zero row (`rs_z=-1`) and no extra rows (`n_rs=n_seqs`). Induction over both calls and all thirty disjoint per-layer caches gives the **same abstract complete recurrent-state map** for gather and direct writing, provided identical input operands and `F_t` in both graphs. The executable witness replays the two calls using unique initial rows and a nonlinear, row-sensitive recurrence, verifies the full resulting map, and records each read/write set. The result is not dependent on the convenient symbolic recurrence: the disjoint-row argument applies to *any* row-local `F_t`.
+
+Each 31-row layer call covers 31×524,288×4 bytes; the singleton covers 524,288×4 bytes. Across thirty layers these are **1,950,351,360 and 62,914,560 bytes of state shards**, respectively. Snapshotting an alleged conflict in row 0 between these calls cannot repair this failure: no preceding direct main write touches it. A separate graph buffer reuse, stale input, state-zero/extra operation in another shape, width-dependent operands, or backend-side effect could still cause a numerical difference. This proof covers only the observed main-state row dependency, **not** GDN operands, graph allocation, FP32 compiler execution, output logits, prompt chunks, arbitrary reorders, or rollback snapshots. The output mismatch and the proof coexist; interpreting the abstract map as proof of finite native equality would be false.
+
+**Next native experiment:** with the selected source and identical pre-swap state, isolate the second call, preserve graph topology, and capture the input and output of the *first GDN layer* plus its full cache row 0 before and after the 31+1 split. Compare against gathered execution and the first call's unaffected row 0, then expand to later layers only if layer 0 agrees. This targets graph/operand lifetime rather than adding row-copy machinery. Keep the selected gathered fallback until full heads and serialized state match; this proof is not an installed gain. No GPU, model or service was changed by this CPU result.

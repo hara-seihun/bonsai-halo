@@ -1,0 +1,17 @@
+model      ../../data/bonsai2/PTQ1_0.gguf (GGUF v3)
+recurrent layers 48, heads per layer 48
+ssm_a      min -139.4213  max -0.0038  mean -2.0704   (sign: all negative)
+dt.bias    min -8.9375  max +19.2500  mean -2.8415
+
+g = exp(ssm_a * softplus(alpha + dt.bias)), per head, over all recurrent layers.
+alpha is a per-token projection of the hidden state, which this script cannot
+know, so each row is a hypothetical gate at a stand-in alpha. These are ranges
+the gate can take, not measured token gates; only the ssm_a line above is data.
+  alpha        min g     median g        max g    gamma_16   gamma_128  1/gamma_128
+   -2.0    1.252e-02     0.996190  0.999994826   3.641e-31  3.086e-244   3.240e+243
+    0.0    1.168e-04     0.973151  0.999961773   1.198e-63   0.000e+00   1.000e+300
+    2.0    1.855e-18     0.862079  0.999717689  1.967e-284   0.000e+00   1.000e+300
+
+fp32 smallest normal 1.175e-38, largest finite 3.403e+38
+A deferred-decay chunk carries 1/gamma_t, so it needs a rescale before
+gamma_t leaves that range; the fastest heads reach it within a few tokens.

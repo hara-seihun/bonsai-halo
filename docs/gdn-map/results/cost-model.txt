@@ -1,0 +1,94 @@
+GDN state phase counted work, one head, d=128, dv=128, m=128 tokens per pass
+lane rate 7.424e12 lane-ops/s, DRAM 256 GB/s
+Times below are counted work at that declared rate. They are budgets, not
+predicted runtimes, and a ratio of budgets is not a predicted speedup.
+
+measured anchor, rocprof, one native 128-row A4 pass, empty prefix:
+  wall 232.172 ms; resident_state<4> 18.294 ms over 48 layers, resident_conv 1.826, resident_output 0.938
+  state kernel is 7.88% of the pass, 143 us/token, against a 35.8 us/token budget: 4.0x.
+  The traffic budget for the same kernel is smaller still, so neither counted
+  resource explains the measured time at these rates. What does is not
+  established here, and until it is, no count ratio below predicts a time.
+
+form                           L,R  VGPR  waves/hd  lane-ops/tok  vs deployed  us/token
+serial, as in gdn_token       32,4    16        32       115,200        1.00x      35.8
+serial + identities A,B       32,4    16        32       100,096        1.15x      31.1
+block WY c=8                  32,4    16        32       102,536        1.12x      31.8
+block WY c=32                 32,4    16        32       107,168        1.07x      33.3
+serial, as written             4,1    32        16        68,096        1.69x      21.1
+serial + identities A,B        4,1    32        16        52,992        2.17x      16.4
+block WY c=8                   4,1    32        16        55,432        2.08x      17.2
+serial + identities A,B        1,1   128         4        50,944        2.26x      15.8
+block WY c=8                   1,1   128         4        53,384        2.16x      16.6
+
+breakdown, lane-ops per token per head
+  serial, as in gdn_token (32, 4)   arithmetic 65,536  reductions 49,152  row scalar 512
+  serial + identities A,B (32, 4)   arithmetic 50,176  reductions 49,152  row scalar 640  k.q dot 128
+  block WY c=8 (32, 4)              state contractions 51,200  token grams 1,032  triangular solve 576  intra output 576  reductions 49,152
+  block WY c=32 (32, 4)             state contractions 49,664  token grams 4,128  triangular solve 2,112  intra output 2,112  reductions 49,152
+  serial, as written (4, 1)         arithmetic 65,536  reductions 2,048  row scalar 512
+  serial + identities A,B (4, 1)    arithmetic 50,176  reductions 2,048  row scalar 640  k.q dot 128
+  block WY c=8 (4, 1)               state contractions 51,200  token grams 1,032  triangular solve 576  intra output 576  reductions 2,048
+  serial + identities A,B (1, 1)    arithmetic 50,176  reductions 0  row scalar 640  k.q dot 128
+  block WY c=8 (1, 1)               state contractions 51,200  token grams 1,032  triangular solve 576  intra output 576  reductions 0
+
+Three state contractions per token are unavoidable in these formulas:
+  k-side (delta needs g S_(t-1) k_t), q-side (output), rank-m update.
+  floor 49,152 lane-ops/token/head = 15.3 us/token over 48 layers.
+  deployed serial is 2.34x that floor, the narrow layout with
+  identities A and B is 1.08x, block WY c=8 on the same layout 1.13x.
+  Reductions are a layout property: both forms contract the state over the key
+  index twice per row per token, so the block form does not remove them.
+  The block form counts LOWER than the unmodified deployed serial form
+  (102,536 against 115,200), because it drops the decay pass. Its only
+  adverse comparator is serial + identities A,B at the SAME layout, where it
+  counts 55,432 against 52,992: more counted arithmetic, by
+  the token-mixing terms. Scheduling, dependence and matrix units are not
+  represented here, and any of them can reverse that on a real machine.
+
+traffic per recurrent layer per pass of 128 tokens, one sequence, fp32
+  state read + write            6.29 MB   (   49.2 kB/token)   same for every form
+  conv output and gates         5.29 MB   (   41.3 kB/token)
+  outputs                       3.15 MB   (   24.6 kB/token)
+  serial intermediates          0.00 MB   state stays in registers
+  block WY c=8   intermediates     0.61 MB      12.8 kB per head, below 64 kB; allocation unimplemented
+  block WY c=16  intermediates     1.28 MB      26.6 kB per head, below 64 kB; allocation unimplemented
+  block WY c=32  intermediates     2.75 MB      57.3 kB per head, below 64 kB; allocation unimplemented
+  block WY c=128 intermediates    15.73 MB     327.7 kB per head, above 64 kB; tiling/storage unimplemented
+
+  layer total 14.73 MB, 115.1 kB/token, 21.6 us/token over 48 layers at 256 GB/s
+
+budgets per token, 48 recurrent layers, both at declared peak rates
+(traffic = state read+write amortised over m, plus this token's operands
+ and outputs; work = VALU slots at the single-issue lane rate)
+    m        traffic us    deployed work us    narrow + A,B work us
+    1            1192.0                35.8                    16.4
+    8             159.8                35.8                    16.4
+   32              49.2                35.8                    16.4
+  128              21.6                35.8                    16.4
+At m=128 the measured state kernel is 143 us/token, above both columns.
+At m=1 the traffic column dominates the work column by a factor of tens, and
+PLAN.md's 1,270 us/token decode phase sits near it. Neither observation is a
+proof of what binds either regime.
+
+For a dense state array and an unconstrained q_t, o_t = S_t q_t touches every
+element, so the read cannot move within that representation. The write can:
+nothing outside the head reads the state between tokens.
+
+decode, one head, one token: keep the state factored, materialise every r
+(pending list averages (r-1)/2 pairs; the rank-r update reuses the base and
+ pairs already read by that token's own contractions)
+    r   bytes/token/head  vs read+write   MB/token/seq  us/token/seq
+    -            131,072          1.00x            302          1180
+    4             84,480          1.55x            195           760
+    8             78,336          1.67x            180           705
+   16             78,336          1.67x            180           705
+   32             84,480          1.55x            195           760
+   8*             76,032          1.72x            175           684   (* bf16 pending pairs)
+
+its counted work, lane-ops per token per head, against 65,536 now:
+  r=8: base contractions 32,768  amortised rank-r update 16,384  pending corrections 1,792  coefficients and row scalar 644  total 51,588
+So the scheme costs no extra counted arithmetic. The traffic column is a
+declared-rate budget for one phase; it is not a tokens/s prediction, and the
+decode phase's own measured time is not isolated here. bf16 state halves the
+base read independently and composes with this.

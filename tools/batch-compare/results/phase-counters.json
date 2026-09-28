@@ -1,0 +1,112 @@
+{
+  "counter_source": "../../data/bonsai2/batch-comparison/phase-profile/traffic-fixed/gpu-host/986532_counter_collection.csv",
+  "calibration_source": "../../data/bonsai2/batch-comparison/phase-profile/calibration/gpu-host/950431_counter_collection.csv",
+  "bytes_per_reported_byte": 1.9999980926531862,
+  "calibration_ratios": [
+    1.9982924746920356,
+    1.9995118379301928,
+    2.0,
+    1.9999971389811435,
+    1.9999980926531862,
+    1.9999980926531862,
+    1.9999992847445185,
+    2.0,
+    1.9999995231629555
+  ],
+  "contract": "Final pass only, all 64 layers, all rows pay head. The uniform-read calibration factor is transferred to these regions, not independently established per region. External-cache requests are not a physical DRAM counter. Counter instrumentation changes scheduling.",
+  "regions": {
+    "embed": {
+      "dispatches": 16,
+      "raw_fetch_size_bytes": 1022848.0,
+      "calibrated_external_request_bytes": 2045694.0490741262,
+      "counter_instrumented_ms": 0.141952,
+      "grid_workgroups": [
+        60
+      ],
+      "allocated_vgprs": [
+        224
+      ],
+      "scratch_bytes": [
+        20
+      ]
+    },
+    "head": {
+      "dispatches": 16,
+      "raw_fetch_size_bytes": 2297608384.0,
+      "calibrated_external_request_bytes": 4595212385.663969,
+      "counter_instrumented_ms": 25.327775,
+      "grid_workgroups": [
+        60
+      ],
+      "allocated_vgprs": [
+        224
+      ],
+      "scratch_bytes": [
+        20
+      ]
+    },
+    "gdn": {
+      "dispatches": 768,
+      "raw_fetch_size_bytes": 12321580608.0,
+      "calibrated_external_request_bytes": 24643137714.472485,
+      "counter_instrumented_ms": 225.140962,
+      "grid_workgroups": [
+        60
+      ],
+      "allocated_vgprs": [
+        224
+      ],
+      "scratch_bytes": [
+        20
+      ]
+    },
+    "attention": {
+      "dispatches": 256,
+      "raw_fetch_size_bytes": 3181844160.0,
+      "calibrated_external_request_bytes": 6363682251.119679,
+      "counter_instrumented_ms": 53.282644,
+      "grid_workgroups": [
+        60
+      ],
+      "allocated_vgprs": [
+        224
+      ],
+      "scratch_bytes": [
+        20
+      ]
+    },
+    "ffn producers": {
+      "dispatches": 128,
+      "raw_fetch_size_bytes": 369770880.0,
+      "calibrated_external_request_bytes": 739541054.7186902,
+      "counter_instrumented_ms": 4.087322,
+      "grid_workgroups": [
+        640,
+        2176
+      ],
+      "allocated_vgprs": [
+        16,
+        24
+      ],
+      "scratch_bytes": [
+        0
+      ]
+    },
+    "ffn projections": {
+      "dispatches": 128,
+      "raw_fetch_size_bytes": 4002873152.0,
+      "calibrated_external_request_bytes": 8005738669.1326475,
+      "counter_instrumented_ms": 90.514746,
+      "grid_workgroups": [
+        80,
+        272
+      ],
+      "allocated_vgprs": [
+        256
+      ],
+      "scratch_bytes": [
+        0
+      ]
+    }
+  }
+}

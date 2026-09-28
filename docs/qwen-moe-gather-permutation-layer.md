@@ -1,0 +1,16 @@
+# Gathered Qwen 31+1 row permutation: the third row has a key-only first saved difference
+
+The [four-arm full-head/state panel](qwen-moe-gdn-permutation-equiv.md) holds logical sequence IDs, next tokens and positions fixed while swapping only batch rows 0/1 on the third step. Both arms here use **gathered** GDN. A new per-token comparison of their retained 2,114,206,957-byte serialized states finds the first *saved* difference for logical/physical row 4 at **the newest FP16 key cell of the first attention layer (model layer 3)**. Its value cell is exactly equal, as are both R and S state for row 4 in recurrent layers 0–2. At the next attention layer (model layer 7), both K and V differ; row 4's R/S state first differs at recurrent layer 4. This separates the third changed head from the two swapped rows' early recurrent faults.
+
+| Physical row | First differing R | First differing S | First differing K | First differing V |
+| --- | ---: | ---: | ---: | ---: |
+| 0 | 0 | 0 | 3 | 3 |
+| 1 | 2 | 1 | 3 | 3 |
+| 4 | 4 | 4 | 3 | 7 |
+| all other 29 | no difference | no difference | no difference | no difference |
+
+For **every** affected K/V image, nine preceding cells per stream match byte-for-byte; only the tenth, just appended by the third step, differs. KV metadata, record headers and recurrent metadata agree. Row 4's first K difference is **47/1,024 bytes**, confined to **31/512 FP16 values** at indices `0,3,6,9,12,15,21,24,32,35,38,41,44,47,50,256,259,262,265,268,271,274,277,280,288,291,294,297,300,303,306`; the maximum absolute changed FP16 value is **2.56689453125**, so this is not merely one-bit rounding in every affected coordinate. Its first V image is unchanged in all 1,024 bytes. In contrast, row 1's first K image differs in 1,020 bytes and its first V in 1,021. The localized, regularly spaced row-4 K changes merit checking the layer-3 key producer's lane/row addressing and normalization, rather than attributing every changed sequence to the layer-1 gathered R history or the rejected direct writer.
+
+This is a **post-step saved-state observation**, not a causal proof of the first forward operation: an earlier unsaved activation could differ and later operations could cancel, and the layer-3 attention output can affect layer-4 R/S without the saved V changing. The finite comparison is of the installed selected GGUF's two gathered graph schedules on this one 32-sequence input; no weights, arithmetic or selected runtime changed. The next native experiment should side-band the layer-3 key input, K projection output before rotary/serialization, and its physical destination/sequence index for row 4 in both no-callback graphs, plus the R0 source of row 0 and S1 source of row 1. Exact full heads and whole state remain the acceptance boundary for any reorder repair.
+
+[Source, parser, prior four-arm receipt and both state SHA-256s, all forty-layer by-row differences and per-token KV counts](../../data/qwen-moe/gdn-permutation-equiv/layer-receipt.json) are in data custody. Run `python3 tools/qwen-moe/gdn_kv_permutation.py ../../data/qwen-moe/gdn-permutation-equiv --output ../../data/qwen-moe/gdn-permutation-equiv/layer-receipt.json`. This CPU analysis did not use the GPU or pause the service.

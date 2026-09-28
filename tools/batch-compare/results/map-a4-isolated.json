@@ -1,0 +1,130 @@
+{
+ "timing": {
+  "decode|32 streams x 16 steps|0": {
+   "median_tokens_per_s": 133.64798956524194,
+   "per_round_tokens_per_s": [
+    133.4423406451495,
+    133.64798956524194,
+    133.9373719753732,
+    133.5668334480423,
+    133.98344606644275
+   ],
+   "wall_s": [
+    3.8368631539633498,
+    3.830959236016497,
+    3.82268214202486,
+    3.833286952925846,
+    3.821367601980455
+   ],
+   "relative_to_mode0": 1.0,
+   "spread_fraction": 0.0040487359596913745,
+   "gfx_mhz_mean": 2899.1979110476855,
+   "board_w_mean": 119.22538219570626
+  },
+  "decode|32 streams x 16 steps|5": {
+   "median_tokens_per_s": 160.43844709285005,
+   "per_round_tokens_per_s": [
+    160.29142387922286,
+    160.63992142385214,
+    160.58993133249822,
+    160.415327013453,
+    160.43844709285005
+   ],
+   "wall_s": [
+    3.1941821190994233,
+    3.1872525550425053,
+    3.1882447159150615,
+    3.1917149659711868,
+    3.1912550219567493
+   ],
+   "relative_to_mode0": 1.2004553724658165,
+   "spread_fraction": 0.0021721573035894397,
+   "gfx_mhz_mean": 2898.678657381313,
+   "board_w_mean": 113.49178501132599
+  },
+  "decode|32 streams x 16 steps|11": {
+   "median_tokens_per_s": 206.2355391819391,
+   "per_round_tokens_per_s": [
+    206.2355391819391,
+    206.3510975387592,
+    206.20942882522743,
+    206.13184389929887,
+    206.77655283373366
+   ],
+   "wall_s": [
+    2.482598304981366,
+    2.4812080289702863,
+    2.4829126530094072,
+    2.4838471839902923,
+    2.4761027930071577
+   ],
+   "relative_to_mode0": 1.5431248898904133,
+   "spread_fraction": 0.003126080679363572,
+   "gfx_mhz_mean": 2897.098557979005,
+   "board_w_mean": 118.26770564962037
+  }
+ },
+ "multistep": {},
+ "quality": {},
+ "stalled_samples": {},
+ "reference_pairs": [],
+ "reference_pairs_source": "--reference-pairs",
+ "device_memory": {
+  "a4_image_option": "both",
+  "after_load_bytes": 15426065992.0,
+  "after_prepare_batch_bytes": 27743618632.0,
+  "batch_rows_prepared": 128,
+  "ffn_batch_module_bytes": 12314664960.0,
+  "ffn_batch_weight_budget_bytes": 12299796480.0,
+  "ffn_batch_weight_bytes_all_modes": 16577986560.0,
+  "ffn_state_created": true,
+  "images": [
+   {
+    "bytes_all_layers": 267386880.0,
+    "image": 0,
+    "name": "SCALES",
+    "resident": true,
+    "resident_bytes": 267386880.0
+   },
+   {
+    "bytes_all_layers": 4278190080.0,
+    "image": 1,
+    "name": "SLICE2",
+    "resident": true,
+    "resident_bytes": 4278190080.0
+   },
+   {
+    "bytes_all_layers": 4278190080.0,
+    "image": 2,
+    "name": "LANE2",
+    "resident": false,
+    "resident_bytes": 0.0
+   },
+   {
+    "bytes_all_layers": 4278190080.0,
+    "image": 3,
+    "name": "PAIR",
+    "resident": true,
+    "resident_bytes": 4278190080.0
+   },
+   {
+    "bytes_all_layers": 3476029440.0,
+    "image": 4,
+    "name": "DENSE5",
+    "resident": true,
+    "resident_bytes": 3476029440.0
+   }
+  ],
+  "modes_mask": 258,
+  "modes_mask_hex": "0x102",
+  "module_modes_served": {
+   "0": null,
+   "11": true,
+   "5": true
+  },
+  "note": "engine device_bytes before and after prepare_batch; the module total is the prepared weight images plus the shared activation workspace",
+  "resident_image_bytes_total": 12299796480.0,
+  "workspace_only": false
+ },
+ "quality_skipped": []
+}

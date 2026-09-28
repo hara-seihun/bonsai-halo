@@ -1,0 +1,17 @@
+# No same-K Q8 integer dot is reusable across ordinary projections
+
+**Question.** Can multiple ordinary Q8_0 projections in one Qwen3.6 MoE layer share a packed integer dot against a prepared input, beyond sharing activation preparation? The installed bank has 250 nonembedding, nonexpert Q8_0 matrices (1,492,910,080 bytes). The prior [within-tensor census](qwen-moe-q8-block-reuse.md) checked reuse between output rows of *one* tensor; it did not compare the independent Q8 calls in each layer.
+
+[`q8_cross_projection.py`](../tools/qwen-moe/q8_cross_projection.py) compares all six or seven Q8 matrices in **each of forty layers** at the same 32-element K block. It reads every one of their **43,909,120** installed blocks and matches both the 32-byte signed code vector and the complete 34-byte code/FP16-scale block. As a deliberately favorable upper-bound grammar, every tensor pair in a layer is granted identical quantized input at each K, even if the actual graph uses different producers; lookup and sharing are free. An equal integer code vector would permit reusing its integer dot and then applying each matrix's own scale and output accumulation. Different K coordinates cannot reuse that dot for arbitrary activations. The experiment also excludes the enormous embedding lookup: it reads one embedding row, not the full matrix, in the conditional one-token stream.
+
+| Installed complete-bank census | Cross-tensor repeated groups | Extra distinct-tensor uses |
+| --- | ---: | ---: |
+| Same-K 32-code vector, including zeros | **0** | **0** |
+| Same-K 34-byte code plus scale | **0** | **0** |
+| Same-K nonzero code vector | **0** | **0** |
+
+Thus the *additional* exact same-K whole-block dot-sharing capacity across these ordinary projections is **zero bytes and zero integer dots**, even under a free common activation. This is separate from repeated zeros *within* one tensor, already bounded by the earlier study. A native cross-projection dot cache keyed by unchanged whole Q8 code blocks cannot recover Q8's conditional one-read gap. It would instead pay for keys, a lookup and potentially a changed FP32 fold. The 0-byte figure is a bound for **unchanged 32-code equality at aligned K**, not for short fragments, sign/scalar orbits across tensors, changed learned representations, caching the same tensor across tokens, fusion of activation preparation, or a joint whole-map carrier. Equal integer products in ideal arithmetic would not alone prove bit-identical native FP32 logits.
+
+The [receipt](../../data/qwen-moe/q8-cross-projection/receipt.json) records the pinned entire GGUF SHA-256, header and inventory hashes, script hash, per-layer source-payload SHA-256s and forty separately saved layer receipts with zero/total counts. The conditional complete one-read stream is 2,626,187,904 bytes/token. Reproduce each CPU shard with `python3 tools/qwen-moe/q8_cross_projection.py --first L --count N` and combine with `--summarize`; no GPU reservation, model image, installed native executable or service changed.
+
+**Next useful question:** measure ordinary Q8 physical transactions and unprofiled per-call/layer device time with complete output heads and the matched whole-model wall panel. If seeking cross-projection reuse, first construct a *changed* shared code basis on actual producers and price its full model quality/image, activation transforms and native consumer; repeating equality lookups over the frozen 32-code blocks has no opportunity.

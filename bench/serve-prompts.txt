@@ -1,0 +1,16 @@
+Explain in three sentences why a hash table lookup is usually constant time.
+Write a short Python function that merges two sorted lists into one sorted list.
+What is the difference between a mutex and a semaphore? Answer in three sentences.
+Describe how a GPU's memory bandwidth limits matrix multiplication throughput.
+In two sentences, explain what a Kalman filter estimates and why.
+Write a bash one-liner that prints the ten largest files under a directory.
+Explain the difference between TCP and UDP to a new backend engineer.
+What does the Rust borrow checker prevent? Give two concrete examples.
+Summarise how DNS resolves a hostname, in four steps.
+Write a SQL query that finds the second highest salary in an employees table.
+Explain what a Merkle tree is and one place it is used.
+In three sentences, say why floating point addition is not associative.
+Describe the tradeoff between a B-tree and an LSM tree for a write-heavy store.
+Write a short C function that reverses a singly linked list.
+Explain what happens when a Linux process calls fork, in three sentences.
+What is the purpose of a load balancer's health check? Answer briefly.

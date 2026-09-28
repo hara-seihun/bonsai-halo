@@ -1,0 +1,3377 @@
+{
+ "config": {
+  "context": 512,
+  "document": "PLAN.md",
+  "document_tokens": 5935,
+  "gdn_state_compared": true,
+  "model": "../../data/bonsai2/PTQ1_0.gguf",
+  "passes": [
+   {
+    "a": 1,
+    "b": 0,
+    "commits": false,
+    "total": 1
+   },
+   {
+    "a": 2,
+    "b": 1,
+    "commits": true,
+    "total": 3
+   },
+   {
+    "a": 5,
+    "b": 3,
+    "commits": true,
+    "total": 8
+   },
+   {
+    "a": 9,
+    "b": 8,
+    "commits": false,
+    "total": 17
+   },
+   {
+    "a": 24,
+    "b": 16,
+    "commits": true,
+    "total": 40
+   },
+   {
+    "a": 0,
+    "b": 1,
+    "commits": false,
+    "total": 1
+   },
+   {
+    "a": 3,
+    "b": 5,
+    "commits": true,
+    "total": 8
+   }
+  ],
+  "references": [
+   10,
+   17
+  ]
+ },
+ "deferred_state_differences_reported": 18,
+ "executable_sha256": "91812113150d3c38092807453bf40564b55d1d30bc8fca462d150d7fd40d4c9c  tools/direct-commit/sequence_state_check\n",
+ "failures": 0,
+ "gdn_resident": false,
+ "gdn_state_split": "4",
+ "generated": "2026-09-21T01:06:08",
+ "git_revision": "f2b61077232e77c48f9b83b86c791500cf1e1d53\n",
+ "how_to_read": "Logits and argmax are required equal after every pass. Raw gdn_state and conv_ring are compared after every pass for every slot, but required equal only where both copies are durable at the same prefix (len - keep); straight after a committing pass the mixed copy is ahead by that pass's rows and a difference there is the contract working. Each scenario ends with one identical committing pass on both copies, and the raw state and ring must match there.",
+ "resident_server_masked": true,
+ "rollback": [
+  {
+   "checks": [
+    {
+     "attempt": "reject one token of a committed pass",
+     "expected_rejection": true,
+     "keep": 5,
+     "message": "cannot reject tokens from a committed pass",
+     "ok": true,
+     "rejected": true,
+     "seq_after": {
+      "durable_prefix": 6,
+      "keep": 0,
+      "last_n": 6,
+      "len": 6,
+      "parity": 1,
+      "rollbackable": false,
+      "slot": 2
+     },
+     "seq_before": {
+      "durable_prefix": 6,
+      "keep": 0,
+      "last_n": 6,
+      "len": 6,
+      "parity": 1,
+      "rollbackable": false,
+      "slot": 2
+     },
+     "seq_unchanged": true
+    },
+    {
+     "attempt": "reject every token of a committed pass",
+     "expected_rejection": true,
+     "keep": 0,
+     "message": "cannot reject tokens from a committed pass",
+     "ok": true,
+     "rejected": true,
+     "seq_after": {
+      "durable_prefix": 6,
+      "keep": 0,
+      "last_n": 6,
+      "len": 6,
+      "parity": 1,
+      "rollbackable": false,
+      "slot": 2
+     },
+     "seq_before": {
+      "durable_prefix": 6,
+      "keep": 0,
+      "last_n": 6,
+      "len": 6,
+      "parity": 1,
+      "rollbackable": false,
+      "slot": 2
+     },
+     "seq_unchanged": true
+    },
+    {
+     "attempt": "accept the whole committed pass",
+     "expected_rejection": false,
+     "keep": 6,
+     "keep_after": 0,
+     "message": "",
+     "ok": true,
+     "rejected": false,
+     "seq_after": {
+      "durable_prefix": 6,
+      "keep": 0,
+      "last_n": 6,
+      "len": 6,
+      "parity": 1,
+      "rollbackable": false,
+      "slot": 2
+     },
+     "seq_before": {
+      "durable_prefix": 6,
+      "keep": 0,
+      "last_n": 6,
+      "len": 6,
+      "parity": 1,
+      "rollbackable": false,
+      "slot": 2
+     },
+     "seq_unchanged": true
+    },
+    {
+     "attempt": "prefix longer than the pass",
+     "expected_rejection": true,
+     "keep": 5,
+     "message": "invalid accepted prefix",
+     "ok": true,
+     "rejected": true,
+     "seq_after": {
+      "durable_prefix": 6,
+      "keep": 4,
+      "last_n": 4,
+      "len": 10,
+      "parity": 0,
+      "rollbackable": true,
+      "slot": 2
+     },
+     "seq_before": {
+      "durable_prefix": 6,
+      "keep": 4,
+      "last_n": 4,
+      "len": 10,
+      "parity": 0,
+      "rollbackable": true,
+      "slot": 2
+     },
+     "seq_unchanged": true
+    },
+    {
+     "attempt": "negative prefix",
+     "expected_rejection": true,
+     "keep": -1,
+     "message": "invalid accepted prefix",
+     "ok": true,
+     "rejected": true,
+     "seq_after": {
+      "durable_prefix": 6,
+      "keep": 4,
+      "last_n": 4,
+      "len": 10,
+      "parity": 0,
+      "rollbackable": true,
+      "slot": 2
+     },
+     "seq_before": {
+      "durable_prefix": 6,
+      "keep": 4,
+      "last_n": 4,
+      "len": 10,
+      "parity": 0,
+      "rollbackable": true,
+      "slot": 2
+     },
+     "seq_unchanged": true
+    }
+   ],
+   "commit_mode": 16,
+   "name": "a committed pass refuses rejection without mutating the Seq",
+   "ok": true
+  },
+  {
+   "accepted": 4,
+   "commit_mode": 16,
+   "committed_rows": 6,
+   "logits": {
+    "bitwise_equal": true,
+    "compared": 1489920,
+    "differing": 0,
+    "max_abs_diff": 0.0,
+    "max_ulp": 0,
+    "nonfinite_mixed": 0,
+    "nonfinite_reference": 0
+   },
+   "name": "reject part of an uncommitted pass after a committed one",
+   "ok": true,
+   "reference_mode": 10,
+   "rejected": 3,
+   "rejected_tokens_differ": true,
+   "sequences": [
+    {
+     "bookkeeping_consistent": true,
+     "conv_ring": {
+      "bitwise_equal": true,
+      "compared": 1474560,
+      "differing": 0,
+      "max_abs_diff": 0.0,
+      "max_ulp": 0,
+      "nonfinite_mixed": 0,
+      "nonfinite_reference": 0
+     },
+     "durable_prefix": {
+      "aligned": true,
+      "mixed": 10,
+      "mixed_ahead_by": 0,
+      "reference": 10
+     },
+     "gdn_state": {
+      "bitwise_equal": true,
+      "compared": 37748736,
+      "differing": 0,
+      "max_abs_diff": 0.0,
+      "max_ulp": 0,
+      "nonfinite_mixed": 0,
+      "nonfinite_reference": 0
+     },
+     "ok": true,
+     "raw_state_bitwise_equal": true,
+     "seq_mixed": {
+      "durable_prefix": 10,
+      "keep": 5,
+      "last_n": 5,
+      "len": 15,
+      "parity": 1,
+      "rollbackable": true,
+      "slot": 2
+     },
+     "seq_reference": {
+      "durable_prefix": 10,
+      "keep": 5,
+      "last_n": 5,
+      "len": 15,
+      "parity": 1,
+      "rollbackable": true,
+      "slot": 0
+     },
+     "sequence": "a",
+     "state_asserted": true,
+     "state_note": "both copies have stored the same 10 tokens, so their durable images must match"
+    },
+    {
+     "bookkeeping_consistent": true,
+     "conv_ring": {
+      "bitwise_equal": true,
+      "compared": 1474560,
+      "differing": 0,
+      "max_abs_diff": 0.0,
+      "max_ulp": 0,
+      "nonfinite_mixed": 0,
+      "nonfinite_reference": 0
+     },
+     "durable_prefix": {
+      "aligned": true,
+      "mixed": 2,
+      "mixed_ahead_by": 0,
+      "reference": 2
+     },
+     "gdn_state": {
+      "bitwise_equal": true,
+      "compared": 37748736,
+      "differing": 0,
+      "max_abs_diff": 0.0,
+      "max_ulp": 0,
+      "nonfinite_mixed": 0,
+      "nonfinite_reference": 0
+     },
+     "ok": true,
+     "raw_state_bitwise_equal": true,
+     "seq_mixed": {
+      "durable_prefix": 2,
+      "keep": 1,
+      "last_n": 1,
+      "len": 3,
+      "parity": 0,
+      "rollbackable": true,
+      "slot": 3
+     },
+     "seq_reference": {
+      "durable_prefix": 2,
+      "keep": 1,
+      "last_n": 1,
+      "len": 3,
+      "parity": 0,
+      "rollbackable": true,
+      "slot": 1
+     },
+     "sequence": "b",
+     "state_asserted": true,
+     "state_note": "both copies have stored the same 2 tokens, so their durable images must match"
+    }
+   ],
+   "synchronisation": {
+    "logits": {
+     "bitwise_equal": true,
+     "compared": 993280,
+     "differing": 0,
+     "max_abs_diff": 0.0,
+     "max_ulp": 0,
+     "nonfinite_mixed": 0,
+     "nonfinite_reference": 0
+    },
+    "mode": 16,
+    "ok": true,
+    "sequences": [
+     {
+      "bookkeeping_consistent": true,
+      "conv_ring": {
+       "bitwise_equal": true,
+       "compared": 1474560,
+       "differing": 0,
+       "max_abs_diff": 0.0,
+       "max_ulp": 0,
+       "nonfinite_mixed": 0,
+       "nonfinite_reference": 0
+      },
+      "durable_prefix": {
+       "aligned": true,
+       "mixed": 17,
+       "mixed_ahead_by": 0,
+       "reference": 17
+      },
+      "gdn_state": {
+       "bitwise_equal": true,
+       "compared": 37748736,
+       "differing": 0,
+       "max_abs_diff": 0.0,
+       "max_ulp": 0,
+       "nonfinite_mixed": 0,
+       "nonfinite_reference": 0
+      },
+      "ok": true,
+      "raw_state_bitwise_equal": true,
+      "seq_mixed": {
+       "durable_prefix": 17,
+       "keep": 0,
+       "last_n": 2,
+       "len": 17,
+       "parity": 0,
+       "rollbackable": false,
+       "slot": 2
+      },
+      "seq_reference": {
+       "durable_prefix": 17,
+       "keep": 0,
+       "last_n": 2,
+       "len": 17,
+       "parity": 0,
+       "rollbackable": false,
+       "slot": 0
+      },
+      "sequence": "a",
+      "state_asserted": true,
+      "state_note": "both copies have stored the same 17 tokens, so their durable images must match"
+     },
+     {
+      "bookkeeping_consistent": true,
+      "conv_ring": {
+       "bitwise_equal": true,
+       "compared": 1474560,
+       "differing": 0,
+       "max_abs_diff": 0.0,
+       "max_ulp": 0,
+       "nonfinite_mixed": 0,
+       "nonfinite_reference": 0
+      },
+      "durable_prefix": {
+       "aligned": true,
+       "mixed": 5,
+       "mixed_ahead_by": 0,
+       "reference": 5
+      },
+      "gdn_state": {
+       "bitwise_equal": true,
+       "compared": 37748736,
+       "differing": 0,
+       "max_abs_diff": 0.0,
+       "max_ulp": 0,
+       "nonfinite_mixed": 0,
+       "nonfinite_reference": 0
+      },
+      "ok": true,
+      "raw_state_bitwise_equal": true,
+      "seq_mixed": {
+       "durable_prefix": 5,
+       "keep": 0,
+       "last_n": 2,
+       "len": 5,
+       "parity": 1,
+       "rollbackable": false,
+       "slot": 3
+      },
+      "seq_reference": {
+       "durable_prefix": 5,
+       "keep": 0,
+       "last_n": 2,
+       "len": 5,
+       "parity": 1,
+       "rollbackable": false,
+       "slot": 1
+      },
+      "sequence": "b",
+      "state_asserted": true,
+      "state_note": "both copies have stored the same 5 tokens, so their durable images must match"
+     }
+    ],
+    "what": "identical committing pass on both copies, so the tail stops being deferred"
+   },
+   "tail_rows": 5
+  },
+  {
+   "accepted": 0,
+   "commit_mode": 16,
+   "committed_rows": 6,
+   "logits": {
+    "bitwise_equal": true,
+    "compared": 1489920,
+    "differing": 0,
+    "max_abs_diff": 0.0,
+    "max_ulp": 0,
+    "nonfinite_mixed": 0,
+    "nonfinite_reference": 0
+   },
+   "name": "reject every token of an uncommitted pass after a committed one",
+   "ok": true,
+   "parity_differs_by_design": false,
+   "reference_mode": 10,
+   "rejected": 3,
+   "rejected_tokens_differ": true,
+   "sequences": [
+    {
+     "bookkeeping_consistent": true,
+     "conv_ring": {
+      "bitwise_equal": true,
+      "compared": 1474560,
+      "differing": 0,
+      "max_abs_diff": 0.0,
+      "max_ulp": 0,
+      "nonfinite_mixed": 0,
+      "nonfinite_reference": 0
+     },
+     "durable_prefix": {
+      "aligned": true,
+      "mixed": 6,
+      "mixed_ahead_by": 0,
+      "reference": 6
+     },
+     "gdn_state": {
+      "bitwise_equal": true,
+      "compared": 37748736,
+      "differing": 0,
+      "max_abs_diff": 0.0,
+      "max_ulp": 0,
+      "nonfinite_mixed": 0,
+      "nonfinite_reference": 0
+     },
+     "ok": true,
+     "parity_difference_allowed": true,
+     "raw_state_bitwise_equal": true,
+     "seq_mixed": {
+      "durable_prefix": 6,
+      "keep": 5,
+      "last_n": 5,
+      "len": 11,
+      "parity": 1,
+      "rollbackable": true,
+      "slot": 2
+     },
+     "seq_reference": {
+      "durable_prefix": 6,
+      "keep": 5,
+      "last_n": 5,
+      "len": 11,
+      "parity": 0,
+      "rollbackable": true,
+      "slot": 0
+     },
+     "sequence": "a",
+     "state_asserted": true,
+     "state_note": "both copies have stored the same 6 tokens, so their durable images must match"
+    },
+    {
+     "bookkeeping_consistent": true,
+     "conv_ring": {
+      "bitwise_equal": true,
+      "compared": 1474560,
+      "differing": 0,
+      "max_abs_diff": 0.0,
+      "max_ulp": 0,
+      "nonfinite_mixed": 0,
+      "nonfinite_reference": 0
+     },
+     "durable_prefix": {
+      "aligned": true,
+      "mixed": 2,
+      "mixed_ahead_by": 0,
+      "reference": 2
+     },
+     "gdn_state": {
+      "bitwise_equal": true,
+      "compared": 37748736,
+      "differing": 0,
+      "max_abs_diff": 0.0,
+      "max_ulp": 0,
+      "nonfinite_mixed": 0,
+      "nonfinite_reference": 0
+     },
+     "ok": true,
+     "raw_state_bitwise_equal": true,
+     "seq_mixed": {
+      "durable_prefix": 2,
+      "keep": 1,
+      "last_n": 1,
+      "len": 3,
+      "parity": 0,
+      "rollbackable": true,
+      "slot": 3
+     },
+     "seq_reference": {
+      "durable_prefix": 2,
+      "keep": 1,
+      "last_n": 1,
+      "len": 3,
+      "parity": 0,
+      "rollbackable": true,
+      "slot": 1
+     },
+     "sequence": "b",
+     "state_asserted": true,
+     "state_note": "both copies have stored the same 2 tokens, so their durable images must match"
+    }
+   ],
+   "synchronisation": {
+    "logits": {
+     "bitwise_equal": true,
+     "compared": 993280,
+     "differing": 0,
+     "max_abs_diff": 0.0,
+     "max_ulp": 0,
+     "nonfinite_mixed": 0,
+     "nonfinite_reference": 0
+    },
+    "mode": 16,
+    "ok": true,
+    "sequences": [
+     {
+      "bookkeeping_consistent": true,
+      "conv_ring": {
+       "bitwise_equal": true,
+       "compared": 1474560,
+       "differing": 0,
+       "max_abs_diff": 0.0,
+       "max_ulp": 0,
+       "nonfinite_mixed": 0,
+       "nonfinite_reference": 0
+      },
+      "durable_prefix": {
+       "aligned": true,
+       "mixed": 13,
+       "mixed_ahead_by": 0,
+       "reference": 13
+      },
+      "gdn_state": {
+       "bitwise_equal": true,
+       "compared": 37748736,
+       "differing": 0,
+       "max_abs_diff": 0.0,
+       "max_ulp": 0,
+       "nonfinite_mixed": 0,
+       "nonfinite_reference": 0
+      },
+      "ok": true,
+      "parity_difference_allowed": true,
+      "raw_state_bitwise_equal": true,
+      "seq_mixed": {
+       "durable_prefix": 13,
+       "keep": 0,
+       "last_n": 2,
+       "len": 13,
+       "parity": 0,
+       "rollbackable": false,
+       "slot": 2
+      },
+      "seq_reference": {
+       "durable_prefix": 13,
+       "keep": 0,
+       "last_n": 2,
+       "len": 13,
+       "parity": 1,
+       "rollbackable": false,
+       "slot": 0
+      },
+      "sequence": "a",
+      "state_asserted": true,
+      "state_note": "both copies have stored the same 13 tokens, so their durable images must match"
+     },
+     {
+      "bookkeeping_consistent": true,
+      "conv_ring": {
+       "bitwise_equal": true,
+       "compared": 1474560,
+       "differing": 0,
+       "max_abs_diff": 0.0,
+       "max_ulp": 0,
+       "nonfinite_mixed": 0,
+       "nonfinite_reference": 0
+      },
+      "durable_prefix": {
+       "aligned": true,
+       "mixed": 5,
+       "mixed_ahead_by": 0,
+       "reference": 5
+      },
+      "gdn_state": {
+       "bitwise_equal": true,
+       "compared": 37748736,
+       "differing": 0,
+       "max_abs_diff": 0.0,
+       "max_ulp": 0,
+       "nonfinite_mixed": 0,
+       "nonfinite_reference": 0
+      },
+      "ok": true,
+      "raw_state_bitwise_equal": true,
+      "seq_mixed": {
+       "durable_prefix": 5,
+       "keep": 0,
+       "last_n": 2,
+       "len": 5,
+       "parity": 1,
+       "rollbackable": false,
+       "slot": 3
+      },
+      "seq_reference": {
+       "durable_prefix": 5,
+       "keep": 0,
+       "last_n": 2,
+       "len": 5,
+       "parity": 1,
+       "rollbackable": false,
+       "slot": 1
+      },
+      "sequence": "b",
+      "state_asserted": true,
+      "state_note": "both copies have stored the same 5 tokens, so their durable images must match"
+     }
+    ],
+    "what": "identical committing pass on both copies, so the tail stops being deferred"
+   },
+   "tail_rows": 5
+  }
+ ],
+ "scenarios": [
+  {
+   "commit_mode": 16,
+   "equal": true,
+   "name": "modes 10 and 16 mixed, against 10 throughout",
+   "passes": [
+    {
+     "argmax": {
+      "matching": 1,
+      "rows": 1
+     },
+     "commits": false,
+     "equal": true,
+     "index": 0,
+     "logits": {
+      "bitwise_equal": true,
+      "compared": 248320,
+      "differing": 0,
+      "max_abs_diff": 0.0,
+      "max_ulp": 0,
+      "nonfinite_mixed": 0,
+      "nonfinite_reference": 0
+     },
+     "mixed_mode": 10,
+     "rows": {
+      "a": 1,
+      "b": 0,
+      "total": 1
+     },
+     "schedule": {
+      "mixed": "deployed",
+      "reference": "deployed"
+     },
+     "sequences": [
+      {
+       "bookkeeping_consistent": true,
+       "conv_ring": {
+        "bitwise_equal": true,
+        "compared": 1474560,
+        "differing": 0,
+        "max_abs_diff": 0.0,
+        "max_ulp": 0,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "durable_prefix": {
+        "aligned": true,
+        "mixed": 0,
+        "mixed_ahead_by": 0,
+        "reference": 0
+       },
+       "gdn_state": {
+        "bitwise_equal": true,
+        "compared": 37748736,
+        "differing": 0,
+        "max_abs_diff": 0.0,
+        "max_ulp": 0,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "ok": true,
+       "raw_state_bitwise_equal": true,
+       "seq_mixed": {
+        "durable_prefix": 0,
+        "keep": 1,
+        "last_n": 1,
+        "len": 1,
+        "parity": 1,
+        "rollbackable": true,
+        "slot": 2
+       },
+       "seq_reference": {
+        "durable_prefix": 0,
+        "keep": 1,
+        "last_n": 1,
+        "len": 1,
+        "parity": 1,
+        "rollbackable": true,
+        "slot": 0
+       },
+       "sequence": "a",
+       "state_asserted": true,
+       "state_note": "both copies have stored the same 0 tokens, so their durable images must match"
+      },
+      {
+       "bookkeeping_consistent": true,
+       "conv_ring": {
+        "bitwise_equal": true,
+        "compared": 1474560,
+        "differing": 0,
+        "max_abs_diff": 0.0,
+        "max_ulp": 0,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "durable_prefix": {
+        "aligned": true,
+        "mixed": 0,
+        "mixed_ahead_by": 0,
+        "reference": 0
+       },
+       "gdn_state": {
+        "bitwise_equal": true,
+        "compared": 37748736,
+        "differing": 0,
+        "max_abs_diff": 0.0,
+        "max_ulp": 0,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "ok": true,
+       "raw_state_bitwise_equal": true,
+       "seq_mixed": {
+        "durable_prefix": 0,
+        "keep": 0,
+        "last_n": 0,
+        "len": 0,
+        "parity": 0,
+        "rollbackable": true,
+        "slot": 3
+       },
+       "seq_reference": {
+        "durable_prefix": 0,
+        "keep": 0,
+        "last_n": 0,
+        "len": 0,
+        "parity": 0,
+        "rollbackable": true,
+        "slot": 1
+       },
+       "sequence": "b",
+       "state_asserted": true,
+       "state_note": "both copies have stored the same 0 tokens, so their durable images must match"
+      }
+     ],
+     "slots_state_asserted": 2,
+     "slots_state_deferred_and_differing": 0
+    },
+    {
+     "argmax": {
+      "matching": 3,
+      "rows": 3
+     },
+     "commits": true,
+     "equal": true,
+     "index": 1,
+     "logits": {
+      "bitwise_equal": true,
+      "compared": 744960,
+      "differing": 0,
+      "max_abs_diff": 0.0,
+      "max_ulp": 0,
+      "nonfinite_mixed": 0,
+      "nonfinite_reference": 0
+     },
+     "mixed_mode": 16,
+     "rows": {
+      "a": 2,
+      "b": 1,
+      "total": 3
+     },
+     "schedule": {
+      "mixed": "deployed",
+      "reference": "deployed"
+     },
+     "sequences": [
+      {
+       "bookkeeping_consistent": true,
+       "conv_ring": {
+        "bitwise_equal": false,
+        "compared": 1474560,
+        "differing": 1474560,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 35.604549407958984,
+        "max_ulp": 2182795059,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "durable_prefix": {
+        "aligned": false,
+        "mixed": 3,
+        "mixed_ahead_by": 2,
+        "reference": 1
+       },
+       "gdn_state": {
+        "bitwise_equal": false,
+        "compared": 37748736,
+        "differing": 37748736,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 9.837810039520264,
+        "max_ulp": 2153590190,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "ok": true,
+       "raw_state_bitwise_equal": false,
+       "seq_mixed": {
+        "durable_prefix": 3,
+        "keep": 0,
+        "last_n": 2,
+        "len": 3,
+        "parity": 0,
+        "rollbackable": false,
+        "slot": 2
+       },
+       "seq_reference": {
+        "durable_prefix": 1,
+        "keep": 2,
+        "last_n": 2,
+        "len": 3,
+        "parity": 0,
+        "rollbackable": true,
+        "slot": 0
+       },
+       "sequence": "a",
+       "state_asserted": false,
+       "state_note": "the mixed copy has stored 2 tokens the reference still holds in blk_cache; a difference here is expected, and the synchronising pass at the end of the scenario is where it has to vanish"
+      },
+      {
+       "bookkeeping_consistent": true,
+       "conv_ring": {
+        "bitwise_equal": false,
+        "compared": 1474560,
+        "differing": 491520,
+        "first_difference": {
+         "flat": 20480,
+         "group": 0,
+         "offset": 20480
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 40.23225402832031,
+        "max_ulp": 1109454292,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "durable_prefix": {
+        "aligned": false,
+        "mixed": 1,
+        "mixed_ahead_by": 1,
+        "reference": 0
+       },
+       "gdn_state": {
+        "bitwise_equal": false,
+        "compared": 37748736,
+        "differing": 37748736,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 6.4826273918151855,
+        "max_ulp": 1087336879,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "ok": true,
+       "raw_state_bitwise_equal": false,
+       "seq_mixed": {
+        "durable_prefix": 1,
+        "keep": 0,
+        "last_n": 1,
+        "len": 1,
+        "parity": 1,
+        "rollbackable": false,
+        "slot": 3
+       },
+       "seq_reference": {
+        "durable_prefix": 0,
+        "keep": 1,
+        "last_n": 1,
+        "len": 1,
+        "parity": 1,
+        "rollbackable": true,
+        "slot": 1
+       },
+       "sequence": "b",
+       "state_asserted": false,
+       "state_note": "the mixed copy has stored 1 tokens the reference still holds in blk_cache; a difference here is expected, and the synchronising pass at the end of the scenario is where it has to vanish"
+      }
+     ],
+     "slots_state_asserted": 0,
+     "slots_state_deferred_and_differing": 2
+    },
+    {
+     "argmax": {
+      "matching": 8,
+      "rows": 8
+     },
+     "commits": true,
+     "equal": true,
+     "index": 2,
+     "logits": {
+      "bitwise_equal": true,
+      "compared": 1986560,
+      "differing": 0,
+      "max_abs_diff": 0.0,
+      "max_ulp": 0,
+      "nonfinite_mixed": 0,
+      "nonfinite_reference": 0
+     },
+     "mixed_mode": 16,
+     "rows": {
+      "a": 5,
+      "b": 3,
+      "total": 8
+     },
+     "schedule": {
+      "mixed": "sliced",
+      "reference": "sliced"
+     },
+     "sequences": [
+      {
+       "bookkeeping_consistent": true,
+       "conv_ring": {
+        "bitwise_equal": false,
+        "compared": 1474560,
+        "differing": 1474560,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 28.837613701820374,
+        "max_ulp": 2183503089,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "durable_prefix": {
+        "aligned": false,
+        "mixed": 8,
+        "mixed_ahead_by": 5,
+        "reference": 3
+       },
+       "gdn_state": {
+        "bitwise_equal": false,
+        "compared": 37748736,
+        "differing": 37748735,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 13.605714797973633,
+        "max_ulp": 2168167259,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "ok": true,
+       "raw_state_bitwise_equal": false,
+       "seq_mixed": {
+        "durable_prefix": 8,
+        "keep": 0,
+        "last_n": 5,
+        "len": 8,
+        "parity": 1,
+        "rollbackable": false,
+        "slot": 2
+       },
+       "seq_reference": {
+        "durable_prefix": 3,
+        "keep": 5,
+        "last_n": 5,
+        "len": 8,
+        "parity": 1,
+        "rollbackable": true,
+        "slot": 0
+       },
+       "sequence": "a",
+       "state_asserted": false,
+       "state_note": "the mixed copy has stored 5 tokens the reference still holds in blk_cache; a difference here is expected, and the synchronising pass at the end of the scenario is where it has to vanish"
+      },
+      {
+       "bookkeeping_consistent": true,
+       "conv_ring": {
+        "bitwise_equal": false,
+        "compared": 1474560,
+        "differing": 1474560,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 43.885894775390625,
+        "max_ulp": 2178851580,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "durable_prefix": {
+        "aligned": false,
+        "mixed": 4,
+        "mixed_ahead_by": 3,
+        "reference": 1
+       },
+       "gdn_state": {
+        "bitwise_equal": false,
+        "compared": 37748736,
+        "differing": 37748736,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 15.458719968795776,
+        "max_ulp": 2165523745,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "ok": true,
+       "raw_state_bitwise_equal": false,
+       "seq_mixed": {
+        "durable_prefix": 4,
+        "keep": 0,
+        "last_n": 3,
+        "len": 4,
+        "parity": 0,
+        "rollbackable": false,
+        "slot": 3
+       },
+       "seq_reference": {
+        "durable_prefix": 1,
+        "keep": 3,
+        "last_n": 3,
+        "len": 4,
+        "parity": 0,
+        "rollbackable": true,
+        "slot": 1
+       },
+       "sequence": "b",
+       "state_asserted": false,
+       "state_note": "the mixed copy has stored 3 tokens the reference still holds in blk_cache; a difference here is expected, and the synchronising pass at the end of the scenario is where it has to vanish"
+      }
+     ],
+     "slots_state_asserted": 0,
+     "slots_state_deferred_and_differing": 2
+    },
+    {
+     "argmax": {
+      "matching": 17,
+      "rows": 17
+     },
+     "commits": false,
+     "equal": true,
+     "index": 3,
+     "logits": {
+      "bitwise_equal": true,
+      "compared": 4221440,
+      "differing": 0,
+      "max_abs_diff": 0.0,
+      "max_ulp": 0,
+      "nonfinite_mixed": 0,
+      "nonfinite_reference": 0
+     },
+     "mixed_mode": 10,
+     "rows": {
+      "a": 9,
+      "b": 8,
+      "total": 17
+     },
+     "schedule": {
+      "mixed": "sliced",
+      "reference": "sliced"
+     },
+     "sequences": [
+      {
+       "bookkeeping_consistent": true,
+       "conv_ring": {
+        "bitwise_equal": true,
+        "compared": 1474560,
+        "differing": 0,
+        "max_abs_diff": 0.0,
+        "max_ulp": 0,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "durable_prefix": {
+        "aligned": true,
+        "mixed": 16,
+        "mixed_ahead_by": 0,
+        "reference": 16
+       },
+       "gdn_state": {
+        "bitwise_equal": true,
+        "compared": 37748736,
+        "differing": 0,
+        "max_abs_diff": 0.0,
+        "max_ulp": 0,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "ok": true,
+       "raw_state_bitwise_equal": true,
+       "seq_mixed": {
+        "durable_prefix": 16,
+        "keep": 1,
+        "last_n": 1,
+        "len": 17,
+        "parity": 1,
+        "rollbackable": true,
+        "slot": 2
+       },
+       "seq_reference": {
+        "durable_prefix": 16,
+        "keep": 1,
+        "last_n": 1,
+        "len": 17,
+        "parity": 1,
+        "rollbackable": true,
+        "slot": 0
+       },
+       "sequence": "a",
+       "state_asserted": true,
+       "state_note": "both copies have stored the same 16 tokens, so their durable images must match"
+      },
+      {
+       "bookkeeping_consistent": true,
+       "conv_ring": {
+        "bitwise_equal": true,
+        "compared": 1474560,
+        "differing": 0,
+        "max_abs_diff": 0.0,
+        "max_ulp": 0,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "durable_prefix": {
+        "aligned": true,
+        "mixed": 11,
+        "mixed_ahead_by": 0,
+        "reference": 11
+       },
+       "gdn_state": {
+        "bitwise_equal": true,
+        "compared": 37748736,
+        "differing": 0,
+        "max_abs_diff": 0.0,
+        "max_ulp": 0,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "ok": true,
+       "raw_state_bitwise_equal": true,
+       "seq_mixed": {
+        "durable_prefix": 11,
+        "keep": 1,
+        "last_n": 1,
+        "len": 12,
+        "parity": 0,
+        "rollbackable": true,
+        "slot": 3
+       },
+       "seq_reference": {
+        "durable_prefix": 11,
+        "keep": 1,
+        "last_n": 1,
+        "len": 12,
+        "parity": 0,
+        "rollbackable": true,
+        "slot": 1
+       },
+       "sequence": "b",
+       "state_asserted": true,
+       "state_note": "both copies have stored the same 11 tokens, so their durable images must match"
+      }
+     ],
+     "slots_state_asserted": 2,
+     "slots_state_deferred_and_differing": 0
+    },
+    {
+     "argmax": {
+      "matching": 40,
+      "rows": 40
+     },
+     "commits": true,
+     "equal": true,
+     "index": 4,
+     "logits": {
+      "bitwise_equal": true,
+      "compared": 9932800,
+      "differing": 0,
+      "max_abs_diff": 0.0,
+      "max_ulp": 0,
+      "nonfinite_mixed": 0,
+      "nonfinite_reference": 0
+     },
+     "mixed_mode": 16,
+     "rows": {
+      "a": 24,
+      "b": 16,
+      "total": 40
+     },
+     "schedule": {
+      "mixed": "batched-ffn",
+      "reference": "batched-ffn"
+     },
+     "sequences": [
+      {
+       "bookkeeping_consistent": true,
+       "conv_ring": {
+        "bitwise_equal": false,
+        "compared": 1474560,
+        "differing": 1474560,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 45.79561424255371,
+        "max_ulp": 2190189967,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "durable_prefix": {
+        "aligned": false,
+        "mixed": 41,
+        "mixed_ahead_by": 8,
+        "reference": 33
+       },
+       "gdn_state": {
+        "bitwise_equal": false,
+        "compared": 37748736,
+        "differing": 37748732,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 13.783860802650452,
+        "max_ulp": 2166050708,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "ok": true,
+       "raw_state_bitwise_equal": false,
+       "seq_mixed": {
+        "durable_prefix": 41,
+        "keep": 0,
+        "last_n": 8,
+        "len": 41,
+        "parity": 0,
+        "rollbackable": false,
+        "slot": 2
+       },
+       "seq_reference": {
+        "durable_prefix": 33,
+        "keep": 8,
+        "last_n": 8,
+        "len": 41,
+        "parity": 0,
+        "rollbackable": true,
+        "slot": 0
+       },
+       "sequence": "a",
+       "state_asserted": false,
+       "state_note": "the mixed copy has stored 8 tokens the reference still holds in blk_cache; a difference here is expected, and the synchronising pass at the end of the scenario is where it has to vanish"
+      },
+      {
+       "bookkeeping_consistent": true,
+       "conv_ring": {
+        "bitwise_equal": false,
+        "compared": 1474560,
+        "differing": 1474560,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 37.536309242248535,
+        "max_ulp": 2179485843,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "durable_prefix": {
+        "aligned": false,
+        "mixed": 28,
+        "mixed_ahead_by": 8,
+        "reference": 20
+       },
+       "gdn_state": {
+        "bitwise_equal": false,
+        "compared": 37748736,
+        "differing": 37748735,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 14.803508996963501,
+        "max_ulp": 2174842907,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "ok": true,
+       "raw_state_bitwise_equal": false,
+       "seq_mixed": {
+        "durable_prefix": 28,
+        "keep": 0,
+        "last_n": 8,
+        "len": 28,
+        "parity": 0,
+        "rollbackable": false,
+        "slot": 3
+       },
+       "seq_reference": {
+        "durable_prefix": 20,
+        "keep": 8,
+        "last_n": 8,
+        "len": 28,
+        "parity": 0,
+        "rollbackable": true,
+        "slot": 1
+       },
+       "sequence": "b",
+       "state_asserted": false,
+       "state_note": "the mixed copy has stored 8 tokens the reference still holds in blk_cache; a difference here is expected, and the synchronising pass at the end of the scenario is where it has to vanish"
+      }
+     ],
+     "slots_state_asserted": 0,
+     "slots_state_deferred_and_differing": 2
+    },
+    {
+     "argmax": {
+      "matching": 1,
+      "rows": 1
+     },
+     "commits": false,
+     "equal": true,
+     "index": 5,
+     "logits": {
+      "bitwise_equal": true,
+      "compared": 248320,
+      "differing": 0,
+      "max_abs_diff": 0.0,
+      "max_ulp": 0,
+      "nonfinite_mixed": 0,
+      "nonfinite_reference": 0
+     },
+     "mixed_mode": 10,
+     "rows": {
+      "a": 0,
+      "b": 1,
+      "total": 1
+     },
+     "schedule": {
+      "mixed": "deployed",
+      "reference": "deployed"
+     },
+     "sequences": [
+      {
+       "bookkeeping_consistent": true,
+       "conv_ring": {
+        "bitwise_equal": false,
+        "compared": 1474560,
+        "differing": 1474560,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 45.79561424255371,
+        "max_ulp": 2190189967,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "durable_prefix": {
+        "aligned": false,
+        "mixed": 41,
+        "mixed_ahead_by": 8,
+        "reference": 33
+       },
+       "gdn_state": {
+        "bitwise_equal": false,
+        "compared": 37748736,
+        "differing": 37748732,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 13.783860802650452,
+        "max_ulp": 2166050708,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "ok": true,
+       "raw_state_bitwise_equal": false,
+       "seq_mixed": {
+        "durable_prefix": 41,
+        "keep": 0,
+        "last_n": 8,
+        "len": 41,
+        "parity": 0,
+        "rollbackable": false,
+        "slot": 2
+       },
+       "seq_reference": {
+        "durable_prefix": 33,
+        "keep": 8,
+        "last_n": 8,
+        "len": 41,
+        "parity": 0,
+        "rollbackable": true,
+        "slot": 0
+       },
+       "sequence": "a",
+       "state_asserted": false,
+       "state_note": "the mixed copy has stored 8 tokens the reference still holds in blk_cache; a difference here is expected, and the synchronising pass at the end of the scenario is where it has to vanish"
+      },
+      {
+       "bookkeeping_consistent": true,
+       "conv_ring": {
+        "bitwise_equal": true,
+        "compared": 1474560,
+        "differing": 0,
+        "max_abs_diff": 0.0,
+        "max_ulp": 0,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "durable_prefix": {
+        "aligned": true,
+        "mixed": 28,
+        "mixed_ahead_by": 0,
+        "reference": 28
+       },
+       "gdn_state": {
+        "bitwise_equal": true,
+        "compared": 37748736,
+        "differing": 0,
+        "max_abs_diff": 0.0,
+        "max_ulp": 0,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "ok": true,
+       "raw_state_bitwise_equal": true,
+       "seq_mixed": {
+        "durable_prefix": 28,
+        "keep": 1,
+        "last_n": 1,
+        "len": 29,
+        "parity": 1,
+        "rollbackable": true,
+        "slot": 3
+       },
+       "seq_reference": {
+        "durable_prefix": 28,
+        "keep": 1,
+        "last_n": 1,
+        "len": 29,
+        "parity": 1,
+        "rollbackable": true,
+        "slot": 1
+       },
+       "sequence": "b",
+       "state_asserted": true,
+       "state_note": "both copies have stored the same 28 tokens, so their durable images must match"
+      }
+     ],
+     "slots_state_asserted": 1,
+     "slots_state_deferred_and_differing": 1
+    },
+    {
+     "argmax": {
+      "matching": 8,
+      "rows": 8
+     },
+     "commits": true,
+     "equal": true,
+     "index": 6,
+     "logits": {
+      "bitwise_equal": true,
+      "compared": 1986560,
+      "differing": 0,
+      "max_abs_diff": 0.0,
+      "max_ulp": 0,
+      "nonfinite_mixed": 0,
+      "nonfinite_reference": 0
+     },
+     "mixed_mode": 16,
+     "rows": {
+      "a": 3,
+      "b": 5,
+      "total": 8
+     },
+     "schedule": {
+      "mixed": "sliced",
+      "reference": "sliced"
+     },
+     "sequences": [
+      {
+       "bookkeeping_consistent": true,
+       "conv_ring": {
+        "bitwise_equal": false,
+        "compared": 1474560,
+        "differing": 1474560,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 28.571741104125977,
+        "max_ulp": 2180127176,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "durable_prefix": {
+        "aligned": false,
+        "mixed": 44,
+        "mixed_ahead_by": 3,
+        "reference": 41
+       },
+       "gdn_state": {
+        "bitwise_equal": false,
+        "compared": 37748736,
+        "differing": 37748730,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 10.734601855278015,
+        "max_ulp": 2161764319,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "ok": true,
+       "raw_state_bitwise_equal": false,
+       "seq_mixed": {
+        "durable_prefix": 44,
+        "keep": 0,
+        "last_n": 3,
+        "len": 44,
+        "parity": 1,
+        "rollbackable": false,
+        "slot": 2
+       },
+       "seq_reference": {
+        "durable_prefix": 41,
+        "keep": 3,
+        "last_n": 3,
+        "len": 44,
+        "parity": 1,
+        "rollbackable": true,
+        "slot": 0
+       },
+       "sequence": "a",
+       "state_asserted": false,
+       "state_note": "the mixed copy has stored 3 tokens the reference still holds in blk_cache; a difference here is expected, and the synchronising pass at the end of the scenario is where it has to vanish"
+      },
+      {
+       "bookkeeping_consistent": true,
+       "conv_ring": {
+        "bitwise_equal": false,
+        "compared": 1474560,
+        "differing": 1474560,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 43.481778651475906,
+        "max_ulp": 2181493183,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "durable_prefix": {
+        "aligned": false,
+        "mixed": 34,
+        "mixed_ahead_by": 5,
+        "reference": 29
+       },
+       "gdn_state": {
+        "bitwise_equal": false,
+        "compared": 37748736,
+        "differing": 37748734,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 12.186912059783936,
+        "max_ulp": 2167757522,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "ok": true,
+       "raw_state_bitwise_equal": false,
+       "seq_mixed": {
+        "durable_prefix": 34,
+        "keep": 0,
+        "last_n": 5,
+        "len": 34,
+        "parity": 0,
+        "rollbackable": false,
+        "slot": 3
+       },
+       "seq_reference": {
+        "durable_prefix": 29,
+        "keep": 5,
+        "last_n": 5,
+        "len": 34,
+        "parity": 0,
+        "rollbackable": true,
+        "slot": 1
+       },
+       "sequence": "b",
+       "state_asserted": false,
+       "state_note": "the mixed copy has stored 5 tokens the reference still holds in blk_cache; a difference here is expected, and the synchronising pass at the end of the scenario is where it has to vanish"
+      }
+     ],
+     "slots_state_asserted": 0,
+     "slots_state_deferred_and_differing": 2
+    }
+   ],
+   "reference_mode": 10,
+   "synchronisation": {
+    "logits": {
+     "bitwise_equal": true,
+     "compared": 993280,
+     "differing": 0,
+     "max_abs_diff": 0.0,
+     "max_ulp": 0,
+     "nonfinite_mixed": 0,
+     "nonfinite_reference": 0
+    },
+    "mode": 16,
+    "ok": true,
+    "rows": {
+     "a": 2,
+     "b": 2
+    },
+    "sequences": [
+     {
+      "bookkeeping_consistent": true,
+      "conv_ring": {
+       "bitwise_equal": true,
+       "compared": 1474560,
+       "differing": 0,
+       "max_abs_diff": 0.0,
+       "max_ulp": 0,
+       "nonfinite_mixed": 0,
+       "nonfinite_reference": 0
+      },
+      "durable_prefix": {
+       "aligned": true,
+       "mixed": 46,
+       "mixed_ahead_by": 0,
+       "reference": 46
+      },
+      "gdn_state": {
+       "bitwise_equal": true,
+       "compared": 37748736,
+       "differing": 0,
+       "max_abs_diff": 0.0,
+       "max_ulp": 0,
+       "nonfinite_mixed": 0,
+       "nonfinite_reference": 0
+      },
+      "ok": true,
+      "raw_state_bitwise_equal": true,
+      "seq_mixed": {
+       "durable_prefix": 46,
+       "keep": 0,
+       "last_n": 2,
+       "len": 46,
+       "parity": 0,
+       "rollbackable": false,
+       "slot": 2
+      },
+      "seq_reference": {
+       "durable_prefix": 46,
+       "keep": 0,
+       "last_n": 2,
+       "len": 46,
+       "parity": 0,
+       "rollbackable": false,
+       "slot": 0
+      },
+      "sequence": "a",
+      "state_asserted": true,
+      "state_note": "both copies have stored the same 46 tokens, so their durable images must match"
+     },
+     {
+      "bookkeeping_consistent": true,
+      "conv_ring": {
+       "bitwise_equal": true,
+       "compared": 1474560,
+       "differing": 0,
+       "max_abs_diff": 0.0,
+       "max_ulp": 0,
+       "nonfinite_mixed": 0,
+       "nonfinite_reference": 0
+      },
+      "durable_prefix": {
+       "aligned": true,
+       "mixed": 36,
+       "mixed_ahead_by": 0,
+       "reference": 36
+      },
+      "gdn_state": {
+       "bitwise_equal": true,
+       "compared": 37748736,
+       "differing": 0,
+       "max_abs_diff": 0.0,
+       "max_ulp": 0,
+       "nonfinite_mixed": 0,
+       "nonfinite_reference": 0
+      },
+      "ok": true,
+      "raw_state_bitwise_equal": true,
+      "seq_mixed": {
+       "durable_prefix": 36,
+       "keep": 0,
+       "last_n": 2,
+       "len": 36,
+       "parity": 1,
+       "rollbackable": false,
+       "slot": 3
+      },
+      "seq_reference": {
+       "durable_prefix": 36,
+       "keep": 0,
+       "last_n": 2,
+       "len": 36,
+       "parity": 1,
+       "rollbackable": false,
+       "slot": 1
+      },
+      "sequence": "b",
+      "state_asserted": true,
+      "state_note": "both copies have stored the same 36 tokens, so their durable images must match"
+     }
+    ],
+    "what": "one identical committing pass on both copies, appended after the trajectory to bring both durable prefixes to len"
+   }
+  },
+  {
+   "commit_mode": 18,
+   "equal": true,
+   "name": "modes 17 and 18 mixed, against 17 throughout",
+   "passes": [
+    {
+     "argmax": {
+      "matching": 1,
+      "rows": 1
+     },
+     "commits": false,
+     "equal": true,
+     "index": 0,
+     "logits": {
+      "bitwise_equal": true,
+      "compared": 248320,
+      "differing": 0,
+      "max_abs_diff": 0.0,
+      "max_ulp": 0,
+      "nonfinite_mixed": 0,
+      "nonfinite_reference": 0
+     },
+     "mixed_mode": 17,
+     "rows": {
+      "a": 1,
+      "b": 0,
+      "total": 1
+     },
+     "schedule": {
+      "mixed": "deployed",
+      "reference": "deployed"
+     },
+     "sequences": [
+      {
+       "bookkeeping_consistent": true,
+       "conv_ring": {
+        "bitwise_equal": true,
+        "compared": 1474560,
+        "differing": 0,
+        "max_abs_diff": 0.0,
+        "max_ulp": 0,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "durable_prefix": {
+        "aligned": true,
+        "mixed": 0,
+        "mixed_ahead_by": 0,
+        "reference": 0
+       },
+       "gdn_state": {
+        "bitwise_equal": true,
+        "compared": 37748736,
+        "differing": 0,
+        "max_abs_diff": 0.0,
+        "max_ulp": 0,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "ok": true,
+       "raw_state_bitwise_equal": true,
+       "seq_mixed": {
+        "durable_prefix": 0,
+        "keep": 1,
+        "last_n": 1,
+        "len": 1,
+        "parity": 1,
+        "rollbackable": true,
+        "slot": 2
+       },
+       "seq_reference": {
+        "durable_prefix": 0,
+        "keep": 1,
+        "last_n": 1,
+        "len": 1,
+        "parity": 1,
+        "rollbackable": true,
+        "slot": 0
+       },
+       "sequence": "a",
+       "state_asserted": true,
+       "state_note": "both copies have stored the same 0 tokens, so their durable images must match"
+      },
+      {
+       "bookkeeping_consistent": true,
+       "conv_ring": {
+        "bitwise_equal": true,
+        "compared": 1474560,
+        "differing": 0,
+        "max_abs_diff": 0.0,
+        "max_ulp": 0,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "durable_prefix": {
+        "aligned": true,
+        "mixed": 0,
+        "mixed_ahead_by": 0,
+        "reference": 0
+       },
+       "gdn_state": {
+        "bitwise_equal": true,
+        "compared": 37748736,
+        "differing": 0,
+        "max_abs_diff": 0.0,
+        "max_ulp": 0,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "ok": true,
+       "raw_state_bitwise_equal": true,
+       "seq_mixed": {
+        "durable_prefix": 0,
+        "keep": 0,
+        "last_n": 0,
+        "len": 0,
+        "parity": 0,
+        "rollbackable": true,
+        "slot": 3
+       },
+       "seq_reference": {
+        "durable_prefix": 0,
+        "keep": 0,
+        "last_n": 0,
+        "len": 0,
+        "parity": 0,
+        "rollbackable": true,
+        "slot": 1
+       },
+       "sequence": "b",
+       "state_asserted": true,
+       "state_note": "both copies have stored the same 0 tokens, so their durable images must match"
+      }
+     ],
+     "slots_state_asserted": 2,
+     "slots_state_deferred_and_differing": 0
+    },
+    {
+     "argmax": {
+      "matching": 3,
+      "rows": 3
+     },
+     "commits": true,
+     "equal": true,
+     "index": 1,
+     "logits": {
+      "bitwise_equal": true,
+      "compared": 744960,
+      "differing": 0,
+      "max_abs_diff": 0.0,
+      "max_ulp": 0,
+      "nonfinite_mixed": 0,
+      "nonfinite_reference": 0
+     },
+     "mixed_mode": 18,
+     "rows": {
+      "a": 2,
+      "b": 1,
+      "total": 3
+     },
+     "schedule": {
+      "mixed": "deployed",
+      "reference": "deployed"
+     },
+     "sequences": [
+      {
+       "bookkeeping_consistent": true,
+       "conv_ring": {
+        "bitwise_equal": false,
+        "compared": 1474560,
+        "differing": 1474560,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 35.604549407958984,
+        "max_ulp": 2182795059,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "durable_prefix": {
+        "aligned": false,
+        "mixed": 3,
+        "mixed_ahead_by": 2,
+        "reference": 1
+       },
+       "gdn_state": {
+        "bitwise_equal": false,
+        "compared": 37748736,
+        "differing": 37748736,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 9.837810039520264,
+        "max_ulp": 2153590190,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "ok": true,
+       "raw_state_bitwise_equal": false,
+       "seq_mixed": {
+        "durable_prefix": 3,
+        "keep": 0,
+        "last_n": 2,
+        "len": 3,
+        "parity": 0,
+        "rollbackable": false,
+        "slot": 2
+       },
+       "seq_reference": {
+        "durable_prefix": 1,
+        "keep": 2,
+        "last_n": 2,
+        "len": 3,
+        "parity": 0,
+        "rollbackable": true,
+        "slot": 0
+       },
+       "sequence": "a",
+       "state_asserted": false,
+       "state_note": "the mixed copy has stored 2 tokens the reference still holds in blk_cache; a difference here is expected, and the synchronising pass at the end of the scenario is where it has to vanish"
+      },
+      {
+       "bookkeeping_consistent": true,
+       "conv_ring": {
+        "bitwise_equal": false,
+        "compared": 1474560,
+        "differing": 491520,
+        "first_difference": {
+         "flat": 20480,
+         "group": 0,
+         "offset": 20480
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 40.23225402832031,
+        "max_ulp": 1109454292,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "durable_prefix": {
+        "aligned": false,
+        "mixed": 1,
+        "mixed_ahead_by": 1,
+        "reference": 0
+       },
+       "gdn_state": {
+        "bitwise_equal": false,
+        "compared": 37748736,
+        "differing": 37748736,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 6.4826273918151855,
+        "max_ulp": 1087336879,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "ok": true,
+       "raw_state_bitwise_equal": false,
+       "seq_mixed": {
+        "durable_prefix": 1,
+        "keep": 0,
+        "last_n": 1,
+        "len": 1,
+        "parity": 1,
+        "rollbackable": false,
+        "slot": 3
+       },
+       "seq_reference": {
+        "durable_prefix": 0,
+        "keep": 1,
+        "last_n": 1,
+        "len": 1,
+        "parity": 1,
+        "rollbackable": true,
+        "slot": 1
+       },
+       "sequence": "b",
+       "state_asserted": false,
+       "state_note": "the mixed copy has stored 1 tokens the reference still holds in blk_cache; a difference here is expected, and the synchronising pass at the end of the scenario is where it has to vanish"
+      }
+     ],
+     "slots_state_asserted": 0,
+     "slots_state_deferred_and_differing": 2
+    },
+    {
+     "argmax": {
+      "matching": 8,
+      "rows": 8
+     },
+     "commits": true,
+     "equal": true,
+     "index": 2,
+     "logits": {
+      "bitwise_equal": true,
+      "compared": 1986560,
+      "differing": 0,
+      "max_abs_diff": 0.0,
+      "max_ulp": 0,
+      "nonfinite_mixed": 0,
+      "nonfinite_reference": 0
+     },
+     "mixed_mode": 18,
+     "rows": {
+      "a": 5,
+      "b": 3,
+      "total": 8
+     },
+     "schedule": {
+      "mixed": "sliced",
+      "reference": "sliced"
+     },
+     "sequences": [
+      {
+       "bookkeeping_consistent": true,
+       "conv_ring": {
+        "bitwise_equal": false,
+        "compared": 1474560,
+        "differing": 1474560,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 28.837613701820374,
+        "max_ulp": 2183503089,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "durable_prefix": {
+        "aligned": false,
+        "mixed": 8,
+        "mixed_ahead_by": 5,
+        "reference": 3
+       },
+       "gdn_state": {
+        "bitwise_equal": false,
+        "compared": 37748736,
+        "differing": 37748735,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 13.605714797973633,
+        "max_ulp": 2168167259,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "ok": true,
+       "raw_state_bitwise_equal": false,
+       "seq_mixed": {
+        "durable_prefix": 8,
+        "keep": 0,
+        "last_n": 5,
+        "len": 8,
+        "parity": 1,
+        "rollbackable": false,
+        "slot": 2
+       },
+       "seq_reference": {
+        "durable_prefix": 3,
+        "keep": 5,
+        "last_n": 5,
+        "len": 8,
+        "parity": 1,
+        "rollbackable": true,
+        "slot": 0
+       },
+       "sequence": "a",
+       "state_asserted": false,
+       "state_note": "the mixed copy has stored 5 tokens the reference still holds in blk_cache; a difference here is expected, and the synchronising pass at the end of the scenario is where it has to vanish"
+      },
+      {
+       "bookkeeping_consistent": true,
+       "conv_ring": {
+        "bitwise_equal": false,
+        "compared": 1474560,
+        "differing": 1474560,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 43.885894775390625,
+        "max_ulp": 2178851580,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "durable_prefix": {
+        "aligned": false,
+        "mixed": 4,
+        "mixed_ahead_by": 3,
+        "reference": 1
+       },
+       "gdn_state": {
+        "bitwise_equal": false,
+        "compared": 37748736,
+        "differing": 37748736,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 15.458719968795776,
+        "max_ulp": 2165523745,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "ok": true,
+       "raw_state_bitwise_equal": false,
+       "seq_mixed": {
+        "durable_prefix": 4,
+        "keep": 0,
+        "last_n": 3,
+        "len": 4,
+        "parity": 0,
+        "rollbackable": false,
+        "slot": 3
+       },
+       "seq_reference": {
+        "durable_prefix": 1,
+        "keep": 3,
+        "last_n": 3,
+        "len": 4,
+        "parity": 0,
+        "rollbackable": true,
+        "slot": 1
+       },
+       "sequence": "b",
+       "state_asserted": false,
+       "state_note": "the mixed copy has stored 3 tokens the reference still holds in blk_cache; a difference here is expected, and the synchronising pass at the end of the scenario is where it has to vanish"
+      }
+     ],
+     "slots_state_asserted": 0,
+     "slots_state_deferred_and_differing": 2
+    },
+    {
+     "argmax": {
+      "matching": 17,
+      "rows": 17
+     },
+     "commits": false,
+     "equal": true,
+     "index": 3,
+     "logits": {
+      "bitwise_equal": true,
+      "compared": 4221440,
+      "differing": 0,
+      "max_abs_diff": 0.0,
+      "max_ulp": 0,
+      "nonfinite_mixed": 0,
+      "nonfinite_reference": 0
+     },
+     "mixed_mode": 17,
+     "rows": {
+      "a": 9,
+      "b": 8,
+      "total": 17
+     },
+     "schedule": {
+      "mixed": "sliced",
+      "reference": "sliced"
+     },
+     "sequences": [
+      {
+       "bookkeeping_consistent": true,
+       "conv_ring": {
+        "bitwise_equal": true,
+        "compared": 1474560,
+        "differing": 0,
+        "max_abs_diff": 0.0,
+        "max_ulp": 0,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "durable_prefix": {
+        "aligned": true,
+        "mixed": 16,
+        "mixed_ahead_by": 0,
+        "reference": 16
+       },
+       "gdn_state": {
+        "bitwise_equal": true,
+        "compared": 37748736,
+        "differing": 0,
+        "max_abs_diff": 0.0,
+        "max_ulp": 0,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "ok": true,
+       "raw_state_bitwise_equal": true,
+       "seq_mixed": {
+        "durable_prefix": 16,
+        "keep": 1,
+        "last_n": 1,
+        "len": 17,
+        "parity": 1,
+        "rollbackable": true,
+        "slot": 2
+       },
+       "seq_reference": {
+        "durable_prefix": 16,
+        "keep": 1,
+        "last_n": 1,
+        "len": 17,
+        "parity": 1,
+        "rollbackable": true,
+        "slot": 0
+       },
+       "sequence": "a",
+       "state_asserted": true,
+       "state_note": "both copies have stored the same 16 tokens, so their durable images must match"
+      },
+      {
+       "bookkeeping_consistent": true,
+       "conv_ring": {
+        "bitwise_equal": true,
+        "compared": 1474560,
+        "differing": 0,
+        "max_abs_diff": 0.0,
+        "max_ulp": 0,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "durable_prefix": {
+        "aligned": true,
+        "mixed": 11,
+        "mixed_ahead_by": 0,
+        "reference": 11
+       },
+       "gdn_state": {
+        "bitwise_equal": true,
+        "compared": 37748736,
+        "differing": 0,
+        "max_abs_diff": 0.0,
+        "max_ulp": 0,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "ok": true,
+       "raw_state_bitwise_equal": true,
+       "seq_mixed": {
+        "durable_prefix": 11,
+        "keep": 1,
+        "last_n": 1,
+        "len": 12,
+        "parity": 0,
+        "rollbackable": true,
+        "slot": 3
+       },
+       "seq_reference": {
+        "durable_prefix": 11,
+        "keep": 1,
+        "last_n": 1,
+        "len": 12,
+        "parity": 0,
+        "rollbackable": true,
+        "slot": 1
+       },
+       "sequence": "b",
+       "state_asserted": true,
+       "state_note": "both copies have stored the same 11 tokens, so their durable images must match"
+      }
+     ],
+     "slots_state_asserted": 2,
+     "slots_state_deferred_and_differing": 0
+    },
+    {
+     "argmax": {
+      "matching": 40,
+      "rows": 40
+     },
+     "commits": true,
+     "equal": true,
+     "index": 4,
+     "logits": {
+      "bitwise_equal": true,
+      "compared": 9932800,
+      "differing": 0,
+      "max_abs_diff": 0.0,
+      "max_ulp": 0,
+      "nonfinite_mixed": 0,
+      "nonfinite_reference": 0
+     },
+     "mixed_mode": 18,
+     "rows": {
+      "a": 24,
+      "b": 16,
+      "total": 40
+     },
+     "schedule": {
+      "mixed": "wide-sequence",
+      "reference": "wide-sequence"
+     },
+     "sequences": [
+      {
+       "bookkeeping_consistent": true,
+       "conv_ring": {
+        "bitwise_equal": false,
+        "compared": 1474560,
+        "differing": 1474559,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 45.79561424255371,
+        "max_ulp": 2190189967,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "durable_prefix": {
+        "aligned": false,
+        "mixed": 41,
+        "mixed_ahead_by": 8,
+        "reference": 33
+       },
+       "gdn_state": {
+        "bitwise_equal": false,
+        "compared": 37748736,
+        "differing": 37748730,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 13.783861756324768,
+        "max_ulp": 2166050709,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "ok": true,
+       "raw_state_bitwise_equal": false,
+       "seq_mixed": {
+        "durable_prefix": 41,
+        "keep": 0,
+        "last_n": 8,
+        "len": 41,
+        "parity": 0,
+        "rollbackable": false,
+        "slot": 2
+       },
+       "seq_reference": {
+        "durable_prefix": 33,
+        "keep": 8,
+        "last_n": 8,
+        "len": 41,
+        "parity": 0,
+        "rollbackable": true,
+        "slot": 0
+       },
+       "sequence": "a",
+       "state_asserted": false,
+       "state_note": "the mixed copy has stored 8 tokens the reference still holds in blk_cache; a difference here is expected, and the synchronising pass at the end of the scenario is where it has to vanish"
+      },
+      {
+       "bookkeeping_consistent": true,
+       "conv_ring": {
+        "bitwise_equal": false,
+        "compared": 1474560,
+        "differing": 1474560,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 37.536309242248535,
+        "max_ulp": 2179384755,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "durable_prefix": {
+        "aligned": false,
+        "mixed": 28,
+        "mixed_ahead_by": 8,
+        "reference": 20
+       },
+       "gdn_state": {
+        "bitwise_equal": false,
+        "compared": 37748736,
+        "differing": 37748735,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 14.803510904312134,
+        "max_ulp": 2174842905,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "ok": true,
+       "raw_state_bitwise_equal": false,
+       "seq_mixed": {
+        "durable_prefix": 28,
+        "keep": 0,
+        "last_n": 8,
+        "len": 28,
+        "parity": 0,
+        "rollbackable": false,
+        "slot": 3
+       },
+       "seq_reference": {
+        "durable_prefix": 20,
+        "keep": 8,
+        "last_n": 8,
+        "len": 28,
+        "parity": 0,
+        "rollbackable": true,
+        "slot": 1
+       },
+       "sequence": "b",
+       "state_asserted": false,
+       "state_note": "the mixed copy has stored 8 tokens the reference still holds in blk_cache; a difference here is expected, and the synchronising pass at the end of the scenario is where it has to vanish"
+      }
+     ],
+     "slots_state_asserted": 0,
+     "slots_state_deferred_and_differing": 2
+    },
+    {
+     "argmax": {
+      "matching": 1,
+      "rows": 1
+     },
+     "commits": false,
+     "equal": true,
+     "index": 5,
+     "logits": {
+      "bitwise_equal": true,
+      "compared": 248320,
+      "differing": 0,
+      "max_abs_diff": 0.0,
+      "max_ulp": 0,
+      "nonfinite_mixed": 0,
+      "nonfinite_reference": 0
+     },
+     "mixed_mode": 17,
+     "rows": {
+      "a": 0,
+      "b": 1,
+      "total": 1
+     },
+     "schedule": {
+      "mixed": "deployed",
+      "reference": "deployed"
+     },
+     "sequences": [
+      {
+       "bookkeeping_consistent": true,
+       "conv_ring": {
+        "bitwise_equal": false,
+        "compared": 1474560,
+        "differing": 1474559,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 45.79561424255371,
+        "max_ulp": 2190189967,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "durable_prefix": {
+        "aligned": false,
+        "mixed": 41,
+        "mixed_ahead_by": 8,
+        "reference": 33
+       },
+       "gdn_state": {
+        "bitwise_equal": false,
+        "compared": 37748736,
+        "differing": 37748730,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 13.783861756324768,
+        "max_ulp": 2166050709,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "ok": true,
+       "raw_state_bitwise_equal": false,
+       "seq_mixed": {
+        "durable_prefix": 41,
+        "keep": 0,
+        "last_n": 8,
+        "len": 41,
+        "parity": 0,
+        "rollbackable": false,
+        "slot": 2
+       },
+       "seq_reference": {
+        "durable_prefix": 33,
+        "keep": 8,
+        "last_n": 8,
+        "len": 41,
+        "parity": 0,
+        "rollbackable": true,
+        "slot": 0
+       },
+       "sequence": "a",
+       "state_asserted": false,
+       "state_note": "the mixed copy has stored 8 tokens the reference still holds in blk_cache; a difference here is expected, and the synchronising pass at the end of the scenario is where it has to vanish"
+      },
+      {
+       "bookkeeping_consistent": true,
+       "conv_ring": {
+        "bitwise_equal": true,
+        "compared": 1474560,
+        "differing": 0,
+        "max_abs_diff": 0.0,
+        "max_ulp": 0,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "durable_prefix": {
+        "aligned": true,
+        "mixed": 28,
+        "mixed_ahead_by": 0,
+        "reference": 28
+       },
+       "gdn_state": {
+        "bitwise_equal": true,
+        "compared": 37748736,
+        "differing": 0,
+        "max_abs_diff": 0.0,
+        "max_ulp": 0,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "ok": true,
+       "raw_state_bitwise_equal": true,
+       "seq_mixed": {
+        "durable_prefix": 28,
+        "keep": 1,
+        "last_n": 1,
+        "len": 29,
+        "parity": 1,
+        "rollbackable": true,
+        "slot": 3
+       },
+       "seq_reference": {
+        "durable_prefix": 28,
+        "keep": 1,
+        "last_n": 1,
+        "len": 29,
+        "parity": 1,
+        "rollbackable": true,
+        "slot": 1
+       },
+       "sequence": "b",
+       "state_asserted": true,
+       "state_note": "both copies have stored the same 28 tokens, so their durable images must match"
+      }
+     ],
+     "slots_state_asserted": 1,
+     "slots_state_deferred_and_differing": 1
+    },
+    {
+     "argmax": {
+      "matching": 8,
+      "rows": 8
+     },
+     "commits": true,
+     "equal": true,
+     "index": 6,
+     "logits": {
+      "bitwise_equal": true,
+      "compared": 1986560,
+      "differing": 0,
+      "max_abs_diff": 0.0,
+      "max_ulp": 0,
+      "nonfinite_mixed": 0,
+      "nonfinite_reference": 0
+     },
+     "mixed_mode": 18,
+     "rows": {
+      "a": 3,
+      "b": 5,
+      "total": 8
+     },
+     "schedule": {
+      "mixed": "sliced",
+      "reference": "sliced"
+     },
+     "sequences": [
+      {
+       "bookkeeping_consistent": true,
+       "conv_ring": {
+        "bitwise_equal": false,
+        "compared": 1474560,
+        "differing": 1474560,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 28.51756525039673,
+        "max_ulp": 2179960148,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "durable_prefix": {
+        "aligned": false,
+        "mixed": 44,
+        "mixed_ahead_by": 3,
+        "reference": 41
+       },
+       "gdn_state": {
+        "bitwise_equal": false,
+        "compared": 37748736,
+        "differing": 37748726,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 10.734602570533752,
+        "max_ulp": 2161764318,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "ok": true,
+       "raw_state_bitwise_equal": false,
+       "seq_mixed": {
+        "durable_prefix": 44,
+        "keep": 0,
+        "last_n": 3,
+        "len": 44,
+        "parity": 1,
+        "rollbackable": false,
+        "slot": 2
+       },
+       "seq_reference": {
+        "durable_prefix": 41,
+        "keep": 3,
+        "last_n": 3,
+        "len": 44,
+        "parity": 1,
+        "rollbackable": true,
+        "slot": 0
+       },
+       "sequence": "a",
+       "state_asserted": false,
+       "state_note": "the mixed copy has stored 3 tokens the reference still holds in blk_cache; a difference here is expected, and the synchronising pass at the end of the scenario is where it has to vanish"
+      },
+      {
+       "bookkeeping_consistent": true,
+       "conv_ring": {
+        "bitwise_equal": false,
+        "compared": 1474560,
+        "differing": 1474560,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 43.481778651475906,
+        "max_ulp": 2181464344,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "durable_prefix": {
+        "aligned": false,
+        "mixed": 34,
+        "mixed_ahead_by": 5,
+        "reference": 29
+       },
+       "gdn_state": {
+        "bitwise_equal": false,
+        "compared": 37748736,
+        "differing": 37748736,
+        "first_difference": {
+         "flat": 0,
+         "group": 0,
+         "offset": 0
+        },
+        "groups_differing": 48,
+        "groups_differing_first": [
+         0,
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
+        ],
+        "max_abs_diff": 12.186912059783936,
+        "max_ulp": 2167757522,
+        "nonfinite_mixed": 0,
+        "nonfinite_reference": 0
+       },
+       "ok": true,
+       "raw_state_bitwise_equal": false,
+       "seq_mixed": {
+        "durable_prefix": 34,
+        "keep": 0,
+        "last_n": 5,
+        "len": 34,
+        "parity": 0,
+        "rollbackable": false,
+        "slot": 3
+       },
+       "seq_reference": {
+        "durable_prefix": 29,
+        "keep": 5,
+        "last_n": 5,
+        "len": 34,
+        "parity": 0,
+        "rollbackable": true,
+        "slot": 1
+       },
+       "sequence": "b",
+       "state_asserted": false,
+       "state_note": "the mixed copy has stored 5 tokens the reference still holds in blk_cache; a difference here is expected, and the synchronising pass at the end of the scenario is where it has to vanish"
+      }
+     ],
+     "slots_state_asserted": 0,
+     "slots_state_deferred_and_differing": 2
+    }
+   ],
+   "reference_mode": 17,
+   "synchronisation": {
+    "logits": {
+     "bitwise_equal": true,
+     "compared": 993280,
+     "differing": 0,
+     "max_abs_diff": 0.0,
+     "max_ulp": 0,
+     "nonfinite_mixed": 0,
+     "nonfinite_reference": 0
+    },
+    "mode": 18,
+    "ok": true,
+    "rows": {
+     "a": 2,
+     "b": 2
+    },
+    "sequences": [
+     {
+      "bookkeeping_consistent": true,
+      "conv_ring": {
+       "bitwise_equal": true,
+       "compared": 1474560,
+       "differing": 0,
+       "max_abs_diff": 0.0,
+       "max_ulp": 0,
+       "nonfinite_mixed": 0,
+       "nonfinite_reference": 0
+      },
+      "durable_prefix": {
+       "aligned": true,
+       "mixed": 46,
+       "mixed_ahead_by": 0,
+       "reference": 46
+      },
+      "gdn_state": {
+       "bitwise_equal": true,
+       "compared": 37748736,
+       "differing": 0,
+       "max_abs_diff": 0.0,
+       "max_ulp": 0,
+       "nonfinite_mixed": 0,
+       "nonfinite_reference": 0
+      },
+      "ok": true,
+      "raw_state_bitwise_equal": true,
+      "seq_mixed": {
+       "durable_prefix": 46,
+       "keep": 0,
+       "last_n": 2,
+       "len": 46,
+       "parity": 0,
+       "rollbackable": false,
+       "slot": 2
+      },
+      "seq_reference": {
+       "durable_prefix": 46,
+       "keep": 0,
+       "last_n": 2,
+       "len": 46,
+       "parity": 0,
+       "rollbackable": false,
+       "slot": 0
+      },
+      "sequence": "a",
+      "state_asserted": true,
+      "state_note": "both copies have stored the same 46 tokens, so their durable images must match"
+     },
+     {
+      "bookkeeping_consistent": true,
+      "conv_ring": {
+       "bitwise_equal": true,
+       "compared": 1474560,
+       "differing": 0,
+       "max_abs_diff": 0.0,
+       "max_ulp": 0,
+       "nonfinite_mixed": 0,
+       "nonfinite_reference": 0
+      },
+      "durable_prefix": {
+       "aligned": true,
+       "mixed": 36,
+       "mixed_ahead_by": 0,
+       "reference": 36
+      },
+      "gdn_state": {
+       "bitwise_equal": true,
+       "compared": 37748736,
+       "differing": 0,
+       "max_abs_diff": 0.0,
+       "max_ulp": 0,
+       "nonfinite_mixed": 0,
+       "nonfinite_reference": 0
+      },
+      "ok": true,
+      "raw_state_bitwise_equal": true,
+      "seq_mixed": {
+       "durable_prefix": 36,
+       "keep": 0,
+       "last_n": 2,
+       "len": 36,
+       "parity": 1,
+       "rollbackable": false,
+       "slot": 3
+      },
+      "seq_reference": {
+       "durable_prefix": 36,
+       "keep": 0,
+       "last_n": 2,
+       "len": 36,
+       "parity": 1,
+       "rollbackable": false,
+       "slot": 1
+      },
+      "sequence": "b",
+      "state_asserted": true,
+      "state_note": "both copies have stored the same 36 tokens, so their durable images must match"
+     }
+    ],
+    "what": "one identical committing pass on both copies, appended after the trajectory to bring both durable prefixes to len"
+   }
+  }
+ ],
+ "sequence_layout": "direct",
+ "sequence_operand": "int8",
+ "source_sha256_rollup": "9398010af02e358afb140aa2ecfdec4b28f944efa76ac396d4cf14dfcfc3846a  -\n",
+ "tool": "sequence_state_check",
+ "verdict": "mixing commit into a sequence changed neither its output at any pass nor its state once both copies had committed"
+}

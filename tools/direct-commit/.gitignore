@@ -1,0 +1,4 @@
+commit_equiv
+sequence_state_check
+*.o
+*.d

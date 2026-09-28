@@ -1,0 +1,18 @@
+# Acceptance cases for the DFlash2 drafter, one prompt per line, walked by
+#   ./bonsai-halo --bench --dflash DRAFTER --prompts bench/drafter-prompts.txt [--draft-weights q8,q4]
+#
+# A drafted run's output tokens never depend on the drafter, so every arm of a sweep produces the
+# same text case by case and differs only in steps, accepted count and time. What varies across
+# these lines is the per-position acceptance the drafter reaches, which docs/serving-decode.md
+# measures at p ~ 0.67 on prose and the README at p ~ 0.85 on code and reasoning. A drafter change
+# that only holds on one of those is not a drafter change worth shipping, so the set spans them.
+Explain why the sky is blue in two sentences.
+Write a Python function that merges two sorted lists into one sorted list, and explain its complexity.
+What is 17*23? Show the multiplication step by step.
+Write a C++ class that implements a fixed-capacity ring buffer with push, pop and size.
+A train leaves Boston at 60 mph and another leaves New York at 80 mph on the same track 200 miles apart. When and where do they meet?
+Summarise the difference between a B-tree and a B+ tree for someone who has used neither.
+Write a bash one-liner that finds every file over 100 MB under the current directory and prints its size in GB, then explain each part.
+Prove that the square root of two is irrational.
+Describe what happens, step by step, when a user types a URL into a browser and presses enter.
+Refactor this into idiomatic Rust: a function taking a vector of integers and returning the sum of the even ones.

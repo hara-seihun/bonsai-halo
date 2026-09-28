@@ -1,0 +1,51 @@
+{
+  "left": "../../data/bonsai2/batch-comparison/head-identity-a4-off",
+  "right": "../../data/bonsai2/batch-comparison/head-identity-a4-on",
+  "left_layout": "direct",
+  "right_layout": "direct",
+  "left_resident": true,
+  "right_resident": true,
+  "same_executable": true,
+  "cases": [
+    {
+      "file": "logits-prefill-r128-mode19.f32",
+      "elements": 31784960,
+      "bit_mismatches": 0,
+      "rows_differing": 0,
+      "nonfinite_pairs": 0,
+      "max_abs_diff": 0.0
+    },
+    {
+      "file": "logits-prefill-r32-mode19.f32",
+      "elements": 7946240,
+      "bit_mismatches": 0,
+      "rows_differing": 0,
+      "nonfinite_pairs": 0,
+      "max_abs_diff": 0.0
+    },
+    {
+      "file": "logits-prefill-r40-mode19.f32",
+      "elements": 9932800,
+      "bit_mismatches": 0,
+      "rows_differing": 0,
+      "nonfinite_pairs": 0,
+      "max_abs_diff": 0.0
+    },
+    {
+      "file": "logits-prefill-r88-mode19.f32",
+      "elements": 21852160,
+      "bit_mismatches": 0,
+      "rows_differing": 0,
+      "nonfinite_pairs": 0,
+      "max_abs_diff": 0.0
+    }
+  ],
+  "passed": true,
+  "continuations": [
+    {
+      "mode": 19,
+      "tokens": 128,
+      "equal": true
+    }
+  ]
+}

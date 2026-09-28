@@ -1,0 +1,73 @@
+# Short distinct prompts for the served decode-route identity panel (docs/serve-decode-wide.md).
+# Every line is short enough that its ingestion pass stays under the wide floor, so an arm's
+# prompt tokens are ingested by the same route in every mode and only the decode step differs.
+Explain how the moon works in one sentence.
+Explain how a diesel engine works in one sentence.
+Explain how photosynthesis works in one sentence.
+Explain how the Roman calendar works in one sentence.
+Explain how a suspension bridge works in one sentence.
+Explain how sea ice works in one sentence.
+Explain how a violin string works in one sentence.
+Explain how the Doppler effect works in one sentence.
+Explain how yeast dough works in one sentence.
+Explain how a ball bearing works in one sentence.
+Explain how tidal power works in one sentence.
+Explain how the water cycle works in one sentence.
+Explain how a transistor works in one sentence.
+Explain how volcanic glass works in one sentence.
+Explain how a compass needle works in one sentence.
+Explain how coral reefs works in one sentence.
+Explain how the jet stream works in one sentence.
+Explain how a pendulum clock works in one sentence.
+Explain how desert soil works in one sentence.
+Explain how a fuel cell works in one sentence.
+Explain how river deltas works in one sentence.
+Explain how a laser diode works in one sentence.
+Explain how sheep wool works in one sentence.
+Explain how the ozone layer works in one sentence.
+Explain how bamboo growth works in one sentence.
+Explain how a hydraulic press works in one sentence.
+Explain how salt marshes works in one sentence.
+Explain how a wind turbine works in one sentence.
+Explain how cave formations works in one sentence.
+Explain how a gyroscope works in one sentence.
+Explain how peat bogs works in one sentence.
+Explain how radio waves works in one sentence.
+Explain how a heat pump works in one sentence.
+Explain how glacier movement works in one sentence.
+Explain how honeybee hives works in one sentence.
+Explain how a steam turbine works in one sentence.
+Explain how monsoon rain works in one sentence.
+Explain how a microscope lens works in one sentence.
+Explain how tree rings works in one sentence.
+Explain how an arch bridge works in one sentence.
+Explain how kelp forests works in one sentence.
+Explain how a solar panel works in one sentence.
+Explain how limestone caves works in one sentence.
+Explain how a sewing machine works in one sentence.
+Explain how thunderstorms works in one sentence.
+Explain how a bicycle gear works in one sentence.
+Explain how mangrove roots works in one sentence.
+Explain how an electric motor works in one sentence.
+Explain how sand dunes works in one sentence.
+Explain how a pressure cooker works in one sentence.
+Explain how ocean currents works in one sentence.
+Explain how a telescope mirror works in one sentence.
+Explain how termite mounds works in one sentence.
+Explain how a refrigerator works in one sentence.
+Explain how lightning strikes works in one sentence.
+Explain how a printing press works in one sentence.
+Explain how frost patterns works in one sentence.
+Explain how a water turbine works in one sentence.
+Explain how bird migration works in one sentence.
+Explain how a clutch plate works in one sentence.
+Explain how geysers works in one sentence.
+Explain how a barometer works in one sentence.
+Explain how soil erosion works in one sentence.
+Explain how a loom works in one sentence.
+Explain how fog formation works in one sentence.
+Explain how a crankshaft works in one sentence.
+Explain how lichen works in one sentence.
+Explain how a parachute works in one sentence.
+Explain how tide pools works in one sentence.
+Explain how a zipper works in one sentence.

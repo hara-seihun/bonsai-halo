@@ -1,0 +1,656 @@
+{
+ "timing": {
+  "decode|1 streams x 64 steps|0": {
+   "median_tokens_per_s": 33.998845813018505,
+   "per_round_tokens_per_s": [
+    33.998845813018505,
+    33.815889136004245,
+    34.01729728547054,
+    34.02003135132015,
+    33.93856173742208
+   ],
+   "wall_s": [
+    1.882416842970997,
+    1.892601425992325,
+    1.8813957929378375,
+    1.8812445920193568,
+    1.8857605250086635
+   ],
+   "relative_to_mode0": 1.0,
+   "spread_fraction": 0.006004386632376108,
+   "gfx_mhz_mean": 2897.3239352436917,
+   "board_w_mean": 104.7679703820257
+  },
+  "decode|1 streams x 64 steps|12": {
+   "median_tokens_per_s": 33.409508213249694,
+   "per_round_tokens_per_s": [
+    33.409508213249694,
+    33.45905073091003,
+    33.37210353271771,
+    33.43242910802603,
+    33.32943158618138
+   ],
+   "wall_s": [
+    1.9156223309691995,
+    1.9127858860883862,
+    1.9177694309037179,
+    1.914309001993388,
+    1.9202247669454664
+   ],
+   "relative_to_mode0": 0.9826659527499858,
+   "spread_fraction": 0.00387970825255205,
+   "gfx_mhz_mean": 2897.0155825293264,
+   "board_w_mean": 103.1796311693111
+  },
+  "decode|1 streams x 64 steps|13": {
+   "median_tokens_per_s": 33.0839211124287,
+   "per_round_tokens_per_s": [
+    33.058325668358265,
+    33.14159685362897,
+    33.174881975927036,
+    33.06728603980722,
+    33.0839211124287
+   ],
+   "wall_s": [
+    1.9359722159570083,
+    1.931107915006578,
+    1.9291703900089487,
+    1.9354476180160418,
+    1.9344744470436126
+   ],
+   "relative_to_mode0": 0.9730895364618679,
+   "spread_fraction": 0.003523049978649131,
+   "gfx_mhz_mean": 2895.238802633544,
+   "board_w_mean": 104.72707757001027
+  },
+  "decode|1 streams x 64 steps|14": {
+   "median_tokens_per_s": 34.547064033931576,
+   "per_round_tokens_per_s": [
+    34.55578432119354,
+    34.50819638593216,
+    34.547064033931576,
+    34.50637206167912,
+    34.57757614684176
+   ],
+   "wall_s": [
+    1.8520777709782124,
+    1.8546318470034748,
+    1.85254526801873,
+    1.8547298999037594,
+    1.8509105360135436
+   ],
+   "relative_to_mode0": 1.0161246126979744,
+   "spread_fraction": 0.0020610748598693823,
+   "gfx_mhz_mean": 2898.0218640887338,
+   "board_w_mean": 104.23977506959018
+  },
+  "decode|1 streams x 64 steps|15": {
+   "median_tokens_per_s": 33.571583606088296,
+   "per_round_tokens_per_s": [
+    33.55828915706588,
+    33.57137214429991,
+    33.571583606088296,
+    33.58835237356479,
+    33.597732455734324
+   ],
+   "wall_s": [
+    1.907129404018633,
+    1.9063861829927191,
+    1.9063741749851033,
+    1.9054224300198257,
+    1.9048904590308666
+   ],
+   "relative_to_mode0": 0.9874330378954628,
+   "spread_fraction": 0.00117490134308981,
+   "gfx_mhz_mean": 2897.009606925936,
+   "board_w_mean": 104.01370375048666
+  },
+  "pair|decode|1 streams x 64 steps|12:0": {
+   "mode_median_tokens_per_s": 33.409508213249694,
+   "reference_median_tokens_per_s": 33.998845813018505,
+   "ratio": 0.9826659527499858,
+   "spec": "12:0"
+  },
+  "pair|decode|1 streams x 64 steps|13:0": {
+   "mode_median_tokens_per_s": 33.0839211124287,
+   "reference_median_tokens_per_s": 33.998845813018505,
+   "ratio": 0.9730895364618679,
+   "spec": "13:0"
+  },
+  "pair|decode|1 streams x 64 steps|15:0": {
+   "mode_median_tokens_per_s": 33.571583606088296,
+   "reference_median_tokens_per_s": 33.998845813018505,
+   "ratio": 0.9874330378954628,
+   "spec": "15:0"
+  }
+ },
+ "multistep": {
+  "12": {
+   "streams": 1,
+   "steps": 32,
+   "streams_matching": 1,
+   "tokens_matching": 32,
+   "tokens_total": 32,
+   "first_divergent_step": null,
+   "first_divergent_stream": null
+  },
+  "13": {
+   "streams": 1,
+   "steps": 32,
+   "streams_matching": 1,
+   "tokens_matching": 32,
+   "tokens_total": 32,
+   "first_divergent_step": null,
+   "first_divergent_stream": null
+  },
+  "14": {
+   "streams": 1,
+   "steps": 32,
+   "streams_matching": 1,
+   "tokens_matching": 32,
+   "tokens_total": 32,
+   "first_divergent_step": null,
+   "first_divergent_stream": null
+  },
+  "15": {
+   "streams": 1,
+   "steps": 32,
+   "streams_matching": 1,
+   "tokens_matching": 32,
+   "tokens_total": 32,
+   "first_divergent_step": null,
+   "first_divergent_stream": null
+  },
+  "pair|12:0": {
+   "streams": 1,
+   "steps": 32,
+   "streams_matching": 1,
+   "tokens_matching": 32,
+   "tokens_total": 32,
+   "first_divergent_step": null,
+   "first_divergent_stream": null,
+   "spec": "12:0"
+  },
+  "pair|13:0": {
+   "streams": 1,
+   "steps": 32,
+   "streams_matching": 1,
+   "tokens_matching": 32,
+   "tokens_total": 32,
+   "first_divergent_step": null,
+   "first_divergent_stream": null,
+   "spec": "13:0"
+  },
+  "pair|15:0": {
+   "streams": 1,
+   "steps": 32,
+   "streams_matching": 1,
+   "tokens_matching": 32,
+   "tokens_total": 32,
+   "first_divergent_step": null,
+   "first_divergent_stream": null,
+   "spec": "15:0"
+  }
+ },
+ "quality": {
+  "decode|1|12": {
+   "rows": 1,
+   "top1_match": 1,
+   "rows_changed": 0,
+   "rows_nonfinite": 0,
+   "kl_ref_to_mode_nats": [
+    0.0
+   ],
+   "max_abs_logit_diff_centred": [
+    0.0
+   ],
+   "top5_overlap": [
+    5
+   ],
+   "worst_rank_of_ref_top1": 0,
+   "per_row": [
+    {
+     "finite": true,
+     "nonfinite_ref": 0,
+     "nonfinite_mode": 0,
+     "top1_match": true,
+     "ref_top1": 1206,
+     "mode_top1": 1206,
+     "ref_top1_prob": 0.7573861298359879,
+     "mode_prob_of_ref_top1": 0.7573861298359879,
+     "rank_of_ref_top1_in_mode": 0,
+     "kl_ref_to_mode_nats": 0.0,
+     "kl_mode_to_ref_nats": 0.0,
+     "max_abs_logit_diff_centred": 0.0,
+     "rms_logit_diff_centred": 0.0,
+     "top5_overlap": 5
+    }
+   ]
+  },
+  "decode|1|13": {
+   "rows": 1,
+   "top1_match": 1,
+   "rows_changed": 0,
+   "rows_nonfinite": 0,
+   "kl_ref_to_mode_nats": [
+    0.0
+   ],
+   "max_abs_logit_diff_centred": [
+    0.0
+   ],
+   "top5_overlap": [
+    5
+   ],
+   "worst_rank_of_ref_top1": 0,
+   "per_row": [
+    {
+     "finite": true,
+     "nonfinite_ref": 0,
+     "nonfinite_mode": 0,
+     "top1_match": true,
+     "ref_top1": 1206,
+     "mode_top1": 1206,
+     "ref_top1_prob": 0.7573861298359879,
+     "mode_prob_of_ref_top1": 0.7573861298359879,
+     "rank_of_ref_top1_in_mode": 0,
+     "kl_ref_to_mode_nats": 0.0,
+     "kl_mode_to_ref_nats": 0.0,
+     "max_abs_logit_diff_centred": 0.0,
+     "rms_logit_diff_centred": 0.0,
+     "top5_overlap": 5
+    }
+   ]
+  },
+  "decode|1|14": {
+   "rows": 1,
+   "top1_match": 1,
+   "rows_changed": 0,
+   "rows_nonfinite": 0,
+   "kl_ref_to_mode_nats": [
+    4.83982070978516e-05
+   ],
+   "max_abs_logit_diff_centred": [
+    0.09688530581698984
+   ],
+   "top5_overlap": [
+    5
+   ],
+   "worst_rank_of_ref_top1": 0,
+   "per_row": [
+    {
+     "finite": true,
+     "nonfinite_ref": 0,
+     "nonfinite_mode": 0,
+     "top1_match": true,
+     "ref_top1": 1206,
+     "mode_top1": 1206,
+     "ref_top1_prob": 0.7573861298359879,
+     "mode_prob_of_ref_top1": 0.7600495096410075,
+     "rank_of_ref_top1_in_mode": 0,
+     "kl_ref_to_mode_nats": 4.83982070978516e-05,
+     "kl_mode_to_ref_nats": 4.7989274287756805e-05,
+     "max_abs_logit_diff_centred": 0.09688530581698984,
+     "rms_logit_diff_centred": 0.016919951390070007,
+     "top5_overlap": 5
+    }
+   ]
+  },
+  "decode|1|15": {
+   "rows": 1,
+   "top1_match": 1,
+   "rows_changed": 0,
+   "rows_nonfinite": 0,
+   "kl_ref_to_mode_nats": [
+    0.0
+   ],
+   "max_abs_logit_diff_centred": [
+    0.0
+   ],
+   "top5_overlap": [
+    5
+   ],
+   "worst_rank_of_ref_top1": 0,
+   "per_row": [
+    {
+     "finite": true,
+     "nonfinite_ref": 0,
+     "nonfinite_mode": 0,
+     "top1_match": true,
+     "ref_top1": 1206,
+     "mode_top1": 1206,
+     "ref_top1_prob": 0.7573861298359879,
+     "mode_prob_of_ref_top1": 0.7573861298359879,
+     "rank_of_ref_top1_in_mode": 0,
+     "kl_ref_to_mode_nats": 0.0,
+     "kl_mode_to_ref_nats": 0.0,
+     "max_abs_logit_diff_centred": 0.0,
+     "rms_logit_diff_centred": 0.0,
+     "top5_overlap": 5
+    }
+   ]
+  },
+  "pair|decode|1|12:0": {
+   "rows": 1,
+   "vocab": 248320,
+   "elements": 248320,
+   "exact_mismatches": 0,
+   "exact_mismatch_fraction": 0.0,
+   "rows_with_any_mismatch": 0,
+   "per_row_exact_mismatches": [
+    0
+   ],
+   "rms_logit_diff": 0.0,
+   "max_abs_logit_diff": 0.0,
+   "nonfinite_mode": 0,
+   "nonfinite_reference": 0,
+   "rms_over_finite_elements": 248320,
+   "bit_identical": true,
+   "clean_reproduction": true,
+   "top1_match": 1,
+   "spec": "12:0"
+  },
+  "pair|decode|1|13:0": {
+   "rows": 1,
+   "vocab": 248320,
+   "elements": 248320,
+   "exact_mismatches": 0,
+   "exact_mismatch_fraction": 0.0,
+   "rows_with_any_mismatch": 0,
+   "per_row_exact_mismatches": [
+    0
+   ],
+   "rms_logit_diff": 0.0,
+   "max_abs_logit_diff": 0.0,
+   "nonfinite_mode": 0,
+   "nonfinite_reference": 0,
+   "rms_over_finite_elements": 248320,
+   "bit_identical": true,
+   "clean_reproduction": true,
+   "top1_match": 1,
+   "spec": "13:0"
+  },
+  "pair|decode|1|15:0": {
+   "rows": 1,
+   "vocab": 248320,
+   "elements": 248320,
+   "exact_mismatches": 0,
+   "exact_mismatch_fraction": 0.0,
+   "rows_with_any_mismatch": 0,
+   "per_row_exact_mismatches": [
+    0
+   ],
+   "rms_logit_diff": 0.0,
+   "max_abs_logit_diff": 0.0,
+   "nonfinite_mode": 0,
+   "nonfinite_reference": 0,
+   "rms_over_finite_elements": 248320,
+   "bit_identical": true,
+   "clean_reproduction": true,
+   "top1_match": 1,
+   "spec": "15:0"
+  },
+  "prefill|1|12": {
+   "rows": 1,
+   "top1_match": 1,
+   "rows_changed": 0,
+   "rows_nonfinite": 0,
+   "kl_ref_to_mode_nats": [
+    0.0
+   ],
+   "max_abs_logit_diff_centred": [
+    0.0
+   ],
+   "top5_overlap": [
+    5
+   ],
+   "worst_rank_of_ref_top1": 0,
+   "per_row": [
+    {
+     "finite": true,
+     "nonfinite_ref": 0,
+     "nonfinite_mode": 0,
+     "top1_match": true,
+     "ref_top1": 220,
+     "mode_top1": 220,
+     "ref_top1_prob": 0.7038847228697832,
+     "mode_prob_of_ref_top1": 0.7038847228697832,
+     "rank_of_ref_top1_in_mode": 0,
+     "kl_ref_to_mode_nats": 0.0,
+     "kl_mode_to_ref_nats": 0.0,
+     "max_abs_logit_diff_centred": 0.0,
+     "rms_logit_diff_centred": 0.0,
+     "top5_overlap": 5
+    }
+   ]
+  },
+  "prefill|1|13": {
+   "rows": 1,
+   "top1_match": 1,
+   "rows_changed": 0,
+   "rows_nonfinite": 0,
+   "kl_ref_to_mode_nats": [
+    0.0
+   ],
+   "max_abs_logit_diff_centred": [
+    0.0
+   ],
+   "top5_overlap": [
+    5
+   ],
+   "worst_rank_of_ref_top1": 0,
+   "per_row": [
+    {
+     "finite": true,
+     "nonfinite_ref": 0,
+     "nonfinite_mode": 0,
+     "top1_match": true,
+     "ref_top1": 220,
+     "mode_top1": 220,
+     "ref_top1_prob": 0.7038847228697832,
+     "mode_prob_of_ref_top1": 0.7038847228697832,
+     "rank_of_ref_top1_in_mode": 0,
+     "kl_ref_to_mode_nats": 0.0,
+     "kl_mode_to_ref_nats": 0.0,
+     "max_abs_logit_diff_centred": 0.0,
+     "rms_logit_diff_centred": 0.0,
+     "top5_overlap": 5
+    }
+   ]
+  },
+  "prefill|1|14": {
+   "rows": 1,
+   "top1_match": 1,
+   "rows_changed": 0,
+   "rows_nonfinite": 0,
+   "kl_ref_to_mode_nats": [
+    0.00029926903794956706
+   ],
+   "max_abs_logit_diff_centred": [
+    0.16691491304674422
+   ],
+   "top5_overlap": [
+    5
+   ],
+   "worst_rank_of_ref_top1": 0,
+   "per_row": [
+    {
+     "finite": true,
+     "nonfinite_ref": 0,
+     "nonfinite_mode": 0,
+     "top1_match": true,
+     "ref_top1": 220,
+     "mode_top1": 220,
+     "ref_top1_prob": 0.7038847228697832,
+     "mode_prob_of_ref_top1": 0.6939995211305575,
+     "rank_of_ref_top1_in_mode": 0,
+     "kl_ref_to_mode_nats": 0.00029926903794956706,
+     "kl_mode_to_ref_nats": 0.0003033491493054502,
+     "max_abs_logit_diff_centred": 0.16691491304674422,
+     "rms_logit_diff_centred": 0.030155268684690244,
+     "top5_overlap": 5
+    }
+   ]
+  },
+  "prefill|1|15": {
+   "rows": 1,
+   "top1_match": 1,
+   "rows_changed": 0,
+   "rows_nonfinite": 0,
+   "kl_ref_to_mode_nats": [
+    0.0
+   ],
+   "max_abs_logit_diff_centred": [
+    0.0
+   ],
+   "top5_overlap": [
+    5
+   ],
+   "worst_rank_of_ref_top1": 0,
+   "per_row": [
+    {
+     "finite": true,
+     "nonfinite_ref": 0,
+     "nonfinite_mode": 0,
+     "top1_match": true,
+     "ref_top1": 220,
+     "mode_top1": 220,
+     "ref_top1_prob": 0.7038847228697832,
+     "mode_prob_of_ref_top1": 0.7038847228697832,
+     "rank_of_ref_top1_in_mode": 0,
+     "kl_ref_to_mode_nats": 0.0,
+     "kl_mode_to_ref_nats": 0.0,
+     "max_abs_logit_diff_centred": 0.0,
+     "rms_logit_diff_centred": 0.0,
+     "top5_overlap": 5
+    }
+   ]
+  },
+  "pair|prefill|1|12:0": {
+   "rows": 1,
+   "vocab": 248320,
+   "elements": 248320,
+   "exact_mismatches": 0,
+   "exact_mismatch_fraction": 0.0,
+   "rows_with_any_mismatch": 0,
+   "per_row_exact_mismatches": [
+    0
+   ],
+   "rms_logit_diff": 0.0,
+   "max_abs_logit_diff": 0.0,
+   "nonfinite_mode": 0,
+   "nonfinite_reference": 0,
+   "rms_over_finite_elements": 248320,
+   "bit_identical": true,
+   "clean_reproduction": true,
+   "top1_match": 1,
+   "spec": "12:0"
+  },
+  "pair|prefill|1|13:0": {
+   "rows": 1,
+   "vocab": 248320,
+   "elements": 248320,
+   "exact_mismatches": 0,
+   "exact_mismatch_fraction": 0.0,
+   "rows_with_any_mismatch": 0,
+   "per_row_exact_mismatches": [
+    0
+   ],
+   "rms_logit_diff": 0.0,
+   "max_abs_logit_diff": 0.0,
+   "nonfinite_mode": 0,
+   "nonfinite_reference": 0,
+   "rms_over_finite_elements": 248320,
+   "bit_identical": true,
+   "clean_reproduction": true,
+   "top1_match": 1,
+   "spec": "13:0"
+  },
+  "pair|prefill|1|15:0": {
+   "rows": 1,
+   "vocab": 248320,
+   "elements": 248320,
+   "exact_mismatches": 0,
+   "exact_mismatch_fraction": 0.0,
+   "rows_with_any_mismatch": 0,
+   "per_row_exact_mismatches": [
+    0
+   ],
+   "rms_logit_diff": 0.0,
+   "max_abs_logit_diff": 0.0,
+   "nonfinite_mode": 0,
+   "nonfinite_reference": 0,
+   "rms_over_finite_elements": 248320,
+   "bit_identical": true,
+   "clean_reproduction": true,
+   "top1_match": 1,
+   "spec": "15:0"
+  }
+ },
+ "stalled_samples": {},
+ "reference_pairs": [
+  "12:0",
+  "13:0",
+  "15:0"
+ ],
+ "reference_pairs_source": "run.json --reference-pairs",
+ "device_memory": {
+  "a4_image_option": "both",
+  "after_load_bytes": 7172625992.0,
+  "after_prepare_batch_bytes": 7190382152.0,
+  "batch_rows_prepared": 128,
+  "ffn_batch_module_bytes": 14868480.0,
+  "ffn_batch_weight_budget_bytes": 0.0,
+  "ffn_batch_weight_bytes_all_modes": 16577986560.0,
+  "ffn_state_created": true,
+  "images": [
+   {
+    "bytes_all_layers": 267386880.0,
+    "image": 0,
+    "name": "SCALES",
+    "resident": false,
+    "resident_bytes": 0.0
+   },
+   {
+    "bytes_all_layers": 4278190080.0,
+    "image": 1,
+    "name": "SLICE2",
+    "resident": false,
+    "resident_bytes": 0.0
+   },
+   {
+    "bytes_all_layers": 4278190080.0,
+    "image": 2,
+    "name": "LANE2",
+    "resident": false,
+    "resident_bytes": 0.0
+   },
+   {
+    "bytes_all_layers": 4278190080.0,
+    "image": 3,
+    "name": "PAIR",
+    "resident": false,
+    "resident_bytes": 0.0
+   },
+   {
+    "bytes_all_layers": 3476029440.0,
+    "image": 4,
+    "name": "DENSE5",
+    "resident": false,
+    "resident_bytes": 0.0
+   }
+  ],
+  "modes_mask": 1073741824,
+  "modes_mask_hex": "0x40000000",
+  "module_modes_served": {
+   "0": null,
+   "12": null,
+   "13": null,
+   "14": null,
+   "15": null
+  },
+  "note": "no measured mode reads a weight image, so prepare_batch was asked for the workspace alone",
+  "resident_image_bytes_total": 0.0,
+  "workspace_only": true
+ },
+ "quality_skipped": []
+}

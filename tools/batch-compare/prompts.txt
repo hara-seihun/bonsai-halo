@@ -1,0 +1,140 @@
+# One prompt per line, distinct workloads for the batched decode benchmark.
+# Lines starting with # are ignored. The driver refuses duplicates: repeating one prompt across
+# rows would make the batch look independent when it is not.
+Explain why LPDDR5X bandwidth, not FLOPs, limits single-stream inference on an integrated GPU.
+Write a bash one-liner that prints the ten largest files under a directory, newest first on ties.
+What changes in a Kalman filter when the process noise is underestimated?
+Summarise the tradeoff between rotary and ALiBi positional encodings in two sentences.
+Draft a polite reply declining a meeting invitation because the agenda is unclear.
+Give three reasons a build that passes locally can fail in CI.
+How does a ternary weight format save memory compared to int4, and what does it cost?
+Describe what a GDN recurrent state holds and why its size is independent of context length.
+Write a Python function that merges overlapping intervals and returns them sorted.
+What is the practical difference between a mutex and a semaphore in a device driver?
+Explain the birthday paradox to someone who has never studied probability.
+Name four failure modes of a hash join and how a query planner avoids each.
+Write a git commit message for a change that fixes an off-by-one in a ring buffer.
+Why do wide batches improve GPU utilisation for matrix-vector heavy workloads?
+Explain in plain language what a KV cache is and when it stops helping.
+List the steps to debug a kernel that produces NaN only on the second launch.
+What is the difference between structured and unstructured sparsity for inference speed?
+Describe how speculative decoding changes the arithmetic intensity of a decode step.
+Write a SQL query that finds customers with no orders in the last ninety days.
+How would you test a random number generator for a subtle correlation between draws?
+Explain why fp16 accumulation can lose accuracy in long reductions, and the usual fix.
+Write a short changelog entry for adding streaming responses to an HTTP API.
+What does it mean for an operation to be memory bound, and how do you prove it on real hardware?
+Explain the role of a rotation matrix in quantisation-aware weight packing.
+Give a short checklist for reviewing a pull request that touches concurrency.
+How do you decide between a ring buffer and a linked queue for audio playback?
+Write a regex that matches ISO 8601 dates but rejects month thirteen.
+Explain what happens to a TCP connection when the network path MTU drops mid-transfer.
+Describe two ways to detect that a benchmark was measuring a warm cache by accident.
+Why is a softmax numerically unstable without subtracting the maximum?
+Write a function that computes the KL divergence between two discrete distributions.
+Explain what makes a compiler autovectorisation attempt fail on a simple loop.
+Summarise the argument for keeping state machines explicit rather than implicit in async code.
+What information does a flame graph give that a wall-clock timer does not?
+Describe how you would shard a 27 billion parameter model across two devices.
+Explain why sampling temperature above one increases the tail probability mass.
+Write a short note explaining a schema migration that renames a column with zero downtime.
+How does an RMS norm differ from layer norm, and why do recent models prefer it?
+Give a minimal reproduction strategy for a race that appears once in a thousand runs.
+What are the tradeoffs between polling and interrupts for a low-latency sensor?
+Explain why an integrated GPU sees a different memory roof for reads than for mixed read-write traffic.
+Write a C function that reverses a singly linked list without recursion.
+What is the difference between arithmetic intensity and operational intensity in a roofline model?
+Describe how a page fault on a device allocation shows up in a kernel profile.
+Give two reasons a persistent kernel can be slower than several short launches.
+Explain why a cooperative grid needs its whole grid resident before it can barrier.
+Write a short design note for a work queue that survives process restart.
+How do you choose the block size for a reduction on a 32-lane wave machine?
+What does a wave slot cost, and why does register pressure convert into time?
+Explain the difference between a bank conflict and a channel conflict in GPU memory.
+Write a Python generator that yields sliding windows over an iterable.
+Describe how to validate that two implementations of a matrix multiply agree bit for bit.
+Why does interleaving two arms of a benchmark inside one process beat two processes?
+Explain what a nontemporal load does to a cache hierarchy and when it helps.
+Write a makefile rule that rebuilds only when a header's contents change, not its timestamp.
+What is the effect of clock ramping on a short benchmark, and how do you defeat it?
+Describe the difference between a greedy decode and a beam search in one paragraph.
+Explain how rejection sampling verifies a draft token without changing the output distribution.
+Write a short explanation of why ternary weights need a per-block scale.
+How does a gated delta rule differ from plain linear attention?
+Give three ways to reduce the state traffic of a recurrent layer at generation time.
+Explain what happens to throughput when a batch outgrows the last level cache.
+Write a shell function that retries a command with exponential backoff.
+What is false sharing, and how would you detect it on a many-core CPU?
+Describe how to lay out a weight tile so that a wave's loads are fully coalesced.
+Explain why a 4096-byte stride between concurrent streams can halve read bandwidth.
+Write a unit test that would catch an off-by-one in a sliding window average.
+How do you prove that a scheduling change did not alter floating point results?
+Describe the role of an accumulator's precision in a long dot product.
+Explain the difference between latency hiding by occupancy and by instruction lookahead.
+Write a short postmortem for an outage caused by a full disk on one replica.
+What does it mean to say a kernel is issue bound rather than bandwidth bound?
+Give a practical method for measuring the real memory bandwidth of a device.
+Explain why a profile that sums to more than the wall clock is not necessarily wrong.
+Describe how you would add backpressure to a producer-consumer pipeline.
+Write a function that finds the median of two sorted arrays in logarithmic time.
+Explain the tradeoff between a larger vocabulary and a faster output head.
+How does weight tying between embeddings and the output head affect memory traffic?
+Describe two ways to compress a key-value cache without retraining.
+Explain why attention cost grows with position while a feedforward layer's does not.
+Write a short note on choosing between mmap and read for loading a large model file.
+What is the practical difference between pinned and pageable host memory for transfers?
+Describe how to detect a silent data corruption in a long training run.
+Explain why integer accumulation is order independent and floating point is not.
+Write a bash snippet that atomically replaces a binary that may be running.
+How would you design a benchmark that cannot be gamed by moving work outside the timer?
+Describe the difference between a transient systemd unit and an installed one.
+Explain what a restore marker is for when several processes share one hardware lock.
+Write a short guide to reading an AMDGCN disassembly for load instruction forms.
+What does s_waitcnt do, and why does its placement matter for throughput?
+Describe how a compiler decides to contract a multiply and add into one instruction.
+Explain why a 12 percent instruction cut can buy 1 percent of wall clock.
+Write a short explanation of why a prefill pass and a generation step are different machines.
+How do you size a KV cache allocation for a server with unpredictable context lengths.
+Describe the memory layout you would choose for a batched recurrent state.
+Explain the difference between a slot and a row in a batched inference engine.
+Write a function that computes a running argmax over a stream of floats.
+How does a hierarchical argmax over a large vocabulary reduce memory traffic?
+Describe what changes when a batch of independent sequences replaces one long sequence.
+Explain why more sequences per step costs state traffic but more tokens per step does not.
+Write a short note on why a lossless drafter cannot change the accepted output.
+What is the break-even acceptance rate for speculative decoding with a cheap drafter?
+Describe how to measure the acceptance rate of a drafter without changing the output.
+Explain why a wider pass amortises a weight stream but not a state round trip.
+Write a short justification for keeping a numerical contract explicit in a release note.
+How would you decide whether a 2 percent speedup is worth a new weight image?
+Describe two experiments that distinguish a cache effect from an alignment effect.
+Explain what an image cardinality argument cannot establish about a relabeling.
+Write a brief note on equal fibers as evidence for an output relabeling.
+How do you price a boundary conversion when a packed representation crosses an interface?
+Describe why a locally optimal instruction can lose to a shared representation.
+Explain the difference between a peak arithmetic budget and a measured bottleneck.
+Write a short explanation of why occupancy alone does not predict kernel throughput.
+How do you tell whether a kernel is waiting on operands or on weights?
+Describe the signature of a kernel that is co-limited by issue rate and bandwidth.
+Explain why deleting a redundant test can be the right engineering decision.
+Write a short note on when to abandon a failing optimisation plan.
+What does it mean for a negative result to be useful, and what must it name?
+Describe the difference between a bounded negative and an inconclusive panel.
+Explain why raw samples must be kept even for experiments that lost.
+Write a checklist for publishing a kernel change that claims bit identical output.
+How would you confirm that a resident service was restored after a benchmark?
+Describe two ways a shared hardware lock can be left in an inconsistent state.
+Explain the value of a shared board when several engineers share one repository.
+Write a short note explaining why a claim on a file prevents duplicated work.
+How do you decide which phase of a pass to attack first, given a profile?
+Describe how you would verify that a token stream is identical across two builds.
+Explain what a finite logit comparison establishes that a token comparison does not.
+Write a short paragraph on why quality evidence is required for a reassociated map.
+How does a per-row activation scale keep rows independent inside one pass?
+Describe why packing a batch of prompts into one pass cannot change a row's arithmetic.
+Explain the difference between a route change and a free win in a batched engine.
+Write a note on why a benchmark should report the shape it measured.
+How would you present a result whose full-model column cannot resolve the phase win?
+Describe what a control phase is for in a within-process comparison.
+Explain why a palindrome arm order defends against clock drift.
+Write a short summary of how to choose the number of rounds for a noisy panel.
