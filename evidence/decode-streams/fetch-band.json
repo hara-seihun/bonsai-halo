@@ -1,0 +1,177 @@
+{
+  "attn_coords": [
+    -1
+  ],
+  "attn_narrows": [
+    -1
+  ],
+  "binary_sha256": "0d59a6ae0dfe48d59be1060568684c8d9a4ee1f22ab409e43d7a440a1231a8be  tools/batch_profile",
+  "context": 512,
+  "decode_context": 512,
+  "decode_prompt_cases": [
+    64
+  ],
+  "decode_streams": 0,
+  "decode_token_cases": [
+    1
+  ],
+  "device_bytes": 17421038664,
+  "ffn_a4_dense": 1,
+  "ffn_a4_image": 0,
+  "ffn_a4_order": 2,
+  "ffn_a4_sched": 2,
+  "ffn_denses": [
+    -1
+  ],
+  "ffn_dn_mats_cases": [
+    -1
+  ],
+  "ffn_images": [
+    2
+  ],
+  "ffn_orders": [
+    -1
+  ],
+  "ffn_runs": [
+    -1
+  ],
+  "ffn_scheds": [
+    -1
+  ],
+  "ffn_slice_cases": [
+    -1
+  ],
+  "ffn_slice_rows": 32,
+  "gdn_defer": 1,
+  "gdn_defer_effective": 1,
+  "gdn_defers": [
+    -1
+  ],
+  "gdn_pregate": -1,
+  "gdn_pregates": [
+    -1
+  ],
+  "gdn_resident": true,
+  "gdn_state": "f32",
+  "gdn_state_split": "4",
+  "gdn_states": [
+    3
+  ],
+  "git_revision": "b4e53659c1e046c6a0d193289a0ba79cccb1643a",
+  "halo_env": {},
+  "head_rows": [
+    1
+  ],
+  "kernel_clock_hz": 100000000,
+  "model": "../../data/bonsai2/PTQ1_0.gguf",
+  "modes": [
+    19
+  ],
+  "notes": "Paired tracing on/off; setup excluded. Events bracket stream launches, barrier stamps include waits. Wall time includes trace collection when enabled; device span excludes its readback. Residual hashing is outside timing.",
+  "rounds": 1,
+  "rows": [
+    32,
+    64,
+    128
+  ],
+  "samples": [
+    {
+      "attn_coord": 0,
+      "attn_hg": 6,
+      "attn_narrow": 1,
+      "attn_sched": 1,
+      "ffn_a4_dense": 1,
+      "ffn_a4_image": 2,
+      "ffn_a4_order": 2,
+      "ffn_a4_sched": 2,
+      "ffn_dn_mats": 0,
+      "ffn_run": 3,
+      "ffn_slice_rows": 32,
+      "gdn_defer": 1,
+      "gdn_pregate": -1,
+      "gdn_state": "i8",
+      "head_rows": "tail",
+      "logits": true,
+      "mode": 19,
+      "profile": false,
+      "residual_fnv64": "5382038992325857930",
+      "round": 0,
+      "rows": 32,
+      "seq_image": 1,
+      "seq_quant": "a4",
+      "seq_sched": 1,
+      "wall_ms": 80.676861
+    },
+    {
+      "attn_coord": 0,
+      "attn_hg": 6,
+      "attn_narrow": 1,
+      "attn_sched": 1,
+      "ffn_a4_dense": 1,
+      "ffn_a4_image": 2,
+      "ffn_a4_order": 2,
+      "ffn_a4_sched": 2,
+      "ffn_dn_mats": 0,
+      "ffn_run": 3,
+      "ffn_slice_rows": 32,
+      "gdn_defer": 1,
+      "gdn_pregate": -1,
+      "gdn_state": "i8",
+      "head_rows": "tail",
+      "logits": true,
+      "mode": 19,
+      "profile": false,
+      "residual_fnv64": "2722312543448664779",
+      "round": 0,
+      "rows": 128,
+      "seq_image": 1,
+      "seq_quant": "a4",
+      "seq_sched": 1,
+      "wall_ms": 170.715444
+    },
+    {
+      "attn_coord": 0,
+      "attn_hg": 6,
+      "attn_narrow": 1,
+      "attn_sched": 1,
+      "ffn_a4_dense": 1,
+      "ffn_a4_image": 2,
+      "ffn_a4_order": 2,
+      "ffn_a4_sched": 2,
+      "ffn_dn_mats": 0,
+      "ffn_run": 3,
+      "ffn_slice_rows": 32,
+      "gdn_defer": 1,
+      "gdn_pregate": -1,
+      "gdn_state": "i8",
+      "head_rows": "tail",
+      "logits": true,
+      "mode": 19,
+      "profile": false,
+      "residual_fnv64": "13239221889136524637",
+      "round": 0,
+      "rows": 64,
+      "seq_image": 1,
+      "seq_quant": "a4",
+      "seq_sched": 1,
+      "wall_ms": 105.654183
+    }
+  ],
+  "schema": "bonsai-phase-profile/1",
+  "sequence_image": 1,
+  "sequence_images": [
+    -1
+  ],
+  "sequence_layout": "direct",
+  "sequence_operand": "int8",
+  "sequence_sched": 1,
+  "sequence_scheds": [
+    -1
+  ],
+  "sequence_tile_width": "auto",
+  "sequence_wave_share": "auto",
+  "source_sha256_rollup": "d1fb63bc961cffef289eda8ca50622e4c8e883438fcc083060629c0e8efa512f  -",
+  "warmup_ms": 2000,
+  "wide_head": true,
+  "wide_head_tile_width": "auto"
+}

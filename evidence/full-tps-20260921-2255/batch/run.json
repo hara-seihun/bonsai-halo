@@ -1,0 +1,2052 @@
+{
+  "auto_dispatch": {
+    "19": {
+      "mirrors": "src/batch.cpp",
+      "rows_5_to_31": 4,
+      "rows_ge_32": 8,
+      "rows_le_4": 0
+    }
+  },
+  "batch_capacity": 256,
+  "context": 1024,
+  "device_memory": {
+    "a4_image_option": "both",
+    "after_load_bytes": 16936930376.0,
+    "after_prepare_batch_bytes": 27208102216.0,
+    "batch_rows_prepared": 256,
+    "ffn_batch_module_bytes": 8051252480.0,
+    "ffn_batch_weight_budget_bytes": 8021606400.0,
+    "ffn_batch_weight_bytes_all_modes": 16577986560.0,
+    "ffn_state_created": true,
+    "images": [
+      {
+        "bytes_all_layers": 267386880.0,
+        "image": 0,
+        "name": "SCALES",
+        "resident": true,
+        "resident_bytes": 267386880.0
+      },
+      {
+        "bytes_all_layers": 4278190080.0,
+        "image": 1,
+        "name": "SLICE2",
+        "resident": false,
+        "resident_bytes": 0.0
+      },
+      {
+        "bytes_all_layers": 4278190080.0,
+        "image": 2,
+        "name": "LANE2",
+        "resident": false,
+        "resident_bytes": 0.0
+      },
+      {
+        "bytes_all_layers": 4278190080.0,
+        "image": 3,
+        "name": "PAIR",
+        "resident": true,
+        "resident_bytes": 4278194176.0
+      },
+      {
+        "bytes_all_layers": 3476029440.0,
+        "image": 4,
+        "name": "DENSE5",
+        "resident": true,
+        "resident_bytes": 3476032768.0
+      }
+    ],
+    "modes_mask": 256,
+    "modes_mask_hex": "0x100",
+    "module_modes_served": {
+      "19": true
+    },
+    "note": "engine device_bytes before and after prepare_batch; the module total is the prepared weight images plus the shared activation workspace",
+    "resident_image_bytes_total": 8021613824.0,
+    "sequence_commit_modes": [
+      16,
+      18,
+      19
+    ],
+    "wide_sequence_prepared": true,
+    "workspace_only": false
+  },
+  "document": "PLAN.md",
+  "environment": {
+    "BONSAI_BENCH_SERVER_MASKED": "1",
+    "BONSAI_BENCH_SERVER_PAUSED": "1",
+    "HALO_GDN_COMPARE": null,
+    "HALO_GDN_RESIDENT": null,
+    "HALO_GDN_SPLIT": null,
+    "HALO_LAYERS": null,
+    "HALO_PROFILE": null,
+    "HALO_PROFILE_ROWS": null,
+    "HALO_SEQUENCE_LAYOUT": null,
+    "HALO_SEQUENCE_OPERAND": null,
+    "HALO_SEQUENCE_TT": null,
+    "HALO_SPEC_DEBUG": null,
+    "HALO_STOP": null,
+    "HIP_VISIBLE_DEVICES": null
+  },
+  "executable_sha256": "02c01aee2620acb7e271ebdcbbac450819ab932de36b3ff6da238ef9ce5d9a9e  ./tools/batch_compare\n",
+  "ffn_images": [
+    -1
+  ],
+  "ffn_orders": [
+    -1
+  ],
+  "ffn_scheds": [
+    -1
+  ],
+  "finished": "2026-09-21T15:56:27",
+  "full_model_layers": 64,
+  "gdn_pregates": [
+    -1
+  ],
+  "gdn_resident": true,
+  "gdn_state": "f32",
+  "gdn_state_split": "4",
+  "gdn_states": [
+    3
+  ],
+  "gen_steps": 64,
+  "git_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  -\n",
+  "git_revision": "83f0478307d166933fc39c2d5841c6792a3128e9\n",
+  "halo_env": {},
+  "head_rows": [
+    1
+  ],
+  "hip_events": false,
+  "input_sha256": "372a4b4f623ceef02cc0d3d0ae895e697b75a8b546f38ea3fcc62942f9370473  PLAN.md\n02439235951c0b045e3f176846374de378f2bdd7394aa6c145e05056b5acf663  tools/batch-compare/prompts.txt\n",
+  "max_rows": 256,
+  "mode_engine_flags": {
+    "19": "wide-commit-a4"
+  },
+  "mode_names": {
+    "19": "wide-commit-a4"
+  },
+  "model": "../../data/bonsai2/PTQ1_0.gguf",
+  "modes": [
+    19
+  ],
+  "multistep": {
+    "steps": 4,
+    "streams": 32
+  },
+  "prefill_tokens": 768,
+  "prompts_file": "tools/batch-compare/prompts.txt",
+  "quality_rows": [
+    8,
+    32
+  ],
+  "quality_shapes": [
+    "prefill",
+    "decode"
+  ],
+  "reference_pairs": null,
+  "resident_server_paused": true,
+  "rounds": [
+    {
+      "measurements": [
+        {
+          "case": "prefill",
+          "ffn_image": 0,
+          "ffn_order": 2,
+          "ffn_sched": 2,
+          "gdn_pregate": -1,
+          "gdn_state": "i8",
+          "head_rows": "tail",
+          "host": {
+            "available": true,
+            "cpu_busy_fraction_of_wall": 1.829781598687666,
+            "cpu_system_s": 1.275828,
+            "cpu_total_s": 1.8056050000000001,
+            "cpu_user_s": 0.5297770000000002,
+            "involuntary_context_switches": 79,
+            "major_faults": 0,
+            "mem_available_kb": {
+              "after": 26467528,
+              "before": 26424236,
+              "delta": 43292
+            },
+            "minor_faults": 9,
+            "psi": {
+              "cpu_full_stall_s": 0.0,
+              "cpu_some_stall_s": 0.005268,
+              "io_full_stall_s": 0.00047,
+              "io_some_stall_s": 0.000479,
+              "memory_full_stall_s": 0.006572,
+              "memory_some_stall_s": 0.00706
+            },
+            "swap_free_kb": {
+              "after": 29632292,
+              "before": 29637836,
+              "delta": -5544
+            },
+            "swap_total_kb": 33554428,
+            "voluntary_context_switches": 172
+          },
+          "last_argmax": 15,
+          "lm_head_cost_included": true,
+          "logits_passes": 1,
+          "logits_policy": "last-pass-only",
+          "mode": 19,
+          "mode_name": "wide-commit-a4",
+          "pass_wall_s": [
+            0.01828476900118403,
+            0.37470582999958424,
+            0.5937929079991591
+          ],
+          "passes": 3,
+          "round": 0,
+          "rows_per_pass": 256,
+          "seq_quant": "a4",
+          "seq_sched": 1,
+          "tail_logits_fnv64": "4745194790589627375",
+          "tail_logits_rows": 256,
+          "telemetry": {
+            "available": true,
+            "busy_percent": {
+              "max": 93,
+              "mean": 89.0119760479042,
+              "min": 84,
+              "n": 167
+            },
+            "device_sysfs": "/sys/class/drm/card0/device",
+            "gfx_hz": {
+              "max": 2631000000,
+              "mean": 2505407185.6287427,
+              "min": 2399000000,
+              "n": 167
+            },
+            "power_uw": {
+              "max": 133096000,
+              "mean": 129667562.8742515,
+              "min": 125029000,
+              "n": 167
+            },
+            "samples_taken": 167,
+            "temperature_mc": {
+              "max": 69000,
+              "mean": 65107.78443113773,
+              "min": 52000,
+              "n": 167
+            }
+          },
+          "tokens": 768,
+          "tokens_per_s": 778.2833276337445,
+          "wall_s": 0.9867871670012391
+        },
+        {
+          "aggregate_tokens_per_s": 33.70081601808792,
+          "case": "decode",
+          "eos_policy": "fixed step count; EOS is emitted and fed back, streams are not stopped",
+          "eos_tokens_emitted": 0,
+          "ffn_image": 0,
+          "ffn_order": 2,
+          "ffn_sched": 2,
+          "gdn_pregate": -1,
+          "gdn_state": "i8",
+          "head_rows": "tail",
+          "host": {
+            "available": true,
+            "cpu_busy_fraction_of_wall": 1.1303137845911626,
+            "cpu_system_s": 0.2652960000000002,
+            "cpu_total_s": 2.146538,
+            "cpu_user_s": 1.8812419999999999,
+            "involuntary_context_switches": 42,
+            "major_faults": 0,
+            "mem_available_kb": {
+              "after": 26224296,
+              "before": 26442888,
+              "delta": -218592
+            },
+            "minor_faults": 4,
+            "psi": {
+              "cpu_full_stall_s": 0.0,
+              "cpu_some_stall_s": 0.007802,
+              "io_full_stall_s": 0.001155,
+              "io_some_stall_s": 0.001344,
+              "memory_full_stall_s": 0.0,
+              "memory_some_stall_s": 0.0
+            },
+            "swap_free_kb": {
+              "after": 29635280,
+              "before": 29632292,
+              "delta": 2988
+            },
+            "swap_total_kb": 33554428,
+            "voluntary_context_switches": 337
+          },
+          "mode": 19,
+          "mode_name": "wide-commit-a4",
+          "per_stream_tokens_per_s": 33.70081601808792,
+          "prompt_tokens": 35,
+          "round": 0,
+          "seq_quant": "a4",
+          "seq_sched": 1,
+          "setup_s": 0.09153386499929184,
+          "step_wall_s": [
+            0.029754867999145063,
+            0.02904970300005516,
+            0.029082142000333988,
+            0.0290254029987409,
+            0.029109641000104602,
+            0.028870739000922185,
+            0.02904448300068907,
+            0.029208437999841408,
+            0.028929926000273554,
+            0.028906217999974615,
+            0.02918654800123477,
+            0.02907884200067201,
+            0.029318744000192964,
+            0.02972393900017778,
+            0.030184622999513522,
+            0.02910659100052726,
+            0.029001633998632315,
+            0.02940608999961114,
+            0.029069621999951778,
+            0.029112490999978036,
+            0.028982734998862725,
+            0.02949712700137752,
+            0.029157588998714346,
+            0.02900396500081115,
+            0.029490517001249827,
+            0.02971996900123486,
+            0.029586124001070857,
+            0.029711909999605268,
+            0.029334913000639062,
+            0.029230457001176546,
+            0.029342461999476654,
+            0.029677440999876126,
+            0.030102206001174636,
+            0.03039317599905189,
+            0.030704824999702396,
+            0.030706884999744943,
+            0.030139683998640976,
+            0.02975555800003349,
+            0.029804456999045215,
+            0.02945220899891865,
+            0.029574624000815675,
+            0.029928722000477137,
+            0.029930542999863974,
+            0.03072624500055099,
+            0.03033742799925676,
+            0.02985859500040533,
+            0.029893302998971194,
+            0.030108465998637257,
+            0.029736828999375575,
+            0.02951066700006777,
+            0.029410329998427187,
+            0.03009815599943977,
+            0.029975441000715364,
+            0.030006509001395898,
+            0.029807686998537974,
+            0.03045458300039172,
+            0.03030539900100848,
+            0.03045861400096328,
+            0.029997388999618124,
+            0.029885343999922043,
+            0.030216191998988506,
+            0.030537701000866946,
+            0.030537800999809406,
+            0.029733188999671256
+          ],
+          "steps": 64,
+          "streams": 1,
+          "streams_out": [
+            {
+              "stream": 0,
+              "token_sequence_sha256": "51fedaf547b8453bd66215aebf6172b91d9044554394c7b6d331b85aaba92d36",
+              "token_sequence_length": 64
+            }
+          ],
+          "telemetry": {
+            "available": true,
+            "busy_percent": {
+              "max": 99,
+              "mean": 97.10122699386503,
+              "min": 94,
+              "n": 326
+            },
+            "device_sysfs": "/sys/class/drm/card0/device",
+            "gfx_hz": {
+              "max": 2649000000,
+              "mean": 2594463190.184049,
+              "min": 2401000000,
+              "n": 326
+            },
+            "power_uw": {
+              "max": 139012000,
+              "mean": 136902518.40490797,
+              "min": 134039000,
+              "n": 326
+            },
+            "samples_taken": 326,
+            "temperature_mc": {
+              "max": 67000,
+              "mean": 63665.64417177914,
+              "min": 62000,
+              "n": 326
+            }
+          },
+          "tokens_emitted": 64,
+          "wall_s": 1.8990638079994824
+        },
+        {
+          "aggregate_tokens_per_s": 134.31766699405537,
+          "case": "decode",
+          "eos_policy": "fixed step count; EOS is emitted and fed back, streams are not stopped",
+          "eos_tokens_emitted": 0,
+          "ffn_image": 0,
+          "ffn_order": 2,
+          "ffn_sched": 2,
+          "gdn_pregate": -1,
+          "gdn_state": "i8",
+          "head_rows": "tail",
+          "host": {
+            "available": true,
+            "cpu_busy_fraction_of_wall": 1.103590154831841,
+            "cpu_system_s": 0.4315520000000004,
+            "cpu_total_s": 4.20673,
+            "cpu_user_s": 3.7751779999999995,
+            "involuntary_context_switches": 107,
+            "major_faults": 0,
+            "mem_available_kb": {
+              "after": 25961384,
+              "before": 26189556,
+              "delta": -228172
+            },
+            "minor_faults": 8,
+            "psi": {
+              "cpu_full_stall_s": 0.0,
+              "cpu_some_stall_s": 0.008334,
+              "io_full_stall_s": 0.001422,
+              "io_some_stall_s": 0.001505,
+              "memory_full_stall_s": 0.0,
+              "memory_some_stall_s": 0.0
+            },
+            "swap_free_kb": {
+              "after": 29635352,
+              "before": 29635316,
+              "delta": 36
+            },
+            "swap_total_kb": 33554428,
+            "voluntary_context_switches": 986
+          },
+          "mode": 19,
+          "mode_name": "wide-commit-a4",
+          "per_stream_tokens_per_s": 16.78970837425692,
+          "prompt_tokens": 238,
+          "round": 0,
+          "seq_quant": "a4",
+          "seq_sched": 1,
+          "setup_s": 0.7853529750009329,
+          "step_wall_s": [
+            0.05961791299887409,
+            0.059118461000252864,
+            0.059001354000429274,
+            0.06000365900035831,
+            0.0594967369997903,
+            0.05871571500028949,
+            0.059962661000099615,
+            0.05973109899969131,
+            0.05846170299992082,
+            0.0593524920004711,
+            0.058471483000175795,
+            0.05870318500092253,
+            0.06026197000028333,
+            0.060429474999182275,
+            0.06033273799948802,
+            0.06024761099979514,
+            0.059358571999837295,
+            0.059000504999858094,
+            0.0588324799991824,
+            0.059114319999935105,
+            0.05913039999904868,
+            0.059235587001239765,
+            0.05929730500065489,
+            0.05916517799960275,
+            0.059506896999664605,
+            0.05932145399856381,
+            0.059780397999929846,
+            0.059393220999481855,
+            0.0614544179989025,
+            0.06198817000040435,
+            0.06187394399967161,
+            0.06049072200039518,
+            0.059265005998895504,
+            0.05917259799934982,
+            0.05921583700001065,
+            0.059242495999569655,
+            0.05921165699874109,
+            0.059164928999962285,
+            0.05921527700047591,
+            0.05934147300104087,
+            0.05931287400017027,
+            0.05923984599940013,
+            0.05928543499976513,
+            0.05929555399961828,
+            0.059380081000199425,
+            0.05932346400004462,
+            0.05927543500001775,
+            0.05932953299998189,
+            0.05935703199975251,
+            0.05989653399956296,
+            0.0596436129999347,
+            0.05959341400011908,
+            0.05954214499979571,
+            0.059676541000953875,
+            0.05973829899994598,
+            0.05964503200084437,
+            0.05982765599947015,
+            0.05967677099943103,
+            0.059619232999466476,
+            0.059616913998979726,
+            0.05957177399977809,
+            0.0597215599991614,
+            0.05972891899909882,
+            0.05972399900019809
+          ],
+          "steps": 64,
+          "streams": 8,
+          "streams_out": [
+            {
+              "stream": 0,
+              "token_sequence_sha256": "51fedaf547b8453bd66215aebf6172b91d9044554394c7b6d331b85aaba92d36",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 1,
+              "token_sequence_sha256": "6591d43715bab15eb747ea14cf4e652f6db1a6a87dcace82503a371b898d6ca9",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 2,
+              "token_sequence_sha256": "7d411dd98f6db617ae6434b57d502b8a1291fd786c27b0acb80f410b252b08bb",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 3,
+              "token_sequence_sha256": "4b8d2d0e81c9b200747a8a21ee6059b74e0da21fc655f1860c2cf49d33a48ac5",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 4,
+              "token_sequence_sha256": "64609cce332b0b670245c61a4ff1d76ab0a5eb88a55eec0f5c25fbe30a58eae7",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 5,
+              "token_sequence_sha256": "3ed160c37d56430e9c27a49e8657adb2c8b09fc7bef8b19de579d936dfa2a4d7",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 6,
+              "token_sequence_sha256": "ed57a56d1c90eee24898fa7c32aa1f54a48d493c9597903f8a44a0a5ac986d5e",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 7,
+              "token_sequence_sha256": "bb2ae3f49768cc82200f1a8f0f8f2e19e93abd4ea36973cd294443eb1ba8ef39",
+              "token_sequence_length": 64
+            }
+          ],
+          "telemetry": {
+            "available": true,
+            "busy_percent": {
+              "max": 100,
+              "mean": 99.90074074074074,
+              "min": 99,
+              "n": 675
+            },
+            "device_sysfs": "/sys/class/drm/card0/device",
+            "gfx_hz": {
+              "max": 2878000000,
+              "mean": 2763770370.3703704,
+              "min": 2544000000,
+              "n": 675
+            },
+            "power_uw": {
+              "max": 139072000,
+              "mean": 135229724.44444445,
+              "min": 125056000,
+              "n": 675
+            },
+            "samples_taken": 675,
+            "temperature_mc": {
+              "max": 69000,
+              "mean": 66810.37037037036,
+              "min": 64000,
+              "n": 675
+            }
+          },
+          "tokens_emitted": 512,
+          "wall_s": 3.811858942000981
+        },
+        {
+          "aggregate_tokens_per_s": 416.85910220111595,
+          "case": "decode",
+          "eos_policy": "fixed step count; EOS is emitted and fed back, streams are not stopped",
+          "eos_tokens_emitted": 0,
+          "ffn_image": 0,
+          "ffn_order": 2,
+          "ffn_sched": 2,
+          "gdn_pregate": -1,
+          "gdn_state": "i8",
+          "head_rows": "tail",
+          "host": {
+            "available": true,
+            "cpu_busy_fraction_of_wall": 1.091327766516281,
+            "cpu_system_s": 0.5003889999999998,
+            "cpu_total_s": 5.361618000000002,
+            "cpu_user_s": 4.861229000000002,
+            "involuntary_context_switches": 109,
+            "major_faults": 0,
+            "mem_available_kb": {
+              "after": 25886612,
+              "before": 25969804,
+              "delta": -83192
+            },
+            "minor_faults": 3,
+            "psi": {
+              "cpu_full_stall_s": 0.0,
+              "cpu_some_stall_s": 0.017021,
+              "io_full_stall_s": 0.004121,
+              "io_some_stall_s": 0.004596,
+              "memory_full_stall_s": 0.0,
+              "memory_some_stall_s": 0.0
+            },
+            "swap_free_kb": {
+              "after": 29635444,
+              "before": 29635352,
+              "delta": 92
+            },
+            "swap_total_kb": 33554428,
+            "voluntary_context_switches": 6093
+          },
+          "mode": 19,
+          "mode_name": "wide-commit-a4",
+          "per_stream_tokens_per_s": 13.026846943784873,
+          "prompt_tokens": 902,
+          "round": 0,
+          "seq_quant": "a4",
+          "seq_sched": 1,
+          "setup_s": 3.094615980000526,
+          "step_wall_s": [
+            0.07572031100062304,
+            0.0762572210005601,
+            0.0763271790001454,
+            0.07615324499965936,
+            0.07615529499889817,
+            0.07601727899964317,
+            0.07654166199972678,
+            0.0757009310000285,
+            0.07571602099960728,
+            0.07603631900019536,
+            0.07625880199884705,
+            0.07617505400048685,
+            0.07614094599921373,
+            0.07603276000008918,
+            0.07619899400015129,
+            0.07571255000038946,
+            0.0760514379999222,
+            0.07606280800064269,
+            0.07670929599953524,
+            0.07619348399930459,
+            0.07604258900028071,
+            0.07617471399862552,
+            0.07632689900128753,
+            0.07706364299883717,
+            0.07657424999888462,
+            0.07636924700091186,
+            0.07621160300004703,
+            0.07614233599997533,
+            0.07620233399939025,
+            0.07630887999948754,
+            0.07651274300042132,
+            0.07643206499960797,
+            0.07678892300100415,
+            0.07675318399924436,
+            0.07678017299986095,
+            0.0766699569994671,
+            0.07712346199878084,
+            0.07686981099868717,
+            0.07686276099957468,
+            0.0772314269997878,
+            0.07742887099993823,
+            0.07692442799998389,
+            0.0770089449997613,
+            0.07707050300086848,
+            0.07696918699912203,
+            0.07760239399976854,
+            0.07762902400099847,
+            0.07707636399936746,
+            0.07699274600054196,
+            0.0775635259997216,
+            0.07845062500018685,
+            0.077292434998526,
+            0.07737428299878957,
+            0.07739392300027248,
+            0.07749698900079238,
+            0.07745694000004733,
+            0.07791281400022854,
+            0.07731722500102478,
+            0.07734074400104873,
+            0.07738177200008067,
+            0.07784754599924781,
+            0.0780188900007488,
+            0.0776339439998992,
+            0.07762306400036323
+          ],
+          "steps": 64,
+          "streams": 32,
+          "streams_out": [
+            {
+              "stream": 0,
+              "token_sequence_sha256": "369fb07b713cd812d19cdb6b774d89519dcc31e4703eb8623b57932a83a572a7",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 1,
+              "token_sequence_sha256": "5f271e1457f362502e480a3949b66ce187abfb41c95889d1416cde4c9836d711",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 2,
+              "token_sequence_sha256": "782bace067cb38c4cb53caeabbb80e08285428f16ac375aa055f01df7c5bdc9e",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 3,
+              "token_sequence_sha256": "ab289fe2e8a8cd621f03243041dc9ca9ec0473adfdeee3fc7da5492a2122bf94",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 4,
+              "token_sequence_sha256": "3481780cfbe880b465a28872236d41064ca9c1f262977f5d2508b34df08dbeff",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 5,
+              "token_sequence_sha256": "1a3d2d9f32736a84c2f6ca4f63660f8126eb668683d853c60ebabf30c70f16eb",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 6,
+              "token_sequence_sha256": "840701c4debbfba4cfe2b92d4c998dbf6b0fa199af4cd1d689d28beecc87691c",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 7,
+              "token_sequence_sha256": "4feceacd81a8ba7f984f346e3e6405f946e37e6999322b290b9f8dc109b8af4c",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 8,
+              "token_sequence_sha256": "98439d7b8604a34fc486aea92bf32a034ed444c8fb4a2501748d7adb1e8e09ca",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 9,
+              "token_sequence_sha256": "ca9cef3f8041e7c7809ee98b0a8519f5b315708160b0165bf6217a9041e6b8ed",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 10,
+              "token_sequence_sha256": "4562bb86c1540f9a119a787f62e5022c18c3fd9d8dac6b051076c3e92450755b",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 11,
+              "token_sequence_sha256": "5f3c2c28c251aeb1e02c5836a5709881d5371008af4162ede7b230cc45db3bcb",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 12,
+              "token_sequence_sha256": "69b51de6051aba5545f171a128770cb8770f242909575999d6af25e69de6b085",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 13,
+              "token_sequence_sha256": "69fcec8998bbdfd6016277e0eb6a4c027f371ece4374c67410c30bcf2743401d",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 14,
+              "token_sequence_sha256": "7766751cd0368dd16874faf172fd2b9ef6c0d38c4cb39b3c65d32134522956cf",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 15,
+              "token_sequence_sha256": "413fb2dcddee634e462d55830264251354b13c080667857e0bf3c63d0275a408",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 16,
+              "token_sequence_sha256": "6f0681f209368508efa04916657e92d4be6e8b361b635e6d4e7f8e04b810e602",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 17,
+              "token_sequence_sha256": "8f5b535b8fa5d6a0609fddd0c95071550fa9b56930730870111b3fdd9b9a121e",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 18,
+              "token_sequence_sha256": "174b399941fccdecad3d2308d8f39ed328cbcd3de36b5b34d36ee072030b9c78",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 19,
+              "token_sequence_sha256": "36bd5c019de973eca63b5e38c7d3162baf56fef0f2b48ebfabd0f33a503efceb",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 20,
+              "token_sequence_sha256": "30d44bf6cfde9df643eb6323ccc6a870685b41164d11316225026fbbb21ff597",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 21,
+              "token_sequence_sha256": "8c1728e01fe72b1ba31e1fb36c2ac7f90ddde0edf2de80d46a95530e68a1867f",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 22,
+              "token_sequence_sha256": "7ca9d214d92d72314dc5d383add85f692879935d13c56aa7704a74012edda748",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 23,
+              "token_sequence_sha256": "09a8aa3089e3205c4b7b30df79de287eb0bcc75b72bb71a80df0af4d59f025a3",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 24,
+              "token_sequence_sha256": "067cda22a9130a38e9b8b4963fcdfda9432ed9a3a563ae71b2c34471c606bf4e",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 25,
+              "token_sequence_sha256": "5451a9c90e1070836d2cc30de70362fbbf22c5a53311830c7282c38f3553bee4",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 26,
+              "token_sequence_sha256": "44ab2ca470aef5aa6f33e9fbf3e49c1fa7ba91b46d935bf424ffcd0337e90dca",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 27,
+              "token_sequence_sha256": "216528f47d5e3c093adb33dd946d21d21fdb0102a09dda0368dc070c26e3e9a1",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 28,
+              "token_sequence_sha256": "aa06bba8da96f6b814396b0442124cf574ddba33eea049c7b27b97caf7bdea83",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 29,
+              "token_sequence_sha256": "d3149a09ad8266c409ef2be68227ed8a079d1c539c890d2f79d08a838f6e8ab0",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 30,
+              "token_sequence_sha256": "352c0372f101043ca84197112a64cf434b29ed7fa7cf6ccc314ac8f9935185c4",
+              "token_sequence_length": 64
+            },
+            {
+              "stream": 31,
+              "token_sequence_sha256": "518b7319cce3c47f6697df5c73ed9fd992cdafea2cf673d9f0ce94adef83f3f1",
+              "token_sequence_length": 64
+            }
+          ],
+          "telemetry": {
+            "available": true,
+            "busy_percent": {
+              "max": 100,
+              "mean": 100.0,
+              "min": 100,
+              "n": 885
+            },
+            "device_sysfs": "/sys/class/drm/card0/device",
+            "gfx_hz": {
+              "max": 2813000000,
+              "mean": 2767185310.734463,
+              "min": 2750000000,
+              "n": 885
+            },
+            "power_uw": {
+              "max": 120019000,
+              "mean": 119356418.07909605,
+              "min": 119089000,
+              "n": 885
+            },
+            "samples_taken": 885,
+            "temperature_mc": {
+              "max": 71000,
+              "mean": 69179.66101694915,
+              "min": 68000,
+              "n": 885
+            }
+          },
+          "tokens_emitted": 2048,
+          "wall_s": 4.912930985999992
+        }
+      ],
+      "mode_order": [
+        {
+          "ffn_image": -1,
+          "ffn_order": -1,
+          "ffn_sched": -1,
+          "gdn_pregate": -1,
+          "gdn_state": 3,
+          "head_rows": "tail",
+          "mode": 19,
+          "seq_quant": 2,
+          "seq_sched": -1
+        }
+      ],
+      "round": 0
+    },
+    {
+      "measurements": [
+        {
+          "case": "prefill",
+          "ffn_image": 0,
+          "ffn_order": 2,
+          "ffn_sched": 2,
+          "gdn_pregate": -1,
+          "gdn_state": "i8",
+          "head_rows": "tail",
+          "host": {
+            "available": true,
+            "cpu_busy_fraction_of_wall": 1.9656802811348486,
+            "cpu_system_s": 0.6539669999999997,
+            "cpu_total_s": 1.6137309999999996,
+            "cpu_user_s": 0.9597639999999998,
+            "involuntary_context_switches": 78,
+            "major_faults": 0,
+            "mem_available_kb": {
+              "after": 25917792,
+              "before": 25887152,
+              "delta": 30640
+            },
+            "minor_faults": 0,
+            "psi": {
+              "cpu_full_stall_s": 0.0,
+              "cpu_some_stall_s": 0.003046,
+              "io_full_stall_s": 3.5e-05,
+              "io_some_stall_s": 4.1e-05,
+              "memory_full_stall_s": 0.0,
+              "memory_some_stall_s": 0.0
+            },
+            "swap_free_kb": {
+              "after": 29635444,
+              "before": 29635444,
+              "delta": 0
+            },
+            "swap_total_kb": 33554428,
+            "voluntary_context_switches": 149
+          },
+          "last_argmax": 15,
+          "lm_head_cost_included": true,
+          "logits_passes": 1,
+          "logits_policy": "last-pass-only",
+          "mode": 19,
+          "mode_name": "wide-commit-a4",
+          "pass_wall_s": [
+            0.0019498419987939997,
+            0.00164839200078859,
+            0.8173499929998798
+          ],
+          "passes": 3,
+          "round": 1,
+          "rows_per_pass": 256,
+          "seq_quant": "a4",
+          "seq_sched": 1,
+          "tail_logits_fnv64": "4745194790589627375",
+          "tail_logits_rows": 256,
+          "telemetry": {
+            "available": true,
+            "busy_percent": {
+              "max": 100,
+              "mean": 99.80536912751678,
+              "min": 99,
+              "n": 149
+            },
+            "device_sysfs": "/sys/class/drm/card0/device",
+            "gfx_hz": {
+              "max": 2763000000,
+              "mean": 2684328859.060403,
+              "min": 2620000000,
+              "n": 149
+            },
+            "power_uw": {
+              "max": 120057000,
+              "mean": 119979201.34228188,
+              "min": 119066000,
+              "n": 149
+            },
+            "samples_taken": 149,
+            "temperature_mc": {
+              "max": 73000,
+              "mean": 70261.74496644296,
+              "min": 66000,
+              "n": 149
+            }
+          },
+          "tokens": 768,
+          "tokens_per_s": 935.4982062757449,
+          "wall_s": 0.8209529369996744
+        },
+        {
+          "aggregate_tokens_per_s": 34.3150248747763,
+          "case": "decode",
+          "eos_policy": "fixed step count; EOS is emitted and fed back, streams are not stopped",
+          "eos_tokens_emitted": 0,
+          "ffn_image": 0,
+          "ffn_order": 2,
+          "ffn_sched": 2,
+          "gdn_pregate": -1,
+          "gdn_state": "i8",
+          "head_rows": "tail",
+          "host": {
+            "available": true,
+            "cpu_busy_fraction_of_wall": 1.0748849115220205,
+            "cpu_system_s": 0.16785799999999984,
+            "cpu_total_s": 2.0047380000000006,
+            "cpu_user_s": 1.8368800000000007,
+            "involuntary_context_switches": 106,
+            "major_faults": 0,
+            "mem_available_kb": {
+              "after": 25870428,
+              "before": 25904256,
+              "delta": -33828
+            },
+            "minor_faults": 0,
+            "psi": {
+              "cpu_full_stall_s": 0.0,
+              "cpu_some_stall_s": 0.005934,
+              "io_full_stall_s": 0.000769,
+              "io_some_stall_s": 0.001152,
+              "memory_full_stall_s": 0.0,
+              "memory_some_stall_s": 0.0
+            },
+            "swap_free_kb": {
+              "after": 29635444,
+              "before": 29635444,
+              "delta": 0
+            },
+            "swap_total_kb": 33554428,
+            "voluntary_context_switches": 348
+          },
+          "mode": 19,
+          "mode_name": "wide-commit-a4",
+          "per_stream_tokens_per_s": 34.3150248747763,
+          "prompt_tokens": 35,
+          "round": 1,
+          "seq_quant": "a4",
+          "seq_sched": 1,
+          "setup_s": 0.08719650999955775,
+          "step_wall_s": [
+            0.029168229000788415,
+            0.029006634998950176,
+            0.028897729000163963,
+            0.028715405000184546,
+            0.028677076999883866,
+            0.02870999600054347,
+            0.02898320600070292,
+            0.02917871899990132,
+            0.028895228999317624,
+            0.028897358999529388,
+            0.02887191999980132,
+            0.028750354000294465,
+            0.02876534299866762,
+            0.028818291999414214,
+            0.028985295999518712,
+            0.0290353939999477,
+            0.029185869001594256,
+            0.029584004998469027,
+            0.029361883000092348,
+            0.029071573000692297,
+            0.029025093999734963,
+            0.029070433000015328,
+            0.029069993001030525,
+            0.028955447000043932,
+            0.02906013300162158,
+            0.028818081998906564,
+            0.02895321700088971,
+            0.02922889799992845,
+            0.02902934399935475,
+            0.028996466000535293,
+            0.028854469999714638,
+            0.029116301999238203,
+            0.029224357000202872,
+            0.029217057999630924,
+            0.029249457000332768,
+            0.029292125000210945,
+            0.02912590099913359,
+            0.029440059999615187,
+            0.0293222340005741,
+            0.029175219000535435,
+            0.02915457100061758,
+            0.029291304999787826,
+            0.02939678099937737,
+            0.02922503800073173,
+            0.029266116000144393,
+            0.029290465001395205,
+            0.02925709700139123,
+            0.029459548999511753,
+            0.029549416000008932,
+            0.029342343999815057,
+            0.029109551000146894,
+            0.029254846998810535,
+            0.02927754600023036,
+            0.029132951000065077,
+            0.02919634900172241,
+            0.029594644998724107,
+            0.029149529998903745,
+            0.029179269000451313,
+            0.02962528399984876,
+            0.029520946998673026,
+            0.02908613200088439,
+            0.029360822998569347,
+            0.02933246400061762,
+            0.029185008999775164
+          ],
+          "steps": 64,
+          "streams": 1,
+          "telemetry": {
+            "available": true,
+            "busy_percent": {
+              "max": 100,
+              "mean": 99.67647058823529,
+              "min": 99,
+              "n": 340
+            },
+            "device_sysfs": "/sys/class/drm/card0/device",
+            "gfx_hz": {
+              "max": 2858000000,
+              "mean": 2776105882.352941,
+              "min": 2629000000,
+              "n": 340
+            },
+            "power_uw": {
+              "max": 120062000,
+              "mean": 118674561.76470588,
+              "min": 116068000,
+              "n": 340
+            },
+            "samples_taken": 340,
+            "temperature_mc": {
+              "max": 70000,
+              "mean": 66582.35294117648,
+              "min": 65000,
+              "n": 340
+            }
+          },
+          "tokens_emitted": 64,
+          "wall_s": 1.8650722309994308
+        },
+        {
+          "aggregate_tokens_per_s": 132.55141931099092,
+          "case": "decode",
+          "eos_policy": "fixed step count; EOS is emitted and fed back, streams are not stopped",
+          "eos_tokens_emitted": 0,
+          "ffn_image": 0,
+          "ffn_order": 2,
+          "ffn_sched": 2,
+          "gdn_pregate": -1,
+          "gdn_state": "i8",
+          "head_rows": "tail",
+          "host": {
+            "available": true,
+            "cpu_busy_fraction_of_wall": 1.0970356740888414,
+            "cpu_system_s": 0.4177850000000003,
+            "cpu_total_s": 4.2374670000000005,
+            "cpu_user_s": 3.8196820000000002,
+            "involuntary_context_switches": 119,
+            "major_faults": 0,
+            "mem_available_kb": {
+              "after": 25289552,
+              "before": 25908308,
+              "delta": -618756
+            },
+            "minor_faults": 0,
+            "psi": {
+              "cpu_full_stall_s": 0.0,
+              "cpu_some_stall_s": 0.012976,
+              "io_full_stall_s": 0.002283,
+              "io_some_stall_s": 0.002461,
+              "memory_full_stall_s": 0.000122,
+              "memory_some_stall_s": 0.000128
+            },
+            "swap_free_kb": {
+              "after": 29635688,
+              "before": 29635468,
+              "delta": 220
+            },
+            "swap_total_kb": 33554428,
+            "voluntary_context_switches": 1044
+          },
+          "mode": 19,
+          "mode_name": "wide-commit-a4",
+          "per_stream_tokens_per_s": 16.568927413873865,
+          "prompt_tokens": 238,
+          "round": 1,
+          "seq_quant": "a4",
+          "seq_sched": 1,
+          "setup_s": 0.7299309249992803,
+          "step_wall_s": [
+            0.05868402800115291,
+            0.058278861000871984,
+            0.05834944900016126,
+            0.058599940999556566,
+            0.058342649001133395,
+            0.05843570599972736,
+            0.05845309600044857,
+            0.058552800999677856,
+            0.05852171299920883,
+            0.05891376900035539,
+            0.05935376399975212,
+            0.05898670600072364,
+            0.05873228599921276,
+            0.058729615000629565,
+            0.05887294100102736,
+            0.05885513100110984,
+            0.05883683200045198,
+            0.05893259799995576,
+            0.05892241899891815,
+            0.05886955099958868,
+            0.058928988999468856,
+            0.058961647999240085,
+            0.058962716999303666,
+            0.058862071000476135,
+            0.05902759600030549,
+            0.05910974200014607,
+            0.059032335000665626,
+            0.05918184999973164,
+            0.059183260000281734,
+            0.05920385900026304,
+            0.059163039999475586,
+            0.05911591200128896,
+            0.05912005199934356,
+            0.05911999199997808,
+            0.05919073000040953,
+            0.059256557000480825,
+            0.05906567399870255,
+            0.05910238300020865,
+            0.05912072200044349,
+            0.05922976800138713,
+            0.05920085900106642,
+            0.059226478999335086,
+            0.059282856000208994,
+            0.0592456280010083,
+            0.060109296999144135,
+            0.059956982999210595,
+            0.06003335999957926,
+            0.06010044800132164,
+            0.06187411599967163,
+            0.06358415599970613,
+            0.06545098099923052,
+            0.06698342799973034,
+            0.06769383299979381,
+            0.06688249100079702,
+            0.06733069400070235,
+            0.06799700199917424,
+            0.0672119799983193,
+            0.06545424999967508,
+            0.06284722199961834,
+            0.06101210599990736,
+            0.06081667299986293,
+            0.06078006399911828,
+            0.06139814199923421,
+            0.06184719699922425
+          ],
+          "steps": 64,
+          "streams": 8,
+          "telemetry": {
+            "available": true,
+            "busy_percent": {
+              "max": 100,
+              "mean": 100.0,
+              "min": 100,
+              "n": 689
+            },
+            "device_sysfs": "/sys/class/drm/card0/device",
+            "gfx_hz": {
+              "max": 2894000000,
+              "mean": 2834978229.317852,
+              "min": 2640000000,
+              "n": 689
+            },
+            "power_uw": {
+              "max": 123091000,
+              "mean": 119696246.73439768,
+              "min": 117021000,
+              "n": 689
+            },
+            "samples_taken": 689,
+            "temperature_mc": {
+              "max": 70000,
+              "mean": 66821.48040638606,
+              "min": 59000,
+              "n": 689
+            }
+          },
+          "tokens_emitted": 512,
+          "wall_s": 3.8626519629997347
+        },
+        {
+          "aggregate_tokens_per_s": 383.31785533087043,
+          "case": "decode",
+          "eos_policy": "fixed step count; EOS is emitted and fed back, streams are not stopped",
+          "eos_tokens_emitted": 0,
+          "ffn_image": 0,
+          "ffn_order": 2,
+          "ffn_sched": 2,
+          "gdn_pregate": -1,
+          "gdn_state": "i8",
+          "head_rows": "tail",
+          "host": {
+            "available": true,
+            "cpu_busy_fraction_of_wall": 1.126045986435564,
+            "cpu_system_s": 0.7094150000000008,
+            "cpu_total_s": 6.016266000000003,
+            "cpu_user_s": 5.306851000000002,
+            "involuntary_context_switches": 229,
+            "major_faults": 0,
+            "mem_available_kb": {
+              "after": 24260528,
+              "before": 24881112,
+              "delta": -620584
+            },
+            "minor_faults": 0,
+            "psi": {
+              "cpu_full_stall_s": 0.0,
+              "cpu_some_stall_s": 0.044107,
+              "io_full_stall_s": 0.001944,
+              "io_some_stall_s": 0.002369,
+              "memory_full_stall_s": 7.8e-05,
+              "memory_some_stall_s": 8.6e-05
+            },
+            "swap_free_kb": {
+              "after": 29635788,
+              "before": 29635688,
+              "delta": 100
+            },
+            "swap_total_kb": 33554428,
+            "voluntary_context_switches": 7962
+          },
+          "mode": 19,
+          "mode_name": "wide-commit-a4",
+          "per_stream_tokens_per_s": 11.978682979089701,
+          "prompt_tokens": 902,
+          "round": 1,
+          "seq_quant": "a4",
+          "seq_sched": 1,
+          "setup_s": 3.369379267998738,
+          "step_wall_s": [
+            0.07820010499926866,
+            0.07922979999966628,
+            0.08037176899961196,
+            0.08107215500058373,
+            0.0806924379994598,
+            0.08090890000130457,
+            0.07944882199990388,
+            0.0779200850010966,
+            0.07914504300060798,
+            0.07978706999892893,
+            0.08226063300025999,
+            0.08452813399890147,
+            0.08462444100041466,
+            0.08423131499876035,
+            0.08481119399948511,
+            0.08276117599962163,
+            0.08184162900033698,
+            0.0818488980003167,
+            0.0823161619991879,
+            0.08423431500159495,
+            0.0852405589994305,
+            0.08518740100043942,
+            0.08643090800069331,
+            0.09017504700022982,
+            0.09088768200126651,
+            0.08856786300020758,
+            0.08804084199982753,
+            0.08787144699999772,
+            0.08721691100072348,
+            0.08670847799839976,
+            0.08591254600105458,
+            0.08531456700075069,
+            0.08699866799906886,
+            0.0865955520002899,
+            0.08526113900006749,
+            0.08354925900130183,
+            0.08340082399990933,
+            0.08342442299908726,
+            0.08417973700125003,
+            0.08486410300065472,
+            0.08472946799884085,
+            0.08494394099943747,
+            0.08499484800086066,
+            0.08341997400020773,
+            0.0835446500004764,
+            0.08448887599843147,
+            0.0836187869990681,
+            0.08318341199992574,
+            0.08336161599982006,
+            0.083264988999872,
+            0.08213156899910246,
+            0.08293052000044554,
+            0.08257679300004384,
+            0.08388108699909935,
+            0.0830226269990817,
+            0.0825541729991528,
+            0.08177288200022303,
+            0.08163864600101078,
+            0.08099107900125091,
+            0.08070119900003192,
+            0.08078569600002083,
+            0.08098168899960001,
+            0.08133365699904971,
+            0.0813210070009518
+          ],
+          "steps": 64,
+          "streams": 32,
+          "telemetry": {
+            "available": true,
+            "busy_percent": {
+              "max": 100,
+              "mean": 100.0,
+              "min": 100,
+              "n": 925
+            },
+            "device_sysfs": "/sys/class/drm/card0/device",
+            "gfx_hz": {
+              "max": 2536000000,
+              "mean": 2371669189.189189,
+              "min": 2237000000,
+              "n": 925
+            },
+            "power_uw": {
+              "max": 120063000,
+              "mean": 119365811.8918919,
+              "min": 119046000,
+              "n": 925
+            },
+            "samples_taken": 925,
+            "temperature_mc": {
+              "max": 69000,
+              "mean": 63954.59459459459,
+              "min": 60000,
+              "n": 925
+            }
+          },
+          "tokens_emitted": 2048,
+          "wall_s": 5.34282442499898
+        }
+      ],
+      "mode_order": [
+        {
+          "ffn_image": -1,
+          "ffn_order": -1,
+          "ffn_sched": -1,
+          "gdn_pregate": -1,
+          "gdn_state": 3,
+          "head_rows": "tail",
+          "mode": 19,
+          "seq_quant": 2,
+          "seq_sched": -1
+        }
+      ],
+      "round": 1
+    },
+    {
+      "measurements": [
+        {
+          "case": "prefill",
+          "ffn_image": 0,
+          "ffn_order": 2,
+          "ffn_sched": 2,
+          "gdn_pregate": -1,
+          "gdn_state": "i8",
+          "head_rows": "tail",
+          "host": {
+            "available": true,
+            "cpu_busy_fraction_of_wall": 2.0058134790228475,
+            "cpu_system_s": 0.711144,
+            "cpu_total_s": 1.7866229999999943,
+            "cpu_user_s": 1.0754789999999943,
+            "involuntary_context_switches": 60,
+            "major_faults": 0,
+            "mem_available_kb": {
+              "after": 24390412,
+              "before": 24258764,
+              "delta": 131648
+            },
+            "minor_faults": 0,
+            "psi": {
+              "cpu_full_stall_s": 0.0,
+              "cpu_some_stall_s": 0.005476,
+              "io_full_stall_s": 0.000286,
+              "io_some_stall_s": 0.000295,
+              "memory_full_stall_s": 0.0,
+              "memory_some_stall_s": 0.0
+            },
+            "swap_free_kb": {
+              "after": 29635796,
+              "before": 29635788,
+              "delta": 8
+            },
+            "swap_total_kb": 33554428,
+            "voluntary_context_switches": 156
+          },
+          "last_argmax": 15,
+          "lm_head_cost_included": true,
+          "logits_passes": 1,
+          "logits_policy": "last-pass-only",
+          "mode": 19,
+          "mode_name": "wide-commit-a4",
+          "pass_wall_s": [
+            0.0013741820002906024,
+            0.0016415230002166936,
+            0.887703287999102
+          ],
+          "passes": 3,
+          "round": 2,
+          "rows_per_pass": 256,
+          "seq_quant": "a4",
+          "seq_sched": 1,
+          "tail_logits_fnv64": "4745194790589627375",
+          "tail_logits_rows": 256,
+          "telemetry": {
+            "available": true,
+            "busy_percent": {
+              "max": 100,
+              "mean": 99.8974358974359,
+              "min": 96,
+              "n": 156
+            },
+            "device_sysfs": "/sys/class/drm/card0/device",
+            "gfx_hz": {
+              "max": 2473000000,
+              "mean": 2406012820.5128207,
+              "min": 2360000000,
+              "n": 156
+            },
+            "power_uw": {
+              "max": 120074000,
+              "mean": 119827455.12820514,
+              "min": 118014000,
+              "n": 156
+            },
+            "samples_taken": 156,
+            "temperature_mc": {
+              "max": 69000,
+              "mean": 66897.43589743589,
+              "min": 58000,
+              "n": 156
+            }
+          },
+          "tokens": 768,
+          "tokens_per_s": 862.221493784392,
+          "wall_s": 0.8907224020003923
+        },
+        {
+          "aggregate_tokens_per_s": 33.322738177832164,
+          "case": "decode",
+          "eos_policy": "fixed step count; EOS is emitted and fed back, streams are not stopped",
+          "eos_tokens_emitted": 0,
+          "ffn_image": 0,
+          "ffn_order": 2,
+          "ffn_sched": 2,
+          "gdn_pregate": -1,
+          "gdn_state": "i8",
+          "head_rows": "tail",
+          "host": {
+            "available": true,
+            "cpu_busy_fraction_of_wall": 1.109222837077826,
+            "cpu_system_s": 0.2387599999999992,
+            "cpu_total_s": 2.130384999999997,
+            "cpu_user_s": 1.8916249999999977,
+            "involuntary_context_switches": 176,
+            "major_faults": 0,
+            "mem_available_kb": {
+              "after": 24362440,
+              "before": 24299500,
+              "delta": 62940
+            },
+            "minor_faults": 0,
+            "psi": {
+              "cpu_full_stall_s": 0.0,
+              "cpu_some_stall_s": 0.008796,
+              "io_full_stall_s": 0.001428,
+              "io_some_stall_s": 0.001942,
+              "memory_full_stall_s": 0.0,
+              "memory_some_stall_s": 0.0
+            },
+            "swap_free_kb": {
+              "after": 29635908,
+              "before": 29635812,
+              "delta": 96
+            },
+            "swap_total_kb": 33554428,
+            "voluntary_context_switches": 352
+          },
+          "mode": 19,
+          "mode_name": "wide-commit-a4",
+          "per_stream_tokens_per_s": 33.322738177832164,
+          "prompt_tokens": 35,
+          "round": 2,
+          "seq_quant": "a4",
+          "seq_sched": 1,
+          "setup_s": 0.12721885300015856,
+          "step_wall_s": [
+            0.03144879100000253,
+            0.0314498799998546,
+            0.031001156999991508,
+            0.03076926399990043,
+            0.030365857999640866,
+            0.030754125000385102,
+            0.03003214999989723,
+            0.029722051000135252,
+            0.03040273700025864,
+            0.02985051699943142,
+            0.030476584999632905,
+            0.029853296000510454,
+            0.029472930000338238,
+            0.02956328600157576,
+            0.029346404000534676,
+            0.02948972999911348,
+            0.029409952001515194,
+            0.02930385599938745,
+            0.029200979000961524,
+            0.029534878000049503,
+            0.029506118000426795,
+            0.029349184000238893,
+            0.02958067600047798,
+            0.029719760999796563,
+            0.02964781400078209,
+            0.029490859000361525,
+            0.029681861999051762,
+            0.02937052400011453,
+            0.02954581700032577,
+            0.029668093000509543,
+            0.02957913600039319,
+            0.02944154099895968,
+            0.02986734600017371,
+            0.029580395999801112,
+            0.029392432999884477,
+            0.029344853999646148,
+            0.0296364440000616,
+            0.029617575000884244,
+            0.02951242800008913,
+            0.029834487000698573,
+            0.029627223999341368,
+            0.029871525999624282,
+            0.029807238001012593,
+            0.03016879599999811,
+            0.030504043999826536,
+            0.03040448799947626,
+            0.030489333999867085,
+            0.030521093000061228,
+            0.030397837999771582,
+            0.030289810998510802,
+            0.030604590001530596,
+            0.030297880999569315,
+            0.03060818000085419,
+            0.030769314000281156,
+            0.0307228670008044,
+            0.031012925999675645,
+            0.0303245600007358,
+            0.030524522999257897,
+            0.02983716700146033,
+            0.029991781999342493,
+            0.03039718800027913,
+            0.030453334999037907,
+            0.03005157000006875,
+            0.030034839999643737
+          ],
+          "steps": 64,
+          "streams": 1,
+          "telemetry": {
+            "available": true,
+            "busy_percent": {
+              "max": 99,
+              "mean": 97.83928571428571,
+              "min": 95,
+              "n": 336
+            },
+            "device_sysfs": "/sys/class/drm/card0/device",
+            "gfx_hz": {
+              "max": 2791000000,
+              "mean": 2573589285.714286,
+              "min": 2249000000,
+              "n": 336
+            },
+            "power_uw": {
+              "max": 120094000,
+              "mean": 119306458.33333333,
+              "min": 118085000,
+              "n": 336
+            },
+            "samples_taken": 336,
+            "temperature_mc": {
+              "max": 69000,
+              "mean": 67062.5,
+              "min": 61000,
+              "n": 336
+            }
+          },
+          "tokens_emitted": 64,
+          "wall_s": 1.9206104749991937
+        },
+        {
+          "aggregate_tokens_per_s": 131.06966669986258,
+          "case": "decode",
+          "eos_policy": "fixed step count; EOS is emitted and fed back, streams are not stopped",
+          "eos_tokens_emitted": 0,
+          "ffn_image": 0,
+          "ffn_order": 2,
+          "ffn_sched": 2,
+          "gdn_pregate": -1,
+          "gdn_state": "i8",
+          "head_rows": "tail",
+          "host": {
+            "available": true,
+            "cpu_busy_fraction_of_wall": 1.0936532348023789,
+            "cpu_system_s": 0.40772600000000025,
+            "cpu_total_s": 4.2721589999999985,
+            "cpu_user_s": 3.8644329999999982,
+            "involuntary_context_switches": 70,
+            "major_faults": 0,
+            "mem_available_kb": {
+              "after": 24316760,
+              "before": 24410116,
+              "delta": -93356
+            },
+            "minor_faults": 0,
+            "psi": {
+              "cpu_full_stall_s": 0.0,
+              "cpu_some_stall_s": 0.014286,
+              "io_full_stall_s": 0.001765,
+              "io_some_stall_s": 0.002112,
+              "memory_full_stall_s": 3e-06,
+              "memory_some_stall_s": 4e-06
+            },
+            "swap_free_kb": {
+              "after": 29636084,
+              "before": 29635924,
+              "delta": 160
+            },
+            "swap_total_kb": 33554428,
+            "voluntary_context_switches": 1034
+          },
+          "mode": 19,
+          "mode_name": "wide-commit-a4",
+          "per_stream_tokens_per_s": 16.383708337482823,
+          "prompt_tokens": 238,
+          "round": 2,
+          "seq_quant": "a4",
+          "seq_sched": 1,
+          "setup_s": 0.7505102079994685,
+          "step_wall_s": [
+            0.06018298699927982,
+            0.05935684599899105,
+            0.05935273500108451,
+            0.058874971999102854,
+            0.05879948499932652,
+            0.05934675500066078,
+            0.059099105001223506,
+            0.05919132099916169,
+            0.058971248001398635,
+            0.05878240600031859,
+            0.05908101500062912,
+            0.058908790999339544,
+            0.059002927999245,
+            0.05883887399977539,
+            0.05912128399904759,
+            0.05888278199927299,
+            0.05907492599908437,
+            0.05905339600030857,
+            0.05904278600064572,
+            0.059035407000919804,
+            0.05917826100085222,
+            0.05923455000083777,
+            0.05936095499964722,
+            0.059192011000050115,
+            0.05922461000045587,
+            0.05923393999910331,
+            0.05931223699917609,
+            0.059234489999653306,
+            0.05927217899989046,
+            0.05937975499909953,
+            0.05939416399996844,
+            0.05925022900009935,
+            0.059541079001064645,
+            0.05947810100042261,
+            0.05944390299919178,
+            0.0594292330006283,
+            0.05944176299999526,
+            0.059423112999866134,
+            0.059477820999745745,
+            0.05940294399988488,
+            0.059538478999456856,
+            0.05946556200069608,
+            0.0597834710006282,
+            0.05956899800003157,
+            0.059570089000771986,
+            0.059845488000064506,
+            0.05959286800134578,
+            0.059745243001088966,
+            0.05963180599974294,
+            0.05985534799947345,
+            0.059847529000762734,
+            0.05987186699894664,
+            0.059936576000836794,
+            0.06000333400152158,
+            0.06053996499940695,
+            0.06248015600067447,
+            0.06583560899889562,
+            0.06853704499917512,
+            0.07130257800054096,
+            0.07331323800099199,
+            0.07445115800146596,
+            0.07399147400064976,
+            0.0748340249992907,
+            0.07567775600000459
+          ],
+          "steps": 64,
+          "streams": 8,
+          "telemetry": {
+            "available": true,
+            "busy_percent": {
+              "max": 100,
+              "mean": 99.90271816881258,
+              "min": 99,
+              "n": 699
+            },
+            "device_sysfs": "/sys/class/drm/card0/device",
+            "gfx_hz": {
+              "max": 2893000000,
+              "mean": 2825864091.5593705,
+              "min": 2512000000,
+              "n": 699
+            },
+            "power_uw": {
+              "max": 121088000,
+              "mean": 119671788.26895565,
+              "min": 118086000,
+              "n": 699
+            },
+            "samples_taken": 699,
+            "temperature_mc": {
+              "max": 72000,
+              "mean": 69194.56366237481,
+              "min": 61000,
+              "n": 699
+            }
+          },
+          "tokens_emitted": 512,
+          "wall_s": 3.906319539000833
+        },
+        {
+          "aggregate_tokens_per_s": 373.25189974166227,
+          "case": "decode",
+          "eos_policy": "fixed step count; EOS is emitted and fed back, streams are not stopped",
+          "eos_tokens_emitted": 0,
+          "ffn_image": 0,
+          "ffn_order": 2,
+          "ffn_sched": 2,
+          "gdn_pregate": -1,
+          "gdn_state": "i8",
+          "head_rows": "tail",
+          "host": {
+            "available": true,
+            "cpu_busy_fraction_of_wall": 1.1176444931670735,
+            "cpu_system_s": 0.6893139999999995,
+            "cpu_total_s": 6.132416000000003,
+            "cpu_user_s": 5.443102000000003,
+            "involuntary_context_switches": 91,
+            "major_faults": 0,
+            "mem_available_kb": {
+              "after": 24497356,
+              "before": 23853244,
+              "delta": 644112
+            },
+            "minor_faults": 0,
+            "psi": {
+              "cpu_full_stall_s": 0.0,
+              "cpu_some_stall_s": 0.017667,
+              "io_full_stall_s": 0.001307,
+              "io_some_stall_s": 0.001571,
+              "memory_full_stall_s": 0.0,
+              "memory_some_stall_s": 0.0
+            },
+            "swap_free_kb": {
+              "after": 29636148,
+              "before": 29636120,
+              "delta": 28
+            },
+            "swap_total_kb": 33554428,
+            "voluntary_context_switches": 8354
+          },
+          "mode": 19,
+          "mode_name": "wide-commit-a4",
+          "per_stream_tokens_per_s": 11.664121866926946,
+          "prompt_tokens": 902,
+          "round": 2,
+          "seq_quant": "a4",
+          "seq_sched": 1,
+          "setup_s": 4.133897263000108,
+          "step_wall_s": [
+            0.08743049500117195,
+            0.08976851400075248,
+            0.09091873400029726,
+            0.09216634999938833,
+            0.09218736900038493,
+            0.09224102700136427,
+            0.09147061399926315,
+            0.08981383200080018,
+            0.0877619639995828,
+            0.08750573300130782,
+            0.08662610399915138,
+            0.08622402699984377,
+            0.08617220899941458,
+            0.08445179000045755,
+            0.08320882299994992,
+            0.08482353600084025,
+            0.0866266729990457,
+            0.08713718500075629,
+            0.08758749999833526,
+            0.08656039599918586,
+            0.085005689999889,
+            0.08577839300050982,
+            0.08677629900012107,
+            0.08596878699972876,
+            0.08556240099824208,
+            0.08567660699918633,
+            0.08477574799871945,
+            0.08595640699968499,
+            0.08713252600136911,
+            0.08726632199977757,
+            0.08471735100101796,
+            0.08289223400061019,
+            0.08160640899950522,
+            0.07987280000088504,
+            0.07994733799932874,
+            0.08059691400012525,
+            0.08086978500068653,
+            0.08144303500012029,
+            0.08172839500002738,
+            0.08112381600039953,
+            0.08144831500067085,
+            0.08130519000042113,
+            0.08151996299966413,
+            0.08342033599910792,
+            0.08536129899948719,
+            0.08699693100061268,
+            0.08645095099927858,
+            0.08633281500078738,
+            0.0878496509994875,
+            0.08824727699902724,
+            0.08841538100023172,
+            0.08782114200039359,
+            0.088059533998603,
+            0.08701779100010754,
+            0.08684036700105935,
+            0.08582291200036707,
+            0.08653062700068404,
+            0.0865354079996905,
+            0.08459580599992478,
+            0.08565989799899398,
+            0.0857890530005534,
+            0.08183519200065348,
+            0.08251428699986718,
+            0.0847004619990912
+          ],
+          "steps": 64,
+          "streams": 32,
+          "telemetry": {
+            "available": true,
+            "busy_percent": {
+              "max": 100,
+              "mean": 100.0,
+              "min": 100,
+              "n": 961
+            },
+            "device_sysfs": "/sys/class/drm/card0/device",
+            "gfx_hz": {
+              "max": 2368000000,
+              "mean": 2180208116.545265,
+              "min": 1997000000,
+              "n": 961
+            },
+            "power_uw": {
+              "max": 120068000,
+              "mean": 119527935.48387097,
+              "min": 119033000,
+              "n": 961
+            },
+            "samples_taken": 961,
+            "temperature_mc": {
+              "max": 69000,
+              "mean": 63705.51508844953,
+              "min": 61000,
+              "n": 961
+            }
+          },
+          "tokens_emitted": 2048,
+          "wall_s": 5.486911121999583
+        }
+      ],
+      "mode_order": [
+        {
+          "ffn_image": -1,
+          "ffn_order": -1,
+          "ffn_sched": -1,
+          "gdn_pregate": -1,
+          "gdn_state": 3,
+          "head_rows": "tail",
+          "mode": 19,
+          "seq_quant": 2,
+          "seq_sched": -1
+        }
+      ],
+      "round": 2
+    }
+  ],
+  "rounds_requested": 3,
+  "schema": "bonsai-batch-compare/1",
+  "seed": 1234,
+  "seq_quant": "a8",
+  "seq_quants": [
+    2
+  ],
+  "seq_scheds": [
+    -1
+  ],
+  "sequence_layout": "direct",
+  "sequence_operand": "int8",
+  "sequence_routes": {
+    "19": {
+      "commit_state": true,
+      "wide_projection_min_rows": 32
+    }
+  },
+  "sequence_tile_width": "auto",
+  "slots": 32,
+  "source_sha256": "c82657e3209a8b1619ece9be64210021b208ec27a2c703fe2b9fa4e0b1be3edb  Makefile\n559b6d404286d8c490e37ff15ec37b495dc2a0d99ffdfe922f64419eb6292837  kernels/attn_batch.h\n8b2edcd37b8c4db3e71715139e67f5855fbdd414c64d0460681a24623a8953fa  kernels/attn_batch.hip\nde82b94d5ca9d535e537d301cf8d11015d2939aff47cc2eb63b6abcffbd90fb9  kernels/device.hpp\n4a7b3a975633008c3af57334033e96f04eed0aa5a286f7a292228d9c78048afe  kernels/ffn_a4_operands.hpp\nece4ed436441a12bf49901abbbca1ad775f2de83acd08b92d025ec670a01a80a  kernels/ffn_a4_pack_check.cpp\n373bec0921fe1c8768c8708af1697d2b4de0c713862434196327bf4d4ff764d6  kernels/ffn_batch.h\n83803397e6591eb4360794486ea550652a080259e75871b8b23fa04768945808  kernels/ffn_batch.hip\n7d1128cdf7b9a0d501cca8ea2383dd67c1a1747e0ee3a98b0276eb6e6dd1ef10  kernels/ffn_dense_stream.hpp\n7feec3d6df2ef5ba6e18891f41c6434c868f9c60a2ded6aa4a5b8e80e4ad4cad  kernels/ffn_operands.hpp\n9e4b86aa4ee82e41b0e15483650672d0d11b1eedf4021e937774e638548a660c  kernels/gdn_state_codec.hpp\n832f19850dfe01c294c47f75514fa10496a87025daa76fa4a9eef6fa045355a4  kernels/halo_draft.hip\n2cbac7434dbbdd9658e0c6ea2498c4fac60093d9d807901573ba1d0c79b3cee5  kernels/halo_kernels.h\n98da91eed93e05d1941b65966298a1e382d86e0cd1a2beb1277e4721a4da6d8f  kernels/halo_kernels.hip\n1b9bb152971161ca5ad010786b25795ca31d4035f6380257e3e8f29741657e87  kernels/halo_rows.hip\nb016ab9ab327e2c886857e1e4586868892dd909cd3605fe7b90ad821d9f418d3  kernels/head_batch.h\nb4a55d7713daec40153b24de4dcbd877015a3d14fbb0c7e8bc77794f1dd88c6e  kernels/head_batch.hip\n781b956304427387ee16f9d1bbc4c33cb7a63e96c02546f3c2e1e769e132b5ec  kernels/mv_body_isa.hip\ne26f4090ec18adbd83d80539d147ef34192a06f4f834041a6678b44613897995  kernels/phases.hpp\ndfdec6e0b41b28e7a75587d287b03e6eb8cca13264afc17f5b07a42cf3c85f30  kernels/prep_batch.h\n90e52f0dcbd8d7f877681ff899cd2fb5824674129553bd4cb075d09109ade33c  kernels/prep_batch.hip\ne88f75d6bf9810627068ec88e09aba4083a6e6a807616509abf9ab4a25d80928  kernels/q4_format.h\n39bbc8c2dfca46157ab086a23ae02860b262e41e9fa45b502c1e46258aeac1ca  kernels/q4_pack_check.cpp\n934483b6a59aa25ad82c9d4e305fdf535a51d1d19d89ec11c17f724c8217f0fd  kernels/q4_tiles.hpp\n40e5246546dbcae0dee622bd92acf76812c3157898715a63537eefd68d7ab721  kernels/sequence_batch.h\n7cccedb3a89e99196c99d2bea97e0a65ff9dcfbd85049623b6c00921bdfb90f4  kernels/sequence_batch.hip\n9662a060d0e3c777888942457ed5ae227671b2c408ad31c7c22566a2849e8900  kernels/sequence_operands.hpp\n521de17f62021b6a94b7fffb59401dea9bb1a4edaf82ad720e3be6f51cb46763  kernels/sequence_stream.hpp\n883a83873893a1ebf6f9b42259985847e17f959c27e30040d03120ffa7f668d4  kernels/single_map_check.cpp\nd52f1c381fd460c75f94b08dc898f31bab26265d2c8b38f48e608e43f90b3c5e  kernels/single_map_isa.py\nc49fd0d35bf78199ee443a4efe5d80ea15c66441e65e36435f35820148952f13  src/batch.cpp\n4bf59930a896a6580d94835f1fa9363b5dfa2beddd4975794618402e3ba037e0  src/batch_profile.hpp\n0bbcb13ecedf5b1454cec3eda43c41d99b425e43a5a34a3a76e573cedbf29a8b  src/chat.cpp\ndfad573a35296669564c3f5480863bdb277f5cd0833b4fc313de4d231730864b  src/chat.h\nd4e1bed42d825f6a26fe6c28048e87c7bc5f71dd9210b7153d491253ff38b09e  src/device_budget.h\n4ce9fac89f9cd13bbd221cd9d6d5f437f9cc5f1711861fdff31b5490f3191d8e  src/engine.cpp\nf3221f36ae236d745a92aaad42ac196e1093de8a07a4e7606d3b91faf89f7e15  src/engine.h\nb85bf20630537ed101d1f8747b2d3d6f751c99969aef4da15884f9276a799083  src/gguf.cpp\ncdb0408eb23ce62432b9d1aff84aa76d7dace63620d4cb787b8a91841a4ef3cf  src/gguf.h\nae6053ad4ce0ea23eb26774aaf61d21cf12e4e495438d761bbfed4590d52e109  src/halo_format.h\n5394255d3f3ea3cedb6e57ed9e045fc5b6de73a7a0b1230e8adaebdd79859cce  src/main.cpp\n58cf1f075665afed8ebdcabfb9819cff634f4c24e1324c2deb39f5a174d0217d  src/q8.cpp\n176a10154b6df10f563f52d5cd9b3ce2b3f3ee73fb4bc8c861261ced4aa5f63b  src/q8.h\n89cc8a3050d67bb4e0a637834e67b493fd0301ff15165e75c011ee9e26632116  src/repack.cpp\nf06de63deeeb1d2c9a0672f9bb9a018e460b614a9084a0e3274965b6ced15a1e  src/repack.h\nfd67f1bf6fceadfc01fca5828423ae180bd6b0008cab2084d791013a3abd161e  src/server.cpp\n4a2923a04b5ba7627d08c3f68cd65929a0c1ca7da5e4d2ca0167c3a5a89f51ca  src/tokenizer.cpp\nebc66d22bbd34e12f4f483ec57c89e7c7cb2f9387fff324685dd07dffdf6642d  src/tokenizer.h\n9e07ac590a37ef92507c3ee805c417481c964f4eef08634436614efa24600fd6  tools/batch_compare.cpp\n93487c875f69fed84f44908ed1c6e69ec086ae3809849e8a3cfe0cba2a410a01  tools/batch_compare.py\n24b698e9042cb38c59a0578ee8cce899c9b917c66544d9d7c38744e3c3670e3e  tools/halo_env.hpp\n33d880520726fbe02524f621d741fbcf874bccbfd168bb9ce747aac2000746f7  tools/run-batch-compare\n1c9f4891ade2e2d671723aa2b60c25c6ec4255b2f925a665ca05257e7a46531a  vendor/README.md\n4b45cbe16d7b71b89ae6127e26e0d90a029198ca5e958ad8e3d0b8bbed364d8b  vendor/cpp-httplib/LICENSE\n8b1de0a587d68006d1c3cb3e056e0b80363b93f12d0ad3a26a9c83a236515f40  vendor/cpp-httplib/httplib.cpp\nb36e352ed5c39eabd26540f2089c83aafbcb29c5f36feb48a63575c63451ed7d  vendor/cpp-httplib/httplib.h\naaf127c04cb31c406e5b04a63f1ae89369fccde6d8fa7cdda1ed4f32dfc5de63  vendor/nlohmann/json.hpp\n",
+  "source_sha256_rollup": "c1dab30704904a5b6bb767ca302875435a402234b3e8f585c008b748544a655e  -\n",
+  "started": "2026-09-21T15:55:36",
+  "tag": "full-tps-20260921-2255/batch",
+  "telemetry_available": true,
+  "warmup_min_s_per_mode": 2.0,
+  "warmup_s": 2.0293285259995173,
+  "warmup_skipped": false,
+  "wide_head": true,
+  "wide_head_tile_width": "auto"
+}

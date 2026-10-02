@@ -1,0 +1,64 @@
+Console capture of the first run of the arm list, transcribed from the panel's stdout
+(this run was not tee'd to a file; grid-arms-aba.txt is the captured one). Canonical f7b680d,
+HALO_PROFILE=1 tools/run-batch-compare --pin-clock --engine --bench --context 4096
+  --dflash .../dflash2.safetensors --draft-weights q4 --grid-rows 100,60 -n 64
+
+model ready: 7.61 GB on device, 0.8 s
+wide prompt ingestion: mode 20 (default), 256 rows per pass, +2.25 GB on device
+prompt: 23 tokens
+dflash2 drafter loaded, weights q4 (11.04 GB on device total)
+
+dflash2: weights q4 pk-occ -1 grid 100 dgrid 0 route 20 round 0 case 0, prompt 23 tokens in 0.111 s:
+207.8 tok/s; 60 tokens in 1.16 s: 51.66 tok/s; 22 steps, 154 drafted, 39 accepted (25.3%),
+2.77 tokens/step; per step: draft 7.179 ms, verify 45.609 ms; digest 16657175983209876683
+phase breakdown (us): total 45807
+  mv_gate_up      15718 us   34.3%  x64  avg 245.6 us
+  mv_down          9569 us   20.9%  x64  avg 149.5 us
+  mv_qkv_z         6116 us   13.4%  x48  avg 127.4 us
+  gdn              2978 us    6.5%  x48  avg 62.1 us
+  mv_ssm_out       2939 us    6.4%  x48  avg 61.2 us
+  mv_qkv           1874 us    4.1%  x16  avg 117.1 us
+  mv_lm_head       1480 us    3.2%  x1   avg 1479.6 us
+  prep_norm        1475 us    3.2%  x129 avg 11.4 us
+  mv_o              993 us    2.2%  x16  avg 62.0 us
+  attn              940 us    2.1%  x16  avg 58.8 us
+  gdn_pre           631 us    1.4%  x48  avg 13.1 us
+  prep_silu         543 us    1.2%  x64  avg 8.5 us
+  prep_gdn          252 us    0.6%  x48  avg 5.3 us
+  attn_pre          115 us    0.3%  x16  avg 7.2 us
+  prep_attn         105 us    0.2%  x16  avg 6.5 us
+  argmax             68 us    0.1%  x1   avg 68.2 us
+  embed               7 us    0.0%  x1   avg 7.0 us
+  prep_embed          3 us    0.0%  x1   avg 3.1 us
+
+dflash2: weights q4 pk-occ -1 grid 60 dgrid 0 route 20 round 0 case 0, prompt 23 tokens in 0.103 s:
+223.5 tok/s; 60 tokens in 1.35 s: 44.33 tok/s; 21 steps, 147 drafted, 40 accepted (27.2%),
+2.90 tokens/step; per step: draft 7.028 ms, verify 57.420 ms; digest 16657175983209876683
+phase breakdown (us): total 57511
+  mv_gate_up      21477 us   37.3%  x64  avg 335.6 us
+  mv_down         11639 us   20.2%  x64  avg 181.9 us
+  mv_qkv_z         7721 us   13.4%  x48  avg 160.9 us
+  gdn              3811 us    6.6%  x48  avg 79.4 us
+  mv_ssm_out       2977 us    5.2%  x48  avg 62.0 us
+  mv_qkv           2278 us    4.0%  x16  avg 142.4 us
+  mv_lm_head       2146 us    3.7%  x1   avg 2145.6 us
+  prep_norm        1811 us    3.1%  x129 avg 14.0 us
+  mv_o              996 us    1.7%  x16  avg 62.3 us
+  attn              888 us    1.5%  x16  avg 55.5 us
+  prep_silu         606 us    1.1%  x64  avg 9.5 us
+  gdn_pre           597 us    1.0%  x48  avg 12.4 us
+  prep_gdn          233 us    0.4%  x48  avg 4.9 us
+  attn_pre          128 us    0.2%  x16  avg 8.0 us
+  prep_attn         105 us    0.2%  x16  avg 6.5 us
+  argmax             89 us    0.2%  x1   avg 89.2 us
+  embed               6 us    0.0%  x1   avg 6.1 us
+  prep_embed          3 us    0.0%  x1   avg 2.6 us
+
+gpu_clock: clock 2296 MHz p50 (79% of 2900) | socket 130 W | gfx 34 W / cpu 57 W |
+host 9.6 cores busy | package-power limited 60% of the window |
+host cores at their own limit 80% of the window |
+NOT QUIET: another 8.6 cores of host work ran during this panel
+
+Derived, for the record: mv_lm_head 187.9 GB/s against mv_gate_up 158.9 GB/s on this loaded panel,
++18.3%, against 208.2 / 174.0 and +19.7% on the quiet one. The clock moves both numbers together;
+the contrast does not move.

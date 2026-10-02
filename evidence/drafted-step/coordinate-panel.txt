@@ -1,0 +1,82 @@
+Unit bonsai-halo.service does not exist, proceeding anyway.
+Created symlink '/run/user/USER/systemd/user/bonsai-halo.service' → '/dev/null'.
+model ready: 7.53 GB on device, 0.8 s
+prompt: 23 tokens
+dflash2 drafter loaded, weights q8+q4 (10.54 GB on device total)
+prefill+first draft: 0.19 s
+dflash2: weights q8 pk-occ -1 grid -1 dgrid 0 route 0 round 0 case 0, prompt 23 tokens in 0.186 s: 123.7 tok/s; 60 tokens in 1.31 s: 45.83 tok/s; 19 steps, 133 drafted, 42 accepted (31.6%), 3.21 tokens/step; per step: draft 10.990 ms, verify 57.910 ms; digest 16657175983209876683
+drafter phase breakdown over 19 steps: 11.495 ms per step inside k_dflash
+  mv-gate-up            4.111 ms/step   35.8%  x5 per step  avg 822.2 us
+  mv-down               2.105 ms/step   18.3%  x5 per step  avg 421.0 us
+  mv-lm-head            1.974 ms/step   17.2%  x1 per step  avg 1974.2 us
+  mv-qkv                0.760 ms/step    6.6%  x5 per step  avg 151.9 us
+  ingest-mv-fc          0.604 ms/step    5.3%  x1 per step  avg 604.2 us
+  mv-o                  0.597 ms/step    5.2%  x5 per step  avg 119.3 us
+  ingest-mv-kv          0.254 ms/step    2.2%  x5 per step  avg 50.9 us
+  mv-akp                0.248 ms/step    2.2%  x5 per step  avg 49.6 us
+  mv-mkp                0.246 ms/step    2.1%  x5 per step  avg 49.2 us
+  attn                  0.148 ms/step    1.3%  x5 per step  avg 29.7 us
+  topk-slice-max        0.087 ms/step    0.8%  x1 per step  avg 86.7 us
+  attn-pre              0.048 ms/step    0.4%  x5 per step  avg 9.6 us
+  prep-silu             0.044 ms/step    0.4%  x5 per step  avg 8.8 us
+  topk-collect          0.043 ms/step    0.4%  x1 per step  avg 43.4 us
+  prep-attn-combine     0.025 ms/step    0.2%  x5 per step  avg 4.9 us
+  prep-in-norm          0.024 ms/step    0.2%  x5 per step  avg 4.7 us
+  prep-post-norm        0.017 ms/step    0.1%  x5 per step  avg 3.4 us
+  dconv-m-out           0.016 ms/step    0.1%  x5 per step  avg 3.2 us
+  dconv-a-out           0.014 ms/step    0.1%  x5 per step  avg 2.9 us
+  topk-select           0.014 ms/step    0.1%  x1 per step  avg 13.9 us
+  selector              0.013 ms/step    0.1%  x1 per step  avg 12.8 us
+  ingest-attn-pre       0.013 ms/step    0.1%  x5 per step  avg 2.5 us
+  topk-threshold        0.012 ms/step    0.1%  x1 per step  avg 11.6 us
+  mv-hproj              0.012 ms/step    0.1%  x1 per step  avg 11.6 us
+  dconv-m               0.011 ms/step    0.1%  x5 per step  avg 2.2 us
+  dconv-a               0.011 ms/step    0.1%  x5 per step  avg 2.1 us
+  prep-conv-a           0.010 ms/step    0.1%  x5 per step  avg 1.9 us
+  prep-conv-m           0.009 ms/step    0.1%  x5 per step  avg 1.9 us
+  embed                 0.006 ms/step    0.1%  x1 per step  avg 5.9 us
+  ingest-prep           0.005 ms/step    0.0%  x1 per step  avg 4.9 us
+  final-norm-s          0.004 ms/step    0.0%  x1 per step  avg 3.8 us
+  final-norm            0.003 ms/step    0.0%  x1 per step  avg 3.4 us
+  ingest-norm           0.003 ms/step    0.0%  x1 per step  avg 3.2 us
+  prep-embed            0.003 ms/step    0.0%  x1 per step  avg 3.0 us
+  keep-embed            0.002 ms/step    0.0%  x1 per step  avg 2.1 us
+prefill+first draft: 0.17 s
+dflash2: weights q4 pk-occ -1 grid -1 dgrid 0 route 0 round 0 case 0, prompt 23 tokens in 0.172 s: 133.4 tok/s; 60 tokens in 1.33 s: 45.08 tok/s; 21 steps, 147 drafted, 40 accepted (27.2%), 2.90 tokens/step; per step: draft 7.224 ms, verify 56.148 ms; digest 16657175983209876683
+drafter phase breakdown over 21 steps: 7.489 ms per step inside k_dflash
+  mv-gate-up            2.131 ms/step   28.5%  x5 per step  avg 426.2 us
+  mv-lm-head            2.072 ms/step   27.7%  x1 per step  avg 2072.1 us
+  mv-down               1.148 ms/step   15.3%  x5 per step  avg 229.6 us
+  mv-qkv                0.441 ms/step    5.9%  x5 per step  avg 88.1 us
+  mv-o                  0.380 ms/step    5.1%  x5 per step  avg 76.0 us
+  ingest-mv-fc          0.322 ms/step    4.3%  x1 per step  avg 322.5 us
+  mv-akp                0.162 ms/step    2.2%  x5 per step  avg 32.4 us
+  mv-mkp                0.161 ms/step    2.1%  x5 per step  avg 32.2 us
+  ingest-mv-kv          0.151 ms/step    2.0%  x5 per step  avg 30.2 us
+  attn                  0.145 ms/step    1.9%  x5 per step  avg 29.0 us
+  topk-slice-max        0.063 ms/step    0.8%  x1 per step  avg 62.5 us
+  prep-silu             0.038 ms/step    0.5%  x5 per step  avg 7.7 us
+  attn-pre              0.035 ms/step    0.5%  x5 per step  avg 7.1 us
+  topk-collect          0.030 ms/step    0.4%  x1 per step  avg 29.6 us
+  prep-attn-combine     0.024 ms/step    0.3%  x5 per step  avg 4.8 us
+  prep-in-norm          0.022 ms/step    0.3%  x5 per step  avg 4.4 us
+  prep-post-norm        0.016 ms/step    0.2%  x5 per step  avg 3.2 us
+  dconv-m-out           0.016 ms/step    0.2%  x5 per step  avg 3.1 us
+  topk-select           0.014 ms/step    0.2%  x1 per step  avg 13.6 us
+  selector              0.013 ms/step    0.2%  x1 per step  avg 12.7 us
+  ingest-attn-pre       0.011 ms/step    0.2%  x5 per step  avg 2.3 us
+  topk-threshold        0.011 ms/step    0.2%  x1 per step  avg 11.4 us
+  dconv-m               0.011 ms/step    0.1%  x5 per step  avg 2.2 us
+  dconv-a               0.010 ms/step    0.1%  x5 per step  avg 2.1 us
+  dconv-a-out           0.010 ms/step    0.1%  x5 per step  avg 2.1 us
+  mv-hproj              0.009 ms/step    0.1%  x1 per step  avg 9.4 us
+  prep-conv-a           0.009 ms/step    0.1%  x5 per step  avg 1.8 us
+  prep-conv-m           0.009 ms/step    0.1%  x5 per step  avg 1.8 us
+  embed                 0.005 ms/step    0.1%  x1 per step  avg 5.4 us
+  ingest-prep           0.004 ms/step    0.1%  x1 per step  avg 4.1 us
+  final-norm-s          0.004 ms/step    0.0%  x1 per step  avg 3.6 us
+  final-norm            0.003 ms/step    0.0%  x1 per step  avg 3.2 us
+  prep-embed            0.003 ms/step    0.0%  x1 per step  avg 2.9 us
+  ingest-norm           0.003 ms/step    0.0%  x1 per step  avg 2.9 us
+  keep-embed            0.002 ms/step    0.0%  x1 per step  avg 1.9 us
+Removed '/run/user/USER/systemd/user/bonsai-halo.service'.

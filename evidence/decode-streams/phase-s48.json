@@ -1,0 +1,3143 @@
+{
+  "attn_coords": [
+    -1
+  ],
+  "attn_narrows": [
+    -1
+  ],
+  "binary_sha256": "0d59a6ae0dfe48d59be1060568684c8d9a4ee1f22ab409e43d7a440a1231a8be  tools/batch_profile",
+  "context": 128,
+  "decode_context": 512,
+  "decode_prompt_cases": [
+    64
+  ],
+  "decode_streams": 48,
+  "decode_token_cases": [
+    1
+  ],
+  "device_bytes": 29911249992,
+  "ffn_a4_dense": 1,
+  "ffn_a4_image": 0,
+  "ffn_a4_order": 2,
+  "ffn_a4_sched": 2,
+  "ffn_denses": [
+    -1
+  ],
+  "ffn_dn_mats_cases": [
+    -1
+  ],
+  "ffn_images": [
+    -1
+  ],
+  "ffn_orders": [
+    -1
+  ],
+  "ffn_runs": [
+    -1
+  ],
+  "ffn_scheds": [
+    -1
+  ],
+  "ffn_slice_cases": [
+    -1
+  ],
+  "ffn_slice_rows": 32,
+  "gdn_defer": 1,
+  "gdn_defer_effective": 1,
+  "gdn_defers": [
+    4
+  ],
+  "gdn_pregate": -1,
+  "gdn_pregates": [
+    -1
+  ],
+  "gdn_resident": true,
+  "gdn_state": "f32",
+  "gdn_state_split": "4",
+  "gdn_states": [
+    3
+  ],
+  "git_revision": "b4e53659c1e046c6a0d193289a0ba79cccb1643a",
+  "halo_env": {},
+  "head_rows": [
+    1
+  ],
+  "kernel_clock_hz": 100000000,
+  "model": "../../data/bonsai2/PTQ1_0.gguf",
+  "modes": [
+    19
+  ],
+  "notes": "Paired tracing on/off; setup excluded. Events bracket stream launches, barrier stamps include waits. Wall time includes trace collection when enabled; device span excludes its readback. Residual hashing is outside timing.",
+  "rounds": 1,
+  "rows": [
+    32,
+    128
+  ],
+  "samples": [
+    {
+      "attn_coord": 0,
+      "attn_hg": 6,
+      "attn_narrow": 1,
+      "attn_sched": 1,
+      "decode_context": 512,
+      "decode_prime": 0,
+      "decode_prompt": 64,
+      "decode_tokens": 1,
+      "device_span_ms": 98.96771240234375,
+      "ffn_a4_dense": 1,
+      "ffn_a4_image": 0,
+      "ffn_a4_sched": 2,
+      "ffn_dn_mats": 0,
+      "ffn_run": 3,
+      "gdn_defer": 4,
+      "gdn_pregate": -1,
+      "gdn_state": "i8",
+      "logits": true,
+      "mode": 19,
+      "profile": true,
+      "residual_fnv64": "7853189369734440973",
+      "round": 0,
+      "rows": 48,
+      "seq_image": 1,
+      "seq_quant": "a4",
+      "seq_sched": 1,
+      "shape": "decode",
+      "streams": 48,
+      "trace": [
+        {
+          "end_ms": 0.07089799642562866,
+          "kind": "embed",
+          "layer": -1,
+          "offset": 0,
+          "phase_us": [
+            6.92,
+            2.76
+          ],
+          "rows": 8,
+          "start_ms": 0.016429999843239784
+        },
+        {
+          "end_ms": 0.0923369973897934,
+          "kind": "embed",
+          "layer": -1,
+          "offset": 8,
+          "phase_us": [
+            5.4,
+            2.28
+          ],
+          "rows": 8,
+          "start_ms": 0.07553800195455551
+        },
+        {
+          "end_ms": 0.11189600080251694,
+          "kind": "embed",
+          "layer": -1,
+          "offset": 16,
+          "phase_us": [
+            5.52,
+            2.36
+          ],
+          "rows": 8,
+          "start_ms": 0.09533700346946716
+        },
+        {
+          "end_ms": 0.13153600692749023,
+          "kind": "embed",
+          "layer": -1,
+          "offset": 24,
+          "phase_us": [
+            5.76,
+            2.28
+          ],
+          "rows": 8,
+          "start_ms": 0.114656001329422
+        },
+        {
+          "end_ms": 0.15197500586509705,
+          "kind": "embed",
+          "layer": -1,
+          "offset": 32,
+          "phase_us": [
+            5.6,
+            2.56
+          ],
+          "rows": 8,
+          "start_ms": 0.1345359981060028
+        },
+        {
+          "end_ms": 0.17197400331497192,
+          "kind": "embed",
+          "layer": -1,
+          "offset": 40,
+          "phase_us": [
+            5.6,
+            2.36
+          ],
+          "rows": 8,
+          "start_ms": 0.15481500327587128
+        },
+        {
+          "end_ms": 0.20821300148963928,
+          "kind": "sequence-input-prep",
+          "layer": 0,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 0.17481400072574615
+        },
+        {
+          "end_ms": 0.4066460132598877,
+          "kind": "sequence-input-projection",
+          "layer": 0,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 0.2110529989004135
+        },
+        {
+          "end_ms": 0.8670300245285034,
+          "kind": "gdn-resident-core",
+          "layer": 0,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 0.40936601161956787
+        },
+        {
+          "end_ms": 1.0112260580062866,
+          "kind": "sequence-output-projection",
+          "layer": 0,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 0.8699100017547607
+        },
+        {
+          "end_ms": 1.7421599626541138,
+          "kind": "ffn",
+          "layer": 0,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 1.0140650272369385
+        },
+        {
+          "end_ms": 1.777438998222351,
+          "kind": "sequence-input-prep",
+          "layer": 1,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 1.7449599504470825
+        },
+        {
+          "end_ms": 1.9723529815673828,
+          "kind": "sequence-input-projection",
+          "layer": 1,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 1.780439019203186
+        },
+        {
+          "end_ms": 2.429697036743164,
+          "kind": "gdn-resident-core",
+          "layer": 1,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 1.9752730131149292
+        },
+        {
+          "end_ms": 2.5705320835113525,
+          "kind": "sequence-output-projection",
+          "layer": 1,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 2.432537078857422
+        },
+        {
+          "end_ms": 3.3099470138549805,
+          "kind": "ffn",
+          "layer": 1,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 2.5734119415283203
+        },
+        {
+          "end_ms": 3.3458259105682373,
+          "kind": "sequence-input-prep",
+          "layer": 2,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 3.312666893005371
+        },
+        {
+          "end_ms": 3.54141902923584,
+          "kind": "sequence-input-projection",
+          "layer": 2,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 3.3487861156463623
+        },
+        {
+          "end_ms": 3.9907240867614746,
+          "kind": "gdn-resident-core",
+          "layer": 2,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 3.5440990924835205
+        },
+        {
+          "end_ms": 4.130918979644775,
+          "kind": "sequence-output-projection",
+          "layer": 2,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 3.993443012237549
+        },
+        {
+          "end_ms": 4.850813865661621,
+          "kind": "ffn",
+          "layer": 2,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 4.133598804473877
+        },
+        {
+          "end_ms": 4.867693901062012,
+          "kind": "sequence-input-prep",
+          "layer": 3,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 4.853494167327881
+        },
+        {
+          "end_ms": 5.047767162322998,
+          "kind": "sequence-input-projection",
+          "layer": 3,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 4.870333194732666
+        },
+        {
+          "end_ms": 5.187963008880615,
+          "kind": "sequence-core",
+          "layer": 3,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 5.050487041473389
+        },
+        {
+          "end_ms": 5.324838161468506,
+          "kind": "sequence-output-projection",
+          "layer": 3,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 5.190563201904297
+        },
+        {
+          "end_ms": 6.041372776031494,
+          "kind": "ffn",
+          "layer": 3,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 5.3275580406188965
+        },
+        {
+          "end_ms": 6.076211929321289,
+          "kind": "sequence-input-prep",
+          "layer": 4,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 6.043972969055176
+        },
+        {
+          "end_ms": 6.2712860107421875,
+          "kind": "sequence-input-projection",
+          "layer": 4,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 6.078892230987549
+        },
+        {
+          "end_ms": 6.733550071716309,
+          "kind": "gdn-resident-core",
+          "layer": 4,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 6.274044990539551
+        },
+        {
+          "end_ms": 6.874424934387207,
+          "kind": "sequence-output-projection",
+          "layer": 4,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 6.73622989654541
+        },
+        {
+          "end_ms": 7.616799831390381,
+          "kind": "ffn",
+          "layer": 4,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 6.877065181732178
+        },
+        {
+          "end_ms": 7.652838230133057,
+          "kind": "sequence-input-prep",
+          "layer": 5,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 7.619479179382324
+        },
+        {
+          "end_ms": 7.845952033996582,
+          "kind": "sequence-input-projection",
+          "layer": 5,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 7.655518054962158
+        },
+        {
+          "end_ms": 8.293815612792969,
+          "kind": "gdn-resident-core",
+          "layer": 5,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 7.848631858825684
+        },
+        {
+          "end_ms": 8.433611869812012,
+          "kind": "sequence-output-projection",
+          "layer": 5,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 8.296655654907227
+        },
+        {
+          "end_ms": 9.165706634521484,
+          "kind": "ffn",
+          "layer": 5,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 8.436450958251953
+        },
+        {
+          "end_ms": 9.200824737548828,
+          "kind": "sequence-input-prep",
+          "layer": 6,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 9.168306350708008
+        },
+        {
+          "end_ms": 9.395298957824707,
+          "kind": "sequence-input-projection",
+          "layer": 6,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 9.203465461730957
+        },
+        {
+          "end_ms": 9.851042747497559,
+          "kind": "gdn-resident-core",
+          "layer": 6,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 9.398058891296387
+        },
+        {
+          "end_ms": 9.992438316345215,
+          "kind": "sequence-output-projection",
+          "layer": 6,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 9.853643417358398
+        },
+        {
+          "end_ms": 10.7211332321167,
+          "kind": "ffn",
+          "layer": 6,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 9.995238304138184
+        },
+        {
+          "end_ms": 10.737893104553223,
+          "kind": "sequence-input-prep",
+          "layer": 7,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 10.723732948303223
+        },
+        {
+          "end_ms": 10.916406631469727,
+          "kind": "sequence-input-projection",
+          "layer": 7,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 10.740532875061035
+        },
+        {
+          "end_ms": 11.052641868591309,
+          "kind": "sequence-core",
+          "layer": 7,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 10.919007301330566
+        },
+        {
+          "end_ms": 11.189436912536621,
+          "kind": "sequence-output-projection",
+          "layer": 7,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 11.055481910705566
+        },
+        {
+          "end_ms": 11.895732879638672,
+          "kind": "ffn",
+          "layer": 7,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 11.192116737365723
+        },
+        {
+          "end_ms": 11.930771827697754,
+          "kind": "sequence-input-prep",
+          "layer": 8,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 11.898372650146484
+        },
+        {
+          "end_ms": 12.124284744262695,
+          "kind": "sequence-input-projection",
+          "layer": 8,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 11.933451652526855
+        },
+        {
+          "end_ms": 12.569029808044434,
+          "kind": "gdn-resident-core",
+          "layer": 8,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 12.127084732055664
+        },
+        {
+          "end_ms": 12.709025382995605,
+          "kind": "sequence-output-projection",
+          "layer": 8,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 12.571789741516113
+        },
+        {
+          "end_ms": 13.449399948120117,
+          "kind": "ffn",
+          "layer": 8,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 12.711785316467285
+        },
+        {
+          "end_ms": 13.484918594360352,
+          "kind": "sequence-input-prep",
+          "layer": 9,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 13.45203971862793
+        },
+        {
+          "end_ms": 13.67799186706543,
+          "kind": "sequence-input-projection",
+          "layer": 9,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 13.487678527832031
+        },
+        {
+          "end_ms": 14.141336441040039,
+          "kind": "gdn-resident-core",
+          "layer": 9,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 13.680671691894531
+        },
+        {
+          "end_ms": 14.282811164855957,
+          "kind": "sequence-output-projection",
+          "layer": 9,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 14.14401626586914
+        },
+        {
+          "end_ms": 15.018865585327148,
+          "kind": "ffn",
+          "layer": 9,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 14.285531044006348
+        },
+        {
+          "end_ms": 15.054985046386719,
+          "kind": "sequence-input-prep",
+          "layer": 10,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 15.021546363830566
+        },
+        {
+          "end_ms": 15.248457908630371,
+          "kind": "sequence-input-projection",
+          "layer": 10,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 15.057985305786133
+        },
+        {
+          "end_ms": 15.695682525634766,
+          "kind": "gdn-resident-core",
+          "layer": 10,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 15.251137733459473
+        },
+        {
+          "end_ms": 15.836518287658691,
+          "kind": "sequence-output-projection",
+          "layer": 10,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 15.69848346710205
+        },
+        {
+          "end_ms": 16.54845428466797,
+          "kind": "ffn",
+          "layer": 10,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 15.839238166809082
+        },
+        {
+          "end_ms": 16.565412521362305,
+          "kind": "sequence-input-prep",
+          "layer": 11,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 16.55121421813965
+        },
+        {
+          "end_ms": 16.745046615600586,
+          "kind": "sequence-input-projection",
+          "layer": 11,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 16.568132400512695
+        },
+        {
+          "end_ms": 16.88568115234375,
+          "kind": "sequence-core",
+          "layer": 11,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 16.7476863861084
+        },
+        {
+          "end_ms": 17.022357940673828,
+          "kind": "sequence-output-projection",
+          "layer": 11,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 16.888521194458008
+        },
+        {
+          "end_ms": 17.742252349853516,
+          "kind": "ffn",
+          "layer": 11,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 17.02503776550293
+        },
+        {
+          "end_ms": 17.778532028198242,
+          "kind": "sequence-input-prep",
+          "layer": 12,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 17.74485206604004
+        },
+        {
+          "end_ms": 17.97304344177246,
+          "kind": "sequence-input-projection",
+          "layer": 12,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 17.781251907348633
+        },
+        {
+          "end_ms": 18.428630828857422,
+          "kind": "gdn-resident-core",
+          "layer": 12,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 17.97584342956543
+        },
+        {
+          "end_ms": 18.57022476196289,
+          "kind": "sequence-output-projection",
+          "layer": 12,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 18.431428909301758
+        },
+        {
+          "end_ms": 19.30392074584961,
+          "kind": "ffn",
+          "layer": 12,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 18.572864532470703
+        },
+        {
+          "end_ms": 19.338838577270508,
+          "kind": "sequence-input-prep",
+          "layer": 13,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 19.306640625
+        },
+        {
+          "end_ms": 19.53211212158203,
+          "kind": "sequence-input-projection",
+          "layer": 13,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 19.341678619384766
+        },
+        {
+          "end_ms": 19.978376388549805,
+          "kind": "gdn-resident-core",
+          "layer": 13,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 19.535072326660156
+        },
+        {
+          "end_ms": 20.1182918548584,
+          "kind": "sequence-output-projection",
+          "layer": 13,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 19.981056213378906
+        },
+        {
+          "end_ms": 20.855388641357422,
+          "kind": "ffn",
+          "layer": 13,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 20.121532440185547
+        },
+        {
+          "end_ms": 20.890623092651367,
+          "kind": "sequence-input-prep",
+          "layer": 14,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 20.858226776123047
+        },
+        {
+          "end_ms": 21.084299087524414,
+          "kind": "sequence-input-projection",
+          "layer": 14,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 20.8933048248291
+        },
+        {
+          "end_ms": 21.54392433166504,
+          "kind": "gdn-resident-core",
+          "layer": 14,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 21.087299346923828
+        },
+        {
+          "end_ms": 21.682878494262695,
+          "kind": "sequence-output-projection",
+          "layer": 14,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 21.546764373779297
+        },
+        {
+          "end_ms": 22.410852432250977,
+          "kind": "ffn",
+          "layer": 14,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 21.685718536376953
+        },
+        {
+          "end_ms": 22.427692413330078,
+          "kind": "sequence-input-prep",
+          "layer": 15,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 22.413612365722656
+        },
+        {
+          "end_ms": 22.599687576293945,
+          "kind": "sequence-input-projection",
+          "layer": 15,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 22.43041229248047
+        },
+        {
+          "end_ms": 22.736202239990234,
+          "kind": "sequence-core",
+          "layer": 15,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 22.602447509765625
+        },
+        {
+          "end_ms": 22.872438430786133,
+          "kind": "sequence-output-projection",
+          "layer": 15,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 22.739042282104492
+        },
+        {
+          "end_ms": 23.581892013549805,
+          "kind": "ffn",
+          "layer": 15,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 22.875076293945312
+        },
+        {
+          "end_ms": 23.616172790527344,
+          "kind": "sequence-input-prep",
+          "layer": 16,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 23.584491729736328
+        },
+        {
+          "end_ms": 23.80988311767578,
+          "kind": "sequence-input-projection",
+          "layer": 16,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 23.618892669677734
+        },
+        {
+          "end_ms": 24.25535011291504,
+          "kind": "gdn-resident-core",
+          "layer": 16,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 23.812564849853516
+        },
+        {
+          "end_ms": 24.396024703979492,
+          "kind": "sequence-output-projection",
+          "layer": 16,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 24.25802993774414
+        },
+        {
+          "end_ms": 25.12183952331543,
+          "kind": "ffn",
+          "layer": 16,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 24.39882469177246
+        },
+        {
+          "end_ms": 25.157840728759766,
+          "kind": "sequence-input-prep",
+          "layer": 17,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 25.124479293823242
+        },
+        {
+          "end_ms": 25.35055160522461,
+          "kind": "sequence-input-projection",
+          "layer": 17,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 25.160480499267578
+        },
+        {
+          "end_ms": 25.81105613708496,
+          "kind": "gdn-resident-core",
+          "layer": 17,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 25.35323143005371
+        },
+        {
+          "end_ms": 25.952211380004883,
+          "kind": "sequence-output-projection",
+          "layer": 17,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 25.813695907592773
+        },
+        {
+          "end_ms": 26.702707290649414,
+          "kind": "ffn",
+          "layer": 17,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 25.954931259155273
+        },
+        {
+          "end_ms": 26.73766326904297,
+          "kind": "sequence-input-prep",
+          "layer": 18,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 26.705345153808594
+        },
+        {
+          "end_ms": 26.929420471191406,
+          "kind": "sequence-input-projection",
+          "layer": 18,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 26.74042320251465
+        },
+        {
+          "end_ms": 27.380203247070312,
+          "kind": "gdn-resident-core",
+          "layer": 18,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 26.932140350341797
+        },
+        {
+          "end_ms": 27.520999908447266,
+          "kind": "sequence-output-projection",
+          "layer": 18,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 27.382883071899414
+        },
+        {
+          "end_ms": 28.251813888549805,
+          "kind": "ffn",
+          "layer": 18,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 27.523757934570312
+        },
+        {
+          "end_ms": 28.26837158203125,
+          "kind": "sequence-input-prep",
+          "layer": 19,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 28.25457191467285
+        },
+        {
+          "end_ms": 28.4556884765625,
+          "kind": "sequence-input-projection",
+          "layer": 19,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 28.27109146118164
+        },
+        {
+          "end_ms": 28.604040145874023,
+          "kind": "sequence-core",
+          "layer": 19,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 28.45832633972168
+        },
+        {
+          "end_ms": 28.740995407104492,
+          "kind": "sequence-output-projection",
+          "layer": 19,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 28.606760025024414
+        },
+        {
+          "end_ms": 29.472492218017578,
+          "kind": "ffn",
+          "layer": 19,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 28.743635177612305
+        },
+        {
+          "end_ms": 29.50741195678711,
+          "kind": "sequence-input-prep",
+          "layer": 20,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 29.47513198852539
+        },
+        {
+          "end_ms": 29.700963973999023,
+          "kind": "sequence-input-projection",
+          "layer": 20,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 29.510089874267578
+        },
+        {
+          "end_ms": 30.16514778137207,
+          "kind": "gdn-resident-core",
+          "layer": 20,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 29.703723907470703
+        },
+        {
+          "end_ms": 30.30642318725586,
+          "kind": "sequence-output-projection",
+          "layer": 20,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 30.167827606201172
+        },
+        {
+          "end_ms": 31.0538387298584,
+          "kind": "ffn",
+          "layer": 20,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 30.309024810791016
+        },
+        {
+          "end_ms": 31.088756561279297,
+          "kind": "sequence-input-prep",
+          "layer": 21,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 31.056678771972656
+        },
+        {
+          "end_ms": 31.281869888305664,
+          "kind": "sequence-input-projection",
+          "layer": 21,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 31.091556549072266
+        },
+        {
+          "end_ms": 31.739213943481445,
+          "kind": "gdn-resident-core",
+          "layer": 21,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 31.284469604492188
+        },
+        {
+          "end_ms": 31.878528594970703,
+          "kind": "sequence-output-projection",
+          "layer": 21,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 31.741973876953125
+        },
+        {
+          "end_ms": 32.618743896484375,
+          "kind": "ffn",
+          "layer": 21,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 31.881208419799805
+        },
+        {
+          "end_ms": 32.65438461303711,
+          "kind": "sequence-input-prep",
+          "layer": 22,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 32.621463775634766
+        },
+        {
+          "end_ms": 32.84677505493164,
+          "kind": "sequence-input-projection",
+          "layer": 22,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 32.6571044921875
+        },
+        {
+          "end_ms": 33.30739974975586,
+          "kind": "gdn-resident-core",
+          "layer": 22,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 32.849735260009766
+        },
+        {
+          "end_ms": 33.447635650634766,
+          "kind": "sequence-output-projection",
+          "layer": 22,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 33.31003952026367
+        },
+        {
+          "end_ms": 34.18073272705078,
+          "kind": "ffn",
+          "layer": 22,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 33.45039749145508
+        },
+        {
+          "end_ms": 34.197608947753906,
+          "kind": "sequence-input-prep",
+          "layer": 23,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 34.18341064453125
+        },
+        {
+          "end_ms": 34.37672424316406,
+          "kind": "sequence-input-projection",
+          "layer": 23,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 34.200286865234375
+        },
+        {
+          "end_ms": 34.513240814208984,
+          "kind": "sequence-core",
+          "layer": 23,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 34.37944412231445
+        },
+        {
+          "end_ms": 34.649234771728516,
+          "kind": "sequence-output-projection",
+          "layer": 23,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 34.515960693359375
+        },
+        {
+          "end_ms": 35.36048889160156,
+          "kind": "ffn",
+          "layer": 23,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 34.65191650390625
+        },
+        {
+          "end_ms": 35.39496612548828,
+          "kind": "sequence-input-prep",
+          "layer": 24,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 35.36328887939453
+        },
+        {
+          "end_ms": 35.58852005004883,
+          "kind": "sequence-input-projection",
+          "layer": 24,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 35.39768981933594
+        },
+        {
+          "end_ms": 36.03266906738281,
+          "kind": "gdn-resident-core",
+          "layer": 24,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 35.59128189086914
+        },
+        {
+          "end_ms": 36.17250442504883,
+          "kind": "sequence-output-projection",
+          "layer": 24,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 36.03534698486328
+        },
+        {
+          "end_ms": 36.895599365234375,
+          "kind": "ffn",
+          "layer": 24,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 36.17522430419922
+        },
+        {
+          "end_ms": 36.93107604980469,
+          "kind": "sequence-input-prep",
+          "layer": 25,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 36.89828109741211
+        },
+        {
+          "end_ms": 37.12423324584961,
+          "kind": "sequence-input-projection",
+          "layer": 25,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 36.93391418457031
+        },
+        {
+          "end_ms": 37.584617614746094,
+          "kind": "gdn-resident-core",
+          "layer": 25,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 37.12691116333008
+        },
+        {
+          "end_ms": 37.72468948364258,
+          "kind": "sequence-output-projection",
+          "layer": 25,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 37.58757781982422
+        },
+        {
+          "end_ms": 38.44102478027344,
+          "kind": "ffn",
+          "layer": 25,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 37.72740936279297
+        },
+        {
+          "end_ms": 38.47586441040039,
+          "kind": "sequence-input-prep",
+          "layer": 26,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 38.44374465942383
+        },
+        {
+          "end_ms": 38.66885757446289,
+          "kind": "sequence-input-projection",
+          "layer": 26,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 38.4785041809082
+        },
+        {
+          "end_ms": 39.11439895629883,
+          "kind": "gdn-resident-core",
+          "layer": 26,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 38.6714973449707
+        },
+        {
+          "end_ms": 39.254356384277344,
+          "kind": "sequence-output-projection",
+          "layer": 26,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 39.11703872680664
+        },
+        {
+          "end_ms": 39.96957015991211,
+          "kind": "ffn",
+          "layer": 26,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 39.25703430175781
+        },
+        {
+          "end_ms": 39.986331939697266,
+          "kind": "sequence-input-prep",
+          "layer": 27,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 39.97233200073242
+        },
+        {
+          "end_ms": 40.16516876220703,
+          "kind": "sequence-input-projection",
+          "layer": 27,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 39.989051818847656
+        },
+        {
+          "end_ms": 40.30459976196289,
+          "kind": "sequence-core",
+          "layer": 27,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 40.167808532714844
+        },
+        {
+          "end_ms": 40.44099426269531,
+          "kind": "sequence-output-projection",
+          "layer": 27,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 40.307281494140625
+        },
+        {
+          "end_ms": 41.14737319946289,
+          "kind": "ffn",
+          "layer": 27,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 40.44367599487305
+        },
+        {
+          "end_ms": 41.18185043334961,
+          "kind": "sequence-input-prep",
+          "layer": 28,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 41.1500129699707
+        },
+        {
+          "end_ms": 41.37400436401367,
+          "kind": "sequence-input-projection",
+          "layer": 28,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 41.18449020385742
+        },
+        {
+          "end_ms": 41.832149505615234,
+          "kind": "gdn-resident-core",
+          "layer": 28,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 41.37676239013672
+        },
+        {
+          "end_ms": 41.97194290161133,
+          "kind": "sequence-output-projection",
+          "layer": 28,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 41.83498764038086
+        },
+        {
+          "end_ms": 42.71352005004883,
+          "kind": "ffn",
+          "layer": 28,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 41.974544525146484
+        },
+        {
+          "end_ms": 42.74811935424805,
+          "kind": "sequence-input-prep",
+          "layer": 29,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 42.71623992919922
+        },
+        {
+          "end_ms": 42.9421501159668,
+          "kind": "sequence-input-projection",
+          "layer": 29,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 42.75095748901367
+        },
+        {
+          "end_ms": 43.386695861816406,
+          "kind": "gdn-resident-core",
+          "layer": 29,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 42.944793701171875
+        },
+        {
+          "end_ms": 43.52693176269531,
+          "kind": "sequence-output-projection",
+          "layer": 29,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 43.3894157409668
+        },
+        {
+          "end_ms": 44.270263671875,
+          "kind": "ffn",
+          "layer": 29,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 43.529571533203125
+        },
+        {
+          "end_ms": 44.30534362792969,
+          "kind": "sequence-input-prep",
+          "layer": 30,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 44.27302551269531
+        },
+        {
+          "end_ms": 44.49921417236328,
+          "kind": "sequence-input-projection",
+          "layer": 30,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 44.30806350708008
+        },
+        {
+          "end_ms": 44.96623992919922,
+          "kind": "gdn-resident-core",
+          "layer": 30,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 44.50205612182617
+        },
+        {
+          "end_ms": 45.106075286865234,
+          "kind": "sequence-output-projection",
+          "layer": 30,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 44.968841552734375
+        },
+        {
+          "end_ms": 45.8290901184082,
+          "kind": "ffn",
+          "layer": 30,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 45.108795166015625
+        },
+        {
+          "end_ms": 45.84605026245117,
+          "kind": "sequence-input-prep",
+          "layer": 31,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 45.83177185058594
+        },
+        {
+          "end_ms": 46.016849517822266,
+          "kind": "sequence-input-projection",
+          "layer": 31,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 45.84869384765625
+        },
+        {
+          "end_ms": 46.15488052368164,
+          "kind": "sequence-core",
+          "layer": 31,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 46.01948928833008
+        },
+        {
+          "end_ms": 46.29187774658203,
+          "kind": "sequence-output-projection",
+          "layer": 31,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 46.15760040283203
+        },
+        {
+          "end_ms": 46.99589157104492,
+          "kind": "ffn",
+          "layer": 31,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 46.294677734375
+        },
+        {
+          "end_ms": 47.030452728271484,
+          "kind": "sequence-input-prep",
+          "layer": 32,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 46.99849319458008
+        },
+        {
+          "end_ms": 47.223323822021484,
+          "kind": "sequence-input-projection",
+          "layer": 32,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 47.03313064575195
+        },
+        {
+          "end_ms": 47.6674690246582,
+          "kind": "gdn-resident-core",
+          "layer": 32,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 47.2259635925293
+        },
+        {
+          "end_ms": 47.80766296386719,
+          "kind": "sequence-output-projection",
+          "layer": 32,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 47.67022705078125
+        },
+        {
+          "end_ms": 48.53179931640625,
+          "kind": "ffn",
+          "layer": 32,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 47.81034469604492
+        },
+        {
+          "end_ms": 48.566959381103516,
+          "kind": "sequence-input-prep",
+          "layer": 33,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 48.53456115722656
+        },
+        {
+          "end_ms": 48.7596321105957,
+          "kind": "sequence-input-projection",
+          "layer": 33,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 48.569801330566406
+        },
+        {
+          "end_ms": 49.21401596069336,
+          "kind": "gdn-resident-core",
+          "layer": 33,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 48.762271881103516
+        },
+        {
+          "end_ms": 49.35381317138672,
+          "kind": "sequence-output-projection",
+          "layer": 33,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 49.216697692871094
+        },
+        {
+          "end_ms": 50.08706283569336,
+          "kind": "ffn",
+          "layer": 33,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 49.35653305053711
+        },
+        {
+          "end_ms": 50.12214279174805,
+          "kind": "sequence-input-prep",
+          "layer": 34,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 50.08982467651367
+        },
+        {
+          "end_ms": 50.315181732177734,
+          "kind": "sequence-input-projection",
+          "layer": 34,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 50.12498474121094
+        },
+        {
+          "end_ms": 50.76352310180664,
+          "kind": "gdn-resident-core",
+          "layer": 34,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 50.31782150268555
+        },
+        {
+          "end_ms": 50.903560638427734,
+          "kind": "sequence-output-projection",
+          "layer": 34,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 50.76628494262695
+        },
+        {
+          "end_ms": 51.639610290527344,
+          "kind": "ffn",
+          "layer": 34,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 50.9062385559082
+        },
+        {
+          "end_ms": 51.655853271484375,
+          "kind": "sequence-input-prep",
+          "layer": 35,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 51.64241027832031
+        },
+        {
+          "end_ms": 51.8331298828125,
+          "kind": "sequence-input-projection",
+          "layer": 35,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 51.65849304199219
+        },
+        {
+          "end_ms": 51.972721099853516,
+          "kind": "sequence-core",
+          "layer": 35,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 51.83588790893555
+        },
+        {
+          "end_ms": 52.10943603515625,
+          "kind": "sequence-output-projection",
+          "layer": 35,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 51.975399017333984
+        },
+        {
+          "end_ms": 52.83177185058594,
+          "kind": "ffn",
+          "layer": 35,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 52.112117767333984
+        },
+        {
+          "end_ms": 52.86729049682617,
+          "kind": "sequence-input-prep",
+          "layer": 36,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 52.83461380004883
+        },
+        {
+          "end_ms": 53.06016540527344,
+          "kind": "sequence-input-projection",
+          "layer": 36,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 52.87029266357422
+        },
+        {
+          "end_ms": 53.519989013671875,
+          "kind": "gdn-resident-core",
+          "layer": 36,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 53.062843322753906
+        },
+        {
+          "end_ms": 53.65978240966797,
+          "kind": "sequence-output-projection",
+          "layer": 36,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 53.52274703979492
+        },
+        {
+          "end_ms": 54.38560104370117,
+          "kind": "ffn",
+          "layer": 36,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 53.662384033203125
+        },
+        {
+          "end_ms": 54.42060089111328,
+          "kind": "sequence-input-prep",
+          "layer": 37,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 54.38832092285156
+        },
+        {
+          "end_ms": 54.61299133300781,
+          "kind": "sequence-input-projection",
+          "layer": 37,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 54.42327880859375
+        },
+        {
+          "end_ms": 55.05481719970703,
+          "kind": "gdn-resident-core",
+          "layer": 37,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 54.615753173828125
+        },
+        {
+          "end_ms": 55.19389343261719,
+          "kind": "sequence-output-projection",
+          "layer": 37,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 55.0574951171875
+        },
+        {
+          "end_ms": 55.916629791259766,
+          "kind": "ffn",
+          "layer": 37,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 55.196693420410156
+        },
+        {
+          "end_ms": 55.95186233520508,
+          "kind": "sequence-input-prep",
+          "layer": 38,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 55.919307708740234
+        },
+        {
+          "end_ms": 56.144378662109375,
+          "kind": "sequence-input-projection",
+          "layer": 38,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 55.95450210571289
+        },
+        {
+          "end_ms": 56.6034049987793,
+          "kind": "gdn-resident-core",
+          "layer": 38,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 56.14706039428711
+        },
+        {
+          "end_ms": 56.741920471191406,
+          "kind": "sequence-output-projection",
+          "layer": 38,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 56.606082916259766
+        },
+        {
+          "end_ms": 57.45421600341797,
+          "kind": "ffn",
+          "layer": 38,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 56.744598388671875
+        },
+        {
+          "end_ms": 57.47089767456055,
+          "kind": "sequence-input-prep",
+          "layer": 39,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 57.45685577392578
+        },
+        {
+          "end_ms": 57.650169372558594,
+          "kind": "sequence-input-projection",
+          "layer": 39,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 57.47381591796875
+        },
+        {
+          "end_ms": 57.78832244873047,
+          "kind": "sequence-core",
+          "layer": 39,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 57.652809143066406
+        },
+        {
+          "end_ms": 57.92435836791992,
+          "kind": "sequence-output-projection",
+          "layer": 39,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 57.79104232788086
+        },
+        {
+          "end_ms": 58.62937545776367,
+          "kind": "ffn",
+          "layer": 39,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 57.92715835571289
+        },
+        {
+          "end_ms": 58.663970947265625,
+          "kind": "sequence-input-prep",
+          "layer": 40,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 58.632015228271484
+        },
+        {
+          "end_ms": 58.85664749145508,
+          "kind": "sequence-input-projection",
+          "layer": 40,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 58.66665267944336
+        },
+        {
+          "end_ms": 59.306671142578125,
+          "kind": "gdn-resident-core",
+          "layer": 40,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 58.85928726196289
+        },
+        {
+          "end_ms": 59.44538497924805,
+          "kind": "sequence-output-projection",
+          "layer": 40,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 59.309391021728516
+        },
+        {
+          "end_ms": 60.165401458740234,
+          "kind": "ffn",
+          "layer": 40,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 59.448062896728516
+        },
+        {
+          "end_ms": 60.20140075683594,
+          "kind": "sequence-input-prep",
+          "layer": 41,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 60.16796112060547
+        },
+        {
+          "end_ms": 60.394752502441406,
+          "kind": "sequence-input-projection",
+          "layer": 41,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 60.204078674316406
+        },
+        {
+          "end_ms": 60.851097106933594,
+          "kind": "gdn-resident-core",
+          "layer": 41,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 60.397430419921875
+        },
+        {
+          "end_ms": 60.99073028564453,
+          "kind": "sequence-output-projection",
+          "layer": 41,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 60.853694915771484
+        },
+        {
+          "end_ms": 61.70502853393555,
+          "kind": "ffn",
+          "layer": 41,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 60.99345016479492
+        },
+        {
+          "end_ms": 61.73994827270508,
+          "kind": "sequence-input-prep",
+          "layer": 42,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 61.707786560058594
+        },
+        {
+          "end_ms": 61.932579040527344,
+          "kind": "sequence-input-projection",
+          "layer": 42,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 61.7427864074707
+        },
+        {
+          "end_ms": 62.37424850463867,
+          "kind": "gdn-resident-core",
+          "layer": 42,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 61.935218811035156
+        },
+        {
+          "end_ms": 62.51300048828125,
+          "kind": "sequence-output-projection",
+          "layer": 42,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 62.37696838378906
+        },
+        {
+          "end_ms": 63.27873611450195,
+          "kind": "ffn",
+          "layer": 42,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 62.51567840576172
+        },
+        {
+          "end_ms": 63.29549789428711,
+          "kind": "sequence-input-prep",
+          "layer": 43,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 63.281375885009766
+        },
+        {
+          "end_ms": 63.47420883178711,
+          "kind": "sequence-input-projection",
+          "layer": 43,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 63.29817581176758
+        },
+        {
+          "end_ms": 63.612083435058594,
+          "kind": "sequence-core",
+          "layer": 43,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 63.477046966552734
+        },
+        {
+          "end_ms": 63.7492790222168,
+          "kind": "sequence-output-projection",
+          "layer": 43,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 63.614723205566406
+        },
+        {
+          "end_ms": 64.45357513427734,
+          "kind": "ffn",
+          "layer": 43,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 63.75196075439453
+        },
+        {
+          "end_ms": 64.48869323730469,
+          "kind": "sequence-input-prep",
+          "layer": 44,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 64.45637512207031
+        },
+        {
+          "end_ms": 64.6810073852539,
+          "kind": "sequence-input-projection",
+          "layer": 44,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 64.49153900146484
+        },
+        {
+          "end_ms": 65.1363525390625,
+          "kind": "gdn-resident-core",
+          "layer": 44,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 64.68368530273438
+        },
+        {
+          "end_ms": 65.27619171142578,
+          "kind": "sequence-output-projection",
+          "layer": 44,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 65.13906860351562
+        },
+        {
+          "end_ms": 66.01360321044922,
+          "kind": "ffn",
+          "layer": 44,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 65.2787857055664
+        },
+        {
+          "end_ms": 66.04863739013672,
+          "kind": "sequence-input-prep",
+          "layer": 45,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 66.01628112792969
+        },
+        {
+          "end_ms": 66.24091339111328,
+          "kind": "sequence-input-projection",
+          "layer": 45,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 66.05136108398438
+        },
+        {
+          "end_ms": 66.6884994506836,
+          "kind": "gdn-resident-core",
+          "layer": 45,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 66.24371337890625
+        },
+        {
+          "end_ms": 66.82869720458984,
+          "kind": "sequence-output-projection",
+          "layer": 45,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 66.6911392211914
+        },
+        {
+          "end_ms": 67.57766723632812,
+          "kind": "ffn",
+          "layer": 45,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 66.83137512207031
+        },
+        {
+          "end_ms": 67.61402130126953,
+          "kind": "sequence-input-prep",
+          "layer": 46,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 67.58050537109375
+        },
+        {
+          "end_ms": 67.80721282958984,
+          "kind": "sequence-input-projection",
+          "layer": 46,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 67.61686706542969
+        },
+        {
+          "end_ms": 68.26348876953125,
+          "kind": "gdn-resident-core",
+          "layer": 46,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 67.81001281738281
+        },
+        {
+          "end_ms": 68.40299987792969,
+          "kind": "sequence-output-projection",
+          "layer": 46,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 68.266357421875
+        },
+        {
+          "end_ms": 69.13009643554688,
+          "kind": "ffn",
+          "layer": 46,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 68.40583801269531
+        },
+        {
+          "end_ms": 69.14713287353516,
+          "kind": "sequence-input-prep",
+          "layer": 47,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 69.13301849365234
+        },
+        {
+          "end_ms": 69.32540893554688,
+          "kind": "sequence-input-projection",
+          "layer": 47,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 69.15009307861328
+        },
+        {
+          "end_ms": 69.4610366821289,
+          "kind": "sequence-core",
+          "layer": 47,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 69.32817077636719
+        },
+        {
+          "end_ms": 69.59732055664062,
+          "kind": "sequence-output-projection",
+          "layer": 47,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 69.46379852294922
+        },
+        {
+          "end_ms": 70.3090591430664,
+          "kind": "ffn",
+          "layer": 47,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 69.59996032714844
+        },
+        {
+          "end_ms": 70.3440170288086,
+          "kind": "sequence-input-prep",
+          "layer": 48,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 70.31169891357422
+        },
+        {
+          "end_ms": 70.53656768798828,
+          "kind": "sequence-input-projection",
+          "layer": 48,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 70.3466567993164
+        },
+        {
+          "end_ms": 70.98711395263672,
+          "kind": "gdn-resident-core",
+          "layer": 48,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 70.53916931152344
+        },
+        {
+          "end_ms": 71.12730407714844,
+          "kind": "sequence-output-projection",
+          "layer": 48,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 70.98975372314453
+        },
+        {
+          "end_ms": 71.86363983154297,
+          "kind": "ffn",
+          "layer": 48,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 71.1299819946289
+        },
+        {
+          "end_ms": 71.89936065673828,
+          "kind": "sequence-input-prep",
+          "layer": 49,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 71.86643981933594
+        },
+        {
+          "end_ms": 72.09239196777344,
+          "kind": "sequence-input-projection",
+          "layer": 49,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 71.9020767211914
+        },
+        {
+          "end_ms": 72.54613494873047,
+          "kind": "gdn-resident-core",
+          "layer": 49,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 72.09523010253906
+        },
+        {
+          "end_ms": 72.68929290771484,
+          "kind": "sequence-output-projection",
+          "layer": 49,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 72.54885864257812
+        },
+        {
+          "end_ms": 73.43738555908203,
+          "kind": "ffn",
+          "layer": 49,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 72.69197082519531
+        },
+        {
+          "end_ms": 73.47198486328125,
+          "kind": "sequence-input-prep",
+          "layer": 50,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 73.44022369384766
+        },
+        {
+          "end_ms": 73.6705322265625,
+          "kind": "sequence-input-projection",
+          "layer": 50,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 73.47462463378906
+        },
+        {
+          "end_ms": 74.11396026611328,
+          "kind": "gdn-resident-core",
+          "layer": 50,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 73.67325592041016
+        },
+        {
+          "end_ms": 74.2545166015625,
+          "kind": "sequence-output-projection",
+          "layer": 50,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 74.11663818359375
+        },
+        {
+          "end_ms": 75.00833892822266,
+          "kind": "ffn",
+          "layer": 50,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 74.25727844238281
+        },
+        {
+          "end_ms": 75.02489471435547,
+          "kind": "sequence-input-prep",
+          "layer": 51,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 75.01093292236328
+        },
+        {
+          "end_ms": 75.20233154296875,
+          "kind": "sequence-input-projection",
+          "layer": 51,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 75.02753448486328
+        },
+        {
+          "end_ms": 75.34123992919922,
+          "kind": "sequence-core",
+          "layer": 51,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 75.20497131347656
+        },
+        {
+          "end_ms": 75.4773178100586,
+          "kind": "sequence-output-projection",
+          "layer": 51,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 75.34400177001953
+        },
+        {
+          "end_ms": 76.19457244873047,
+          "kind": "ffn",
+          "layer": 51,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 75.4800033569336
+        },
+        {
+          "end_ms": 76.22948455810547,
+          "kind": "sequence-input-prep",
+          "layer": 52,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 76.19721221923828
+        },
+        {
+          "end_ms": 76.42151641845703,
+          "kind": "sequence-input-projection",
+          "layer": 52,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 76.23212432861328
+        },
+        {
+          "end_ms": 76.87998962402344,
+          "kind": "gdn-resident-core",
+          "layer": 52,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 76.42428588867188
+        },
+        {
+          "end_ms": 77.01790618896484,
+          "kind": "sequence-output-projection",
+          "layer": 52,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 76.88262939453125
+        },
+        {
+          "end_ms": 77.75048065185547,
+          "kind": "ffn",
+          "layer": 52,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 77.02062225341797
+        },
+        {
+          "end_ms": 77.78507995605469,
+          "kind": "sequence-input-prep",
+          "layer": 53,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 77.75312042236328
+        },
+        {
+          "end_ms": 77.97891235351562,
+          "kind": "sequence-input-projection",
+          "layer": 53,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 77.7877197265625
+        },
+        {
+          "end_ms": 78.42257690429688,
+          "kind": "gdn-resident-core",
+          "layer": 53,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 77.98155212402344
+        },
+        {
+          "end_ms": 78.56240844726562,
+          "kind": "sequence-output-projection",
+          "layer": 53,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 78.42521667480469
+        },
+        {
+          "end_ms": 79.2950210571289,
+          "kind": "ffn",
+          "layer": 53,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 78.5650863647461
+        },
+        {
+          "end_ms": 79.32926177978516,
+          "kind": "sequence-input-prep",
+          "layer": 54,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 79.29766082763672
+        },
+        {
+          "end_ms": 79.52781677246094,
+          "kind": "sequence-input-projection",
+          "layer": 54,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 79.33190155029297
+        },
+        {
+          "end_ms": 79.9810791015625,
+          "kind": "gdn-resident-core",
+          "layer": 54,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 79.53069305419922
+        },
+        {
+          "end_ms": 80.12920379638672,
+          "kind": "sequence-output-projection",
+          "layer": 54,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 79.98371887207031
+        },
+        {
+          "end_ms": 80.85745239257812,
+          "kind": "ffn",
+          "layer": 54,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 80.13188171386719
+        },
+        {
+          "end_ms": 80.8749771118164,
+          "kind": "sequence-input-prep",
+          "layer": 55,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 80.86021423339844
+        },
+        {
+          "end_ms": 81.06048583984375,
+          "kind": "sequence-input-projection",
+          "layer": 55,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 80.87777709960938
+        },
+        {
+          "end_ms": 81.20247650146484,
+          "kind": "sequence-core",
+          "layer": 55,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 81.06336975097656
+        },
+        {
+          "end_ms": 81.34575653076172,
+          "kind": "sequence-output-projection",
+          "layer": 55,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 81.20511627197266
+        },
+        {
+          "end_ms": 82.06148529052734,
+          "kind": "ffn",
+          "layer": 55,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 81.34839630126953
+        },
+        {
+          "end_ms": 82.09580993652344,
+          "kind": "sequence-input-prep",
+          "layer": 56,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 82.064208984375
+        },
+        {
+          "end_ms": 82.29212951660156,
+          "kind": "sequence-input-projection",
+          "layer": 56,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 82.09852600097656
+        },
+        {
+          "end_ms": 82.7412338256836,
+          "kind": "gdn-resident-core",
+          "layer": 56,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 82.29476928710938
+        },
+        {
+          "end_ms": 82.8896255493164,
+          "kind": "sequence-output-projection",
+          "layer": 56,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 82.74394989013672
+        },
+        {
+          "end_ms": 83.61900329589844,
+          "kind": "ffn",
+          "layer": 56,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 82.89226531982422
+        },
+        {
+          "end_ms": 83.65371704101562,
+          "kind": "sequence-input-prep",
+          "layer": 57,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 83.62164306640625
+        },
+        {
+          "end_ms": 83.85071563720703,
+          "kind": "sequence-input-projection",
+          "layer": 57,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 83.65635681152344
+        },
+        {
+          "end_ms": 84.30345916748047,
+          "kind": "gdn-resident-core",
+          "layer": 57,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 83.85366821289062
+        },
+        {
+          "end_ms": 84.44329071044922,
+          "kind": "sequence-output-projection",
+          "layer": 57,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 84.30609893798828
+        },
+        {
+          "end_ms": 85.16558074951172,
+          "kind": "ffn",
+          "layer": 57,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 84.446044921875
+        },
+        {
+          "end_ms": 85.20022583007812,
+          "kind": "sequence-input-prep",
+          "layer": 58,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 85.16822052001953
+        },
+        {
+          "end_ms": 85.39181518554688,
+          "kind": "sequence-input-projection",
+          "layer": 58,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 85.20286560058594
+        },
+        {
+          "end_ms": 85.84423828125,
+          "kind": "gdn-resident-core",
+          "layer": 58,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 85.39457702636719
+        },
+        {
+          "end_ms": 85.98523712158203,
+          "kind": "sequence-output-projection",
+          "layer": 58,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 85.84691619873047
+        },
+        {
+          "end_ms": 86.71756744384766,
+          "kind": "ffn",
+          "layer": 58,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 85.988037109375
+        },
+        {
+          "end_ms": 86.73436737060547,
+          "kind": "sequence-input-prep",
+          "layer": 59,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 86.72025299072266
+        },
+        {
+          "end_ms": 86.91324615478516,
+          "kind": "sequence-input-projection",
+          "layer": 59,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 86.73700714111328
+        },
+        {
+          "end_ms": 87.05039978027344,
+          "kind": "sequence-core",
+          "layer": 59,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 86.91593170166016
+        },
+        {
+          "end_ms": 87.1872787475586,
+          "kind": "sequence-output-projection",
+          "layer": 59,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 87.0530776977539
+        },
+        {
+          "end_ms": 87.9014892578125,
+          "kind": "ffn",
+          "layer": 59,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 87.18994903564453
+        },
+        {
+          "end_ms": 87.9357681274414,
+          "kind": "sequence-input-prep",
+          "layer": 60,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 87.90412902832031
+        },
+        {
+          "end_ms": 88.1312026977539,
+          "kind": "sequence-input-projection",
+          "layer": 60,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 87.93840789794922
+        },
+        {
+          "end_ms": 88.58678436279297,
+          "kind": "gdn-resident-core",
+          "layer": 60,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 88.1338882446289
+        },
+        {
+          "end_ms": 88.72606658935547,
+          "kind": "sequence-output-projection",
+          "layer": 60,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 88.58946990966797
+        },
+        {
+          "end_ms": 89.46440124511719,
+          "kind": "ffn",
+          "layer": 60,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 88.72870635986328
+        },
+        {
+          "end_ms": 89.49955749511719,
+          "kind": "sequence-input-prep",
+          "layer": 61,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 89.467041015625
+        },
+        {
+          "end_ms": 89.69315338134766,
+          "kind": "sequence-input-projection",
+          "layer": 61,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 89.50224304199219
+        },
+        {
+          "end_ms": 90.14009857177734,
+          "kind": "gdn-resident-core",
+          "layer": 61,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 89.69579315185547
+        },
+        {
+          "end_ms": 90.27948760986328,
+          "kind": "sequence-output-projection",
+          "layer": 61,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 90.14277648925781
+        },
+        {
+          "end_ms": 91.01846313476562,
+          "kind": "ffn",
+          "layer": 61,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 90.28216552734375
+        },
+        {
+          "end_ms": 91.05314636230469,
+          "kind": "sequence-input-prep",
+          "layer": 62,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 91.02122497558594
+        },
+        {
+          "end_ms": 91.24505615234375,
+          "kind": "sequence-input-projection",
+          "layer": 62,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 91.05582427978516
+        },
+        {
+          "end_ms": 91.70272064208984,
+          "kind": "gdn-resident-core",
+          "layer": 62,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 91.2476577758789
+        },
+        {
+          "end_ms": 91.84143829345703,
+          "kind": "sequence-output-projection",
+          "layer": 62,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 91.70543670654297
+        },
+        {
+          "end_ms": 92.56041717529297,
+          "kind": "ffn",
+          "layer": 62,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 91.8441162109375
+        },
+        {
+          "end_ms": 92.5771713256836,
+          "kind": "sequence-input-prep",
+          "layer": 63,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 92.5630111694336
+        },
+        {
+          "end_ms": 92.76588439941406,
+          "kind": "sequence-input-projection",
+          "layer": 63,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 92.5798568725586
+        },
+        {
+          "end_ms": 92.90055847167969,
+          "kind": "sequence-core",
+          "layer": 63,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 92.76864624023438
+        },
+        {
+          "end_ms": 93.03667449951172,
+          "kind": "sequence-output-projection",
+          "layer": 63,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 92.9031982421875
+        },
+        {
+          "end_ms": 93.7440185546875,
+          "kind": "ffn",
+          "layer": 63,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 93.0392837524414
+        },
+        {
+          "end_ms": 93.76004791259766,
+          "kind": "head-prep",
+          "layer": 64,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 8,
+          "start_ms": 93.74673461914062
+        },
+        {
+          "end_ms": 93.77324676513672,
+          "kind": "head-prep",
+          "layer": 64,
+          "offset": 8,
+          "phase_us": [],
+          "rows": 8,
+          "start_ms": 93.76268768310547
+        },
+        {
+          "end_ms": 93.7867660522461,
+          "kind": "head-prep",
+          "layer": 64,
+          "offset": 16,
+          "phase_us": [],
+          "rows": 8,
+          "start_ms": 93.77597045898438
+        },
+        {
+          "end_ms": 93.80012512207031,
+          "kind": "head-prep",
+          "layer": 64,
+          "offset": 24,
+          "phase_us": [],
+          "rows": 8,
+          "start_ms": 93.7894058227539
+        },
+        {
+          "end_ms": 93.81344604492188,
+          "kind": "head-prep",
+          "layer": 64,
+          "offset": 32,
+          "phase_us": [],
+          "rows": 8,
+          "start_ms": 93.80284881591797
+        },
+        {
+          "end_ms": 93.8271255493164,
+          "kind": "head-prep",
+          "layer": 64,
+          "offset": 40,
+          "phase_us": [],
+          "rows": 8,
+          "start_ms": 93.81613159179688
+        },
+        {
+          "end_ms": 98.964111328125,
+          "kind": "head-projection",
+          "layer": 64,
+          "offset": 0,
+          "phase_us": [],
+          "rows": 48,
+          "start_ms": 93.82984924316406
+        }
+      ],
+      "wall_ms": 100.136023
+    }
+  ],
+  "schema": "bonsai-phase-profile/1",
+  "sequence_image": 1,
+  "sequence_images": [
+    -1
+  ],
+  "sequence_layout": "direct",
+  "sequence_operand": "int8",
+  "sequence_sched": 1,
+  "sequence_scheds": [
+    -1
+  ],
+  "sequence_tile_width": "auto",
+  "sequence_wave_share": "auto",
+  "source_sha256_rollup": "d1fb63bc961cffef289eda8ca50622e4c8e883438fcc083060629c0e8efa512f  -",
+  "warmup_ms": 2000,
+  "wide_head": true,
+  "wide_head_tile_width": "auto"
+}

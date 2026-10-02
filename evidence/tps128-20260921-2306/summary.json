@@ -1,0 +1,84 @@
+{
+  "source": "1c7d7f2dc4f9e5c3d9114ee75a8e37d5aaef6157",
+  "memory": {
+    "a4_image_option": "wide-only",
+    "after_load_bytes": 37186374728.0,
+    "after_prepare_batch_bytes": 43814933576.0,
+    "batch_rows_prepared": 128,
+    "ffn_batch_module_bytes": 4560449536.0,
+    "ffn_batch_weight_budget_bytes": 4545576960.0,
+    "ffn_batch_weight_bytes_all_modes": 16577986560.0,
+    "ffn_state_created": true,
+    "images": [
+      {
+        "bytes_all_layers": 267386880.0,
+        "image": 0,
+        "name": "SCALES",
+        "resident": true,
+        "resident_bytes": 267386880.0
+      },
+      {
+        "bytes_all_layers": 4278190080.0,
+        "image": 1,
+        "name": "SLICE2",
+        "resident": false,
+        "resident_bytes": 0.0
+      },
+      {
+        "bytes_all_layers": 4278190080.0,
+        "image": 2,
+        "name": "LANE2",
+        "resident": false,
+        "resident_bytes": 0.0
+      },
+      {
+        "bytes_all_layers": 4278190080.0,
+        "image": 3,
+        "name": "PAIR",
+        "resident": true,
+        "resident_bytes": 4278194176.0
+      },
+      {
+        "bytes_all_layers": 3476029440.0,
+        "image": 4,
+        "name": "DENSE5",
+        "resident": false,
+        "resident_bytes": 0.0
+      }
+    ],
+    "modes_mask": 268435712,
+    "modes_mask_hex": "0x10000100",
+    "module_modes_served": {
+      "19": true
+    },
+    "note": "engine device_bytes before and after prepare_batch; the module total is the prepared weight images plus the shared activation workspace",
+    "resident_image_bytes_total": 4545581056.0,
+    "sequence_commit_modes": [
+      16,
+      18,
+      19
+    ],
+    "wide_sequence_prepared": true,
+    "workspace_only": false
+  },
+  "decode": {
+    "64": {
+      "rounds_tps": [
+        463.14422312691977,
+        462.8514561891048,
+        465.75876049943537
+      ],
+      "median_total_tps": 463.14422312691977,
+      "median_per_stream_tps": 7.236628486358121
+    },
+    "128": {
+      "rounds_tps": [
+        523.3046886870759,
+        517.018339372902,
+        517.7267990378767
+      ],
+      "median_total_tps": 517.7267990378767,
+      "median_per_stream_tps": 4.044740617483412
+    }
+  }
+}

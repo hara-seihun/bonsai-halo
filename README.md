@@ -6,6 +6,15 @@ A from-scratch HIP inference engine for Ternary Bonsai 2 27B (Qwen3.8 hybrid GDN
 
 [PLAN.md](PLAN.md) holds the design and measured history. [The M1 engine shootout](docs/engine-shootout.md) owns the max preset and quality path. [Kelana's catalogue](https://github.com/hara-seihun/kelana) classifies cross-project research. This file is the operating manual.
 
+## Code, measurements and proofs
+
+- **Single-stream inference and target-verified drafting:** [build and run](#build-and-run), [combined full-model measurements](docs/full-tps-20260921.md).
+- **Batch inference, prefill and concurrent serving:** [128-stream generation](docs/generation-128.md), [wide prompt ingestion](#wide-prompt-ingestion), [served concurrency](docs/served-concurrency.md).
+- **Original measurement evidence:** [public receipt bundle](evidence/README.md), retaining timings, numerical comparisons and output digests with private text removed.
+- **Mathematical proofs:** [Kelana's Lean sources](https://github.com/hara-seihun/kelana/tree/main/Kelana), [ternary 2×2 proof and exhaustive checker](https://github.com/hara-seihun/kelana/blob/main/research/toy2/PROOF.md), [Bonsai proof problems](https://github.com/hara-seihun/kelana/blob/main/BONSAI.md). All 162 tracked Lean files from the recovered Kelana source are public. Native operand-map checkers also live in this repository's [`kernels/`](kernels/) directory.
+
+These repositories publish the inference implementation, research source, formal proofs and reports. Model weights, calibration datasets and large raw arrays are separately acquired inputs, not included here. The receipt bundle is recovered historical evidence, not a new benchmark on the replacement server. External programme results linked from the research catalogue retain their own source ownership; a catalogue citation does not claim their entire workspace is mirrored here.
+
 ## Status
 
 The [September 21 combined full-model measurement](docs/full-tps-20260921.md) records
@@ -965,8 +974,8 @@ comparison. `auto` keeps eight-bit activations and selects the original pass at
 rows. The tested 8-row wide kernels lose, so the automatic path avoids them.
 
 The map modes port the measured schedules from Kelana's
-[tile ownership](../kelana/research/ffn/batched/tile-ownership/README.md) and
-[dense consumer](../kelana/research/ffn/batched/dense-consumer/README.md) experiments.
+[tile ownership](https://github.com/hara-seihun/kelana/blob/main/research/ffn/batched/tile-ownership/README.md) and
+[dense consumer](https://github.com/hara-seihun/kelana/blob/main/research/ffn/batched/dense-consumer/README.md) experiments.
 `map-a8` shares weight tiles across token waves with contiguous block loads.
 `map-scaled-a8` selects the scaled-operand schedule by batch size.
 `map-a4` uses dense five-trit bytes for small batches and pair-code wide loads

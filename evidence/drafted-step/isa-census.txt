@@ -1,0 +1,90 @@
+# ISA census of k_dflash<8, Q4=true>, hipcc -S on cd47cf6
+# tools/isa_loop_count.py /tmp/df.s k_dflashILi8ELb1 14
+_ZN4halo12_GLOBAL__N_18k_dflashILi8ELb1EEEvNS_12DflashParamsE
+
+== block .LBB5_1203+++++++: 686 instructions, 594 work + 92 scheduling ==
+   other:v          328
+   bitops           104
+   s_delay_alu       82   (scheduling)
+   mul               72
+   s_load            32
+   add               22
+   salu              15
+   s_waitcnt         10   (scheduling)
+   cvt                9
+   fma/mac            8
+   global_load        3
+   branch             1
+
+== block .LBB5_233+: 386 instructions, 340 work + 46 scheduling ==
+   other:v           90
+   add               75
+   salu              59
+   s_delay_alu       45   (scheduling)
+   bitops            38
+   fma/mac           21
+   mov               20
+   mul               19
+   s_load            13
+   cvt                4
+   s_waitcnt          1   (scheduling)
+   branch             1
+
+== block .LBB5_1504++: 280 instructions, 250 work + 30 scheduling ==
+   add               82
+   bitops            46
+   mov               44
+   global_load       22
+   mul               17
+   s_delay_alu       16   (scheduling)
+   fma/mac           16
+   perm              16
+   s_waitcnt         14   (scheduling)
+   salu               5
+   ds                 1
+   branch             1
+
+== whole kernel: 21290 instructions, 16975 work + 4315 scheduling ==
+   salu            4021
+   add             2919
+   s_delay_alu     2562   (scheduling)
+   other:v         2271
+   s_waitcnt       1752   (scheduling)
+   mov             1247
+   ds              1140
+   bitops          1112
+   branch           936
+   mul              478
+   global_load      465
+   fma/mac          443
+   other:buffer     427
+   perm             409
+   cvt              257
+   s_load           230
+   global_store     200
+   wmma             160
+   other:global     148
+   permlane         110
+   other:flat         2
+   s_nop              1   (scheduling)
+
+== memory address forms ==
+   flat_store_b128      other                         2
+   global_atomic_add_u32 scalar base + lane offset    68
+   global_atomic_cmpswap_b32 64-bit VGPR address pair     80
+   global_load_b128     64-bit VGPR address pair    210
+   global_load_b128     scalar base + lane offset     9
+   global_load_b32      64-bit VGPR address pair    125
+   global_load_b32      scalar base + lane offset    74
+   global_load_b64      64-bit VGPR address pair      8
+   global_load_d16_b16  64-bit VGPR address pair     14
+   global_load_d16_hi_b16 64-bit VGPR address pair      8
+   global_load_u16      64-bit VGPR address pair     17
+   global_store_b128    64-bit VGPR address pair     10
+   global_store_b16     other                         4
+   global_store_b32     other                       127
+   global_store_b32     scalar base + lane offset     6
+   global_store_b64     64-bit VGPR address pair      2
+   global_store_b64     scalar base + lane offset    51
+   ; implicit-def: $vgpr238 : SGPR spill to VGPR lane
+   .amdhsa_shared_vgpr_count 0

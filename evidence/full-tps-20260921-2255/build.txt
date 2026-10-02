@@ -1,0 +1,3 @@
+source=83f0478307d166933fc39c2d5841c6792a3128e9
+19f43cf99a2233523aff6e7cc82ccdf5c54e4f5115fe15fc9d2ba301faa95977  bonsai-halo
+02c01aee2620acb7e271ebdcbbac450819ab932de36b3ff6da238ef9ce5d9a9e  tools/batch_compare

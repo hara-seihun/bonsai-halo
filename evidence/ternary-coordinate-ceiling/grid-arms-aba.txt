@@ -1,0 +1,72 @@
+Unit bonsai-halo.service does not exist, proceeding anyway.
+Created symlink '/run/user/USER/systemd/user/bonsai-halo.service' → '/dev/null'.
+model ready: 7.61 GB on device, 0.8 s
+wide prompt ingestion: mode 20 (default), 256 rows per pass, +2.25 GB on device
+prompt: 23 tokens
+dflash2 drafter loaded, weights q4 (11.04 GB on device total)
+prefill+first draft: 0.10 s
+dflash2: weights q4 pk-occ -1 grid 100 dgrid 0 route 20 round 0 case 0, prompt 23 tokens in 0.102 s: 226.0 tok/s; 48 tokens in 0.76 s: 63.39 tok/s; 16 steps, 112 drafted, 32 accepted (28.6%), 3.00 tokens/step; per step: draft 6.481 ms, verify 40.838 ms; digest 14250041415274144751
+phase breakdown (us): total 41891
+  mv_gate_up      14346 us   34.2%  x64  avg 224.2 us
+  mv_down          8729 us   20.8%  x64  avg 136.4 us
+  mv_qkv_z         5622 us   13.4%  x48  avg 117.1 us
+  gdn              3142 us    7.5%  x48  avg 65.5 us
+  mv_ssm_out       2581 us    6.2%  x48  avg 53.8 us
+  mv_qkv           1714 us    4.1%  x16  avg 107.1 us
+  mv_lm_head       1352 us    3.2%  x1  avg 1351.8 us
+  prep_norm        1260 us    3.0%  x129  avg 9.8 us
+  mv_o              868 us    2.1%  x16  avg 54.2 us
+  attn              701 us    1.7%  x16  avg 43.8 us
+  gdn_pre           629 us    1.5%  x48  avg 13.1 us
+  prep_silu         473 us    1.1%  x64  avg 7.4 us
+  prep_gdn          220 us    0.5%  x48  avg 4.6 us
+  attn_pre           94 us    0.2%  x16  avg 5.9 us
+  prep_attn          92 us    0.2%  x16  avg 5.7 us
+  argmax             60 us    0.1%  x1  avg 60.2 us
+  embed               6 us    0.0%  x1  avg 6.0 us
+  prep_embed          3 us    0.0%  x1  avg 2.6 us
+prefill+first draft: 0.09 s
+dflash2: weights q4 pk-occ -1 grid 60 dgrid 0 route 20 round 0 case 0, prompt 23 tokens in 0.087 s: 264.0 tok/s; 48 tokens in 0.94 s: 51.31 tok/s; 16 steps, 112 drafted, 32 accepted (28.6%), 3.00 tokens/step; per step: draft 6.533 ms, verify 51.926 ms; digest 14250041415274144751
+phase breakdown (us): total 53412
+  mv_gate_up      19728 us   36.9%  x64  avg 308.2 us
+  mv_down         10583 us   19.8%  x64  avg 165.4 us
+  mv_qkv_z         7077 us   13.2%  x48  avg 147.4 us
+  gdn              4370 us    8.2%  x48  avg 91.1 us
+  mv_ssm_out       2701 us    5.1%  x48  avg 56.3 us
+  mv_qkv           2083 us    3.9%  x16  avg 130.2 us
+  mv_lm_head       2003 us    3.7%  x1  avg 2002.6 us
+  prep_norm        1609 us    3.0%  x129  avg 12.5 us
+  mv_o              905 us    1.7%  x16  avg 56.6 us
+  attn              690 us    1.3%  x16  avg 43.1 us
+  gdn_pre           616 us    1.2%  x48  avg 12.8 us
+  prep_silu         542 us    1.0%  x64  avg 8.5 us
+  prep_gdn          215 us    0.4%  x48  avg 4.5 us
+  attn_pre          111 us    0.2%  x16  avg 6.9 us
+  prep_attn          91 us    0.2%  x16  avg 5.7 us
+  argmax             79 us    0.1%  x1  avg 79.0 us
+  embed               6 us    0.0%  x1  avg 5.6 us
+  prep_embed          2 us    0.0%  x1  avg 2.2 us
+prefill+first draft: 0.09 s
+dflash2: weights q4 pk-occ -1 grid 100 dgrid 0 route 20 round 0 case 0, prompt 23 tokens in 0.093 s: 247.0 tok/s; 48 tokens in 0.76 s: 62.84 tok/s; 16 steps, 112 drafted, 32 accepted (28.6%), 3.00 tokens/step; per step: draft 6.559 ms, verify 41.174 ms; digest 14250041415274144751
+phase breakdown (us): total 41841
+  mv_gate_up      14338 us   34.3%  x64  avg 224.0 us
+  mv_down          8685 us   20.8%  x64  avg 135.7 us
+  mv_qkv_z         5625 us   13.4%  x48  avg 117.2 us
+  gdn              3148 us    7.5%  x48  avg 65.6 us
+  mv_ssm_out       2589 us    6.2%  x48  avg 53.9 us
+  mv_qkv           1720 us    4.1%  x16  avg 107.5 us
+  mv_lm_head       1320 us    3.2%  x1  avg 1319.7 us
+  prep_norm        1269 us    3.0%  x129  avg 9.8 us
+  mv_o              872 us    2.1%  x16  avg 54.5 us
+  attn              700 us    1.7%  x16  avg 43.7 us
+  gdn_pre           625 us    1.5%  x48  avg 13.0 us
+  prep_silu         475 us    1.1%  x64  avg 7.4 us
+  prep_gdn          221 us    0.5%  x48  avg 4.6 us
+  attn_pre           96 us    0.2%  x16  avg 6.0 us
+  prep_attn          93 us    0.2%  x16  avg 5.8 us
+  argmax             57 us    0.1%  x1  avg 57.3 us
+  embed               6 us    0.0%  x1  avg 6.3 us
+  prep_embed          3 us    0.0%  x1  avg 2.7 us
+gpu_clock: clock 2812 MHz p50 (97% of 2900) | socket 120 W | gfx 60 W / cpu 25 W | host 3.4 cores busy | package-power limited 49% of the window | NOT QUIET: another 2.4 cores of host work ran during this panel
+Removed '/run/user/USER/systemd/user/bonsai-halo.service'.
+Running as unit: bonsai-halo.service; invocation ID: c479b031b1c34f16b49c424160a8e701

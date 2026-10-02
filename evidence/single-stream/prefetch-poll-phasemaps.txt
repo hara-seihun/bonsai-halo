@@ -1,0 +1,90 @@
+Unit bonsai-halo.service does not exist, proceeding anyway.
+Created symlink '/run/user/USER/systemd/user/bonsai-halo.service' → '/dev/null'.
+loaded layer 1/64 (0.64 GB on device)loaded layer 2/64 (0.73 GB on device)loaded layer 3/64 (0.81 GB on device)loaded layer 4/64 (0.89 GB on device)loaded layer 5/64 (0.98 GB on device)loaded layer 6/64 (1.06 GB on device)loaded layer 7/64 (1.15 GB on device)loaded layer 8/64 (1.23 GB on device)loaded layer 9/64 (1.31 GB on device)loaded layer 10/64 (1.40 GB on device)loaded layer 11/64 (1.48 GB on device)loaded layer 12/64 (1.57 GB on device)loaded layer 13/64 (1.65 GB on device)loaded layer 14/64 (1.74 GB on device)loaded layer 15/64 (1.82 GB on device)loaded layer 16/64 (1.90 GB on device)loaded layer 17/64 (1.99 GB on device)loaded layer 18/64 (2.07 GB on device)loaded layer 19/64 (2.16 GB on device)loaded layer 20/64 (2.24 GB on device)loaded layer 21/64 (2.32 GB on device)loaded layer 22/64 (2.41 GB on device)loaded layer 23/64 (2.49 GB on device)loaded layer 24/64 (2.58 GB on device)loaded layer 25/64 (2.66 GB on device)loaded layer 26/64 (2.74 GB on device)loaded layer 27/64 (2.83 GB on device)loaded layer 28/64 (2.91 GB on device)loaded layer 29/64 (3.00 GB on device)loaded layer 30/64 (3.08 GB on device)loaded layer 31/64 (3.17 GB on device)loaded layer 32/64 (3.25 GB on device)loaded layer 33/64 (3.33 GB on device)loaded layer 34/64 (3.42 GB on device)loaded layer 35/64 (3.50 GB on device)loaded layer 36/64 (3.58 GB on device)loaded layer 37/64 (3.67 GB on device)loaded layer 38/64 (3.75 GB on device)loaded layer 39/64 (3.84 GB on device)loaded layer 40/64 (3.92 GB on device)loaded layer 41/64 (4.01 GB on device)loaded layer 42/64 (4.09 GB on device)loaded layer 43/64 (4.18 GB on device)loaded layer 44/64 (4.26 GB on device)loaded layer 45/64 (4.34 GB on device)loaded layer 46/64 (4.43 GB on device)loaded layer 47/64 (4.51 GB on device)loaded layer 48/64 (4.59 GB on device)loaded layer 49/64 (4.68 GB on device)loaded layer 50/64 (4.76 GB on device)loaded layer 51/64 (4.85 GB on device)loaded layer 52/64 (4.93 GB on device)loaded layer 53/64 (5.02 GB on device)loaded layer 54/64 (5.10 GB on device)loaded layer 55/64 (5.19 GB on device)loaded layer 56/64 (5.27 GB on device)loaded layer 57/64 (5.35 GB on device)loaded layer 58/64 (5.44 GB on device)loaded layer 59/64 (5.52 GB on device)loaded layer 60/64 (5.60 GB on device)loaded layer 61/64 (5.69 GB on device)loaded layer 62/64 (5.77 GB on device)loaded layer 63/64 (5.86 GB on device)loaded layer 64/64 (5.94 GB on device)
+model ready: 10.08 GB on device, 0.9 s
+prompt: 23 tokens
+prefill: 23 tokens in 0.15 s (151.0 tok/s)
+---- phase map, prefetch 0
+phase breakdown (us): total 29876
+  mv_gate_up      11484 us   38.4%  x64  avg 179.4 us
+  mv_down          6398 us   21.4%  x64  avg 100.0 us
+  mv_qkv_z         4021 us   13.5%  x48  avg 83.8 us
+  mv_ssm_out       1688 us    5.6%  x48  avg 35.2 us
+  mv_qkv           1200 us    4.0%  x16  avg 75.0 us
+  mv_lm_head       1182 us    4.0%  x1  avg 1182.1 us
+  gdn              1181 us    4.0%  x48  avg 24.6 us
+  prep_norm         869 us    2.9%  x129  avg 6.7 us
+  mv_o              607 us    2.0%  x16  avg 38.0 us
+  attn              491 us    1.6%  x16  avg 30.7 us
+  prep_silu         234 us    0.8%  x64  avg 3.7 us
+  gdn_pre           205 us    0.7%  x48  avg 4.3 us
+  prep_gdn          174 us    0.6%  x48  avg 3.6 us
+  prep_attn          67 us    0.2%  x16  avg 4.2 us
+  attn_pre           54 us    0.2%  x16  avg 3.4 us
+  argmax             13 us    0.0%  x1  avg 13.4 us
+  embed               4 us    0.0%  x1  avg 4.0 us
+  prep_embed          2 us    0.0%  x1  avg 2.3 us
+---- phase map, prefetch 1
+phase breakdown (us): total 29595
+  mv_gate_up      11212 us   37.9%  x64  avg 175.2 us
+  mv_down          6147 us   20.8%  x64  avg 96.0 us
+  mv_qkv_z         3805 us   12.9%  x48  avg 79.3 us
+  mv_ssm_out       1708 us    5.8%  x48  avg 35.6 us
+  prep_norm        1227 us    4.1%  x129  avg 9.5 us
+  gdn              1194 us    4.0%  x48  avg 24.9 us
+  mv_lm_head       1182 us    4.0%  x1  avg 1181.8 us
+  mv_qkv           1115 us    3.8%  x16  avg 69.7 us
+  mv_o              587 us    2.0%  x16  avg 36.7 us
+  attn              496 us    1.7%  x16  avg 31.0 us
+  prep_silu         398 us    1.3%  x64  avg 6.2 us
+  gdn_pre           211 us    0.7%  x48  avg 4.4 us
+  prep_gdn          174 us    0.6%  x48  avg 3.6 us
+  prep_attn          67 us    0.2%  x16  avg 4.2 us
+  attn_pre           51 us    0.2%  x16  avg 3.2 us
+  argmax             14 us    0.0%  x1  avg 14.0 us
+  embed               4 us    0.0%  x1  avg 4.0 us
+  prep_embed          3 us    0.0%  x1  avg 2.5 us
+---- phase map, prefetch 0
+phase breakdown (us): total 29662
+  mv_gate_up      11403 us   38.4%  x64  avg 178.2 us
+  mv_down          6350 us   21.4%  x64  avg 99.2 us
+  mv_qkv_z         3990 us   13.5%  x48  avg 83.1 us
+  mv_ssm_out       1662 us    5.6%  x48  avg 34.6 us
+  mv_qkv           1194 us    4.0%  x16  avg 74.6 us
+  mv_lm_head       1187 us    4.0%  x1  avg 1186.9 us
+  gdn              1172 us    4.0%  x48  avg 24.4 us
+  prep_norm         867 us    2.9%  x129  avg 6.7 us
+  mv_o              586 us    2.0%  x16  avg 36.6 us
+  attn              501 us    1.7%  x16  avg 31.3 us
+  prep_silu         235 us    0.8%  x64  avg 3.7 us
+  gdn_pre           201 us    0.7%  x48  avg 4.2 us
+  prep_gdn          173 us    0.6%  x48  avg 3.6 us
+  prep_attn          67 us    0.2%  x16  avg 4.2 us
+  attn_pre           54 us    0.2%  x16  avg 3.4 us
+  argmax             13 us    0.0%  x1  avg 13.3 us
+  embed               4 us    0.0%  x1  avg 3.9 us
+  prep_embed          2 us    0.0%  x1  avg 1.8 us
+prefetch 0: 30 tokens, median 29.743 ms (33.62 tok/s), min 29.493, mean 29.905
+prefetch 1: 30 tokens, median 29.721 ms (33.65 tok/s), min 29.348, mean 29.886
+paired off-minus-on: median 0.081 ms, 20 of 30 tokens favour prefetch
+phase breakdown (us): total 29662
+  mv_gate_up      11403 us   38.4%  x64  avg 178.2 us
+  mv_down          6350 us   21.4%  x64  avg 99.2 us
+  mv_qkv_z         3990 us   13.5%  x48  avg 83.1 us
+  mv_ssm_out       1662 us    5.6%  x48  avg 34.6 us
+  mv_qkv           1194 us    4.0%  x16  avg 74.6 us
+  mv_lm_head       1187 us    4.0%  x1  avg 1186.9 us
+  gdn              1172 us    4.0%  x48  avg 24.4 us
+  prep_norm         867 us    2.9%  x129  avg 6.7 us
+  mv_o              586 us    2.0%  x16  avg 36.6 us
+  attn              501 us    1.7%  x16  avg 31.3 us
+  prep_silu         235 us    0.8%  x64  avg 3.7 us
+  gdn_pre           201 us    0.7%  x48  avg 4.2 us
+  prep_gdn          173 us    0.6%  x48  avg 3.6 us
+  prep_attn          67 us    0.2%  x16  avg 4.2 us
+  attn_pre           54 us    0.2%  x16  avg 3.4 us
+  argmax             13 us    0.0%  x1  avg 13.3 us
+  embed               4 us    0.0%  x1  avg 3.9 us
+  prep_embed          2 us    0.0%  x1  avg 1.8 us
+generated 60 tokens in 1.79 s: 33.44 tok/s (29.91 ms/token)
+Removed '/run/user/USER/systemd/user/bonsai-halo.service'.

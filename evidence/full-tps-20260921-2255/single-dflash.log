@@ -1,0 +1,69 @@
+Unit bonsai-halo.service does not exist, proceeding anyway.
+Created symlink '/run/user/USER/systemd/user/bonsai-halo.service' → '/dev/null'.
+loaded layer 1/64 (0.64 GB on device)loaded layer 2/64 (0.73 GB on device)loaded layer 3/64 (0.81 GB on device)loaded layer 4/64 (0.89 GB on device)loaded layer 5/64 (0.98 GB on device)loaded layer 6/64 (1.06 GB on device)loaded layer 7/64 (1.15 GB on device)loaded layer 8/64 (1.23 GB on device)loaded layer 9/64 (1.31 GB on device)loaded layer 10/64 (1.40 GB on device)loaded layer 11/64 (1.48 GB on device)loaded layer 12/64 (1.57 GB on device)loaded layer 13/64 (1.65 GB on device)loaded layer 14/64 (1.74 GB on device)loaded layer 15/64 (1.82 GB on device)loaded layer 16/64 (1.90 GB on device)loaded layer 17/64 (1.99 GB on device)loaded layer 18/64 (2.07 GB on device)loaded layer 19/64 (2.16 GB on device)loaded layer 20/64 (2.24 GB on device)loaded layer 21/64 (2.32 GB on device)loaded layer 22/64 (2.41 GB on device)loaded layer 23/64 (2.49 GB on device)loaded layer 24/64 (2.58 GB on device)loaded layer 25/64 (2.66 GB on device)loaded layer 26/64 (2.74 GB on device)loaded layer 27/64 (2.83 GB on device)loaded layer 28/64 (2.91 GB on device)loaded layer 29/64 (3.00 GB on device)loaded layer 30/64 (3.08 GB on device)loaded layer 31/64 (3.17 GB on device)loaded layer 32/64 (3.25 GB on device)loaded layer 33/64 (3.33 GB on device)loaded layer 34/64 (3.42 GB on device)loaded layer 35/64 (3.50 GB on device)loaded layer 36/64 (3.58 GB on device)loaded layer 37/64 (3.67 GB on device)loaded layer 38/64 (3.75 GB on device)loaded layer 39/64 (3.84 GB on device)loaded layer 40/64 (3.92 GB on device)loaded layer 41/64 (4.01 GB on device)loaded layer 42/64 (4.09 GB on device)loaded layer 43/64 (4.18 GB on device)loaded layer 44/64 (4.26 GB on device)loaded layer 45/64 (4.34 GB on device)loaded layer 46/64 (4.43 GB on device)loaded layer 47/64 (4.51 GB on device)loaded layer 48/64 (4.59 GB on device)loaded layer 49/64 (4.68 GB on device)loaded layer 50/64 (4.76 GB on device)loaded layer 51/64 (4.85 GB on device)loaded layer 52/64 (4.93 GB on device)loaded layer 53/64 (5.02 GB on device)loaded layer 54/64 (5.10 GB on device)loaded layer 55/64 (5.19 GB on device)loaded layer 56/64 (5.27 GB on device)loaded layer 57/64 (5.35 GB on device)loaded layer 58/64 (5.44 GB on device)loaded layer 59/64 (5.52 GB on device)loaded layer 60/64 (5.60 GB on device)loaded layer 61/64 (5.69 GB on device)loaded layer 62/64 (5.77 GB on device)loaded layer 63/64 (5.86 GB on device)loaded layer 64/64 (5.94 GB on device)
+model ready: 7.53 GB on device, 0.8 s
+wide prompt ingestion: mode 19, 256 rows per pass, +10.27 GB on device
+prompt: 23 tokens
+dflash2 drafter loaded, weights q4 (18.98 GB on device total)
+prompt set: 10 cases
+prefill+first draft: 0.12 s
+dflash2: weights q4 route 19 round 0 case 0, prompt 23 tokens in 0.119 s: 193.5 tok/s; 57 tokens in 1.54 s: 37.05 tok/s; 24 steps, 168 drafted, 34 accepted (20.2%), 2.42 tokens/step; per step: draft 7.4 ms, verify 56.7 ms; digest 15868117571875629009
+prefill+first draft: 0.12 s
+dflash2: weights q4 route 19 round 0 case 1, prompt 31 tokens in 0.116 s: 266.5 tok/s; 192 tokens in 2.07 s: 92.73 tok/s; 31 steps, 217 drafted, 165 accepted (76.0%), 6.32 tokens/step; per step: draft 7.7 ms, verify 59.1 ms; digest 554853893681003279
+prefill+first draft: 0.12 s
+dflash2: weights q4 route 19 round 0 case 2, prompt 28 tokens in 0.123 s: 228.0 tok/s; 192 tokens in 3.11 s: 61.81 tok/s; 49 steps, 343 drafted, 146 accepted (42.6%), 3.98 tokens/step; per step: draft 7.6 ms, verify 55.8 ms; digest 6609173093050985802
+prefill+first draft: 0.08 s
+dflash2: weights q4 route 19 round 0 case 3, prompt 32 tokens in 0.077 s: 415.7 tok/s; 192 tokens in 2.92 s: 65.66 tok/s; 47 steps, 329 drafted, 146 accepted (44.4%), 4.11 tokens/step; per step: draft 7.5 ms, verify 54.7 ms; digest 10186625208392174677
+prefill+first draft: 0.09 s
+dflash2: weights q4 route 19 round 0 case 4, prompt 49 tokens in 0.095 s: 517.8 tok/s; 192 tokens in 2.37 s: 81.09 tok/s; 38 steps, 266 drafted, 154 accepted (57.9%), 5.05 tokens/step; per step: draft 7.4 ms, verify 54.9 ms; digest 12850798261158961343
+prefill+first draft: 0.09 s
+dflash2: weights q4 route 19 round 0 case 5, prompt 33 tokens in 0.094 s: 349.6 tok/s; 192 tokens in 3.96 s: 48.46 tok/s; 64 steps, 448 drafted, 127 accepted (28.3%), 2.98 tokens/step; per step: draft 7.5 ms, verify 54.4 ms; digest 17922039974856960680
+prefill+first draft: 0.10 s
+dflash2: weights q4 route 19 round 0 case 6, prompt 44 tokens in 0.099 s: 445.4 tok/s; 192 tokens in 3.29 s: 58.33 tok/s; 53 steps, 371 drafted, 140 accepted (37.7%), 3.64 tokens/step; per step: draft 7.5 ms, verify 54.6 ms; digest 2081386989518216490
+prefill+first draft: 0.09 s
+dflash2: weights q4 route 19 round 0 case 7, prompt 23 tokens in 0.095 s: 242.4 tok/s; 192 tokens in 2.36 s: 81.33 tok/s; 38 steps, 266 drafted, 155 accepted (58.3%), 5.08 tokens/step; per step: draft 7.4 ms, verify 54.7 ms; digest 2806429882815168189
+prefill+first draft: 0.09 s
+dflash2: weights q4 route 19 round 0 case 8, prompt 33 tokens in 0.095 s: 347.5 tok/s; 192 tokens in 3.29 s: 58.42 tok/s; 53 steps, 371 drafted, 141 accepted (38.0%), 3.66 tokens/step; per step: draft 7.5 ms, verify 54.5 ms; digest 16998497453504658766
+prefill+first draft: 0.09 s
+dflash2: weights q4 route 19 round 0 case 9, prompt 36 tokens in 0.095 s: 380.2 tok/s; 192 tokens in 3.78 s: 50.82 tok/s; 61 steps, 427 drafted, 137 accepted (32.1%), 3.25 tokens/step; per step: draft 7.5 ms, verify 54.4 ms; digest 1908835723494080770
+prefill+first draft: 0.09 s
+dflash2: weights q4 route 19 round 1 case 0, prompt 23 tokens in 0.095 s: 242.6 tok/s; 57 tokens in 1.28 s: 44.40 tok/s; 21 steps, 147 drafted, 37 accepted (25.2%), 2.76 tokens/step; per step: draft 7.1 ms, verify 54.0 ms; digest 15868117571875629009
+prefill+first draft: 0.11 s
+dflash2: weights q4 route 19 round 1 case 1, prompt 31 tokens in 0.110 s: 282.0 tok/s; 192 tokens in 2.05 s: 93.59 tok/s; 33 steps, 231 drafted, 163 accepted (70.6%), 5.94 tokens/step; per step: draft 7.3 ms, verify 54.8 ms; digest 554853893681003279
+prefill+first draft: 0.11 s
+dflash2: weights q4 route 19 round 1 case 2, prompt 28 tokens in 0.106 s: 263.0 tok/s; 192 tokens in 2.85 s: 67.32 tok/s; 46 steps, 322 drafted, 148 accepted (46.0%), 4.22 tokens/step; per step: draft 7.4 ms, verify 54.6 ms; digest 8839442435491275909
+prefill+first draft: 0.06 s
+dflash2: weights q4 route 19 round 1 case 3, prompt 32 tokens in 0.064 s: 503.5 tok/s; 192 tokens in 2.91 s: 65.91 tok/s; 47 steps, 329 drafted, 146 accepted (44.4%), 4.11 tokens/step; per step: draft 7.4 ms, verify 54.5 ms; digest 10186625208392174677
+prefill+first draft: 0.09 s
+dflash2: weights q4 route 19 round 1 case 4, prompt 49 tokens in 0.094 s: 522.3 tok/s; 192 tokens in 2.36 s: 81.37 tok/s; 38 steps, 266 drafted, 154 accepted (57.9%), 5.05 tokens/step; per step: draft 7.4 ms, verify 54.7 ms; digest 12850798261158961343
+prefill+first draft: 0.09 s
+dflash2: weights q4 route 19 round 1 case 5, prompt 33 tokens in 0.094 s: 350.4 tok/s; 192 tokens in 3.96 s: 48.45 tok/s; 64 steps, 448 drafted, 127 accepted (28.3%), 2.98 tokens/step; per step: draft 7.5 ms, verify 54.4 ms; digest 17922039974856960680
+prefill+first draft: 0.10 s
+dflash2: weights q4 route 19 round 1 case 6, prompt 44 tokens in 0.099 s: 443.1 tok/s; 192 tokens in 3.29 s: 58.34 tok/s; 53 steps, 371 drafted, 140 accepted (37.7%), 3.64 tokens/step; per step: draft 7.5 ms, verify 54.6 ms; digest 2081386989518216490
+prefill+first draft: 0.10 s
+dflash2: weights q4 route 19 round 1 case 7, prompt 23 tokens in 0.095 s: 241.9 tok/s; 192 tokens in 2.36 s: 81.35 tok/s; 38 steps, 266 drafted, 155 accepted (58.3%), 5.08 tokens/step; per step: draft 7.4 ms, verify 54.7 ms; digest 2806429882815168189
+prefill+first draft: 0.09 s
+dflash2: weights q4 route 19 round 1 case 8, prompt 33 tokens in 0.094 s: 350.5 tok/s; 192 tokens in 3.29 s: 58.37 tok/s; 53 steps, 371 drafted, 141 accepted (38.0%), 3.66 tokens/step; per step: draft 7.5 ms, verify 54.6 ms; digest 16998497453504658766
+prefill+first draft: 0.09 s
+dflash2: weights q4 route 19 round 1 case 9, prompt 36 tokens in 0.095 s: 380.5 tok/s; 192 tokens in 3.79 s: 50.72 tok/s; 61 steps, 427 drafted, 137 accepted (32.1%), 3.25 tokens/step; per step: draft 7.5 ms, verify 54.5 ms; digest 1908835723494080770
+prefill+first draft: 0.09 s
+dflash2: weights q4 route 19 round 2 case 0, prompt 23 tokens in 0.095 s: 242.2 tok/s; 57 tokens in 1.28 s: 44.39 tok/s; 21 steps, 147 drafted, 37 accepted (25.2%), 2.76 tokens/step; per step: draft 7.2 ms, verify 54.0 ms; digest 15868117571875629009
+prefill+first draft: 0.11 s
+dflash2: weights q4 route 19 round 2 case 1, prompt 31 tokens in 0.110 s: 281.7 tok/s; 192 tokens in 2.05 s: 93.49 tok/s; 33 steps, 231 drafted, 163 accepted (70.6%), 5.94 tokens/step; per step: draft 7.3 ms, verify 54.9 ms; digest 554853893681003279
+prefill+first draft: 0.11 s
+dflash2: weights q4 route 19 round 2 case 2, prompt 28 tokens in 0.106 s: 263.2 tok/s; 192 tokens in 2.85 s: 67.33 tok/s; 46 steps, 322 drafted, 148 accepted (46.0%), 4.22 tokens/step; per step: draft 7.4 ms, verify 54.6 ms; digest 8839442435491275909
+prefill+first draft: 0.06 s
+dflash2: weights q4 route 19 round 2 case 3, prompt 32 tokens in 0.064 s: 499.6 tok/s; 192 tokens in 2.92 s: 65.78 tok/s; 47 steps, 329 drafted, 146 accepted (44.4%), 4.11 tokens/step; per step: draft 7.4 ms, verify 54.7 ms; digest 10186625208392174677
+prefill+first draft: 0.09 s
+dflash2: weights q4 route 19 round 2 case 4, prompt 49 tokens in 0.095 s: 516.9 tok/s; 192 tokens in 2.37 s: 81.12 tok/s; 38 steps, 266 drafted, 154 accepted (57.9%), 5.05 tokens/step; per step: draft 7.4 ms, verify 54.9 ms; digest 12850798261158961343
+prefill+first draft: 0.09 s
+dflash2: weights q4 route 19 round 2 case 5, prompt 33 tokens in 0.095 s: 348.0 tok/s; 192 tokens in 3.96 s: 48.43 tok/s; 64 steps, 448 drafted, 127 accepted (28.3%), 2.98 tokens/step; per step: draft 7.5 ms, verify 54.5 ms; digest 17922039974856960680
+prefill+first draft: 0.10 s
+dflash2: weights q4 route 19 round 2 case 6, prompt 44 tokens in 0.099 s: 444.9 tok/s; 192 tokens in 3.29 s: 58.37 tok/s; 53 steps, 371 drafted, 140 accepted (37.7%), 3.64 tokens/step; per step: draft 7.5 ms, verify 54.6 ms; digest 2081386989518216490
+prefill+first draft: 0.09 s
+dflash2: weights q4 route 19 round 2 case 7, prompt 23 tokens in 0.095 s: 242.8 tok/s; 192 tokens in 2.36 s: 81.30 tok/s; 38 steps, 266 drafted, 155 accepted (58.3%), 5.08 tokens/step; per step: draft 7.4 ms, verify 54.8 ms; digest 2806429882815168189
+prefill+first draft: 0.09 s
+dflash2: weights q4 route 19 round 2 case 8, prompt 33 tokens in 0.094 s: 350.7 tok/s; 192 tokens in 3.35 s: 57.30 tok/s; 54 steps, 378 drafted, 141 accepted (37.3%), 3.61 tokens/step; per step: draft 7.5 ms, verify 54.6 ms; digest 14183662568125864979
+prefill+first draft: 0.10 s
+dflash2: weights q4 route 19 round 2 case 9, prompt 36 tokens in 0.097 s: 371.9 tok/s; 192 tokens in 3.79 s: 50.71 tok/s; 61 steps, 427 drafted, 137 accepted (32.1%), 3.25 tokens/step; per step: draft 7.5 ms, verify 54.5 ms; digest 1908835723494080770
+Removed '/run/user/USER/systemd/user/bonsai-halo.service'.

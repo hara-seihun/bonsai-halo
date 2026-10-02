@@ -3,7 +3,7 @@
 One model, one machine. Bonsai 2 27B (ternary, Qwen3.8 hybrid GDN/attention, 64 layers) on the Ryzen AI MAX+ 395 with the Radeon 8060S (gfx1151, 40 CUs, 256-bit LPDDR5X-8000). Nothing here is general. Every shape is a compile-time constant and every byte of weight traffic is accounted for.
 
 Cross-project research decisions and comparator boundaries live in
-[Kelana's catalogue](../kelana/research/catalogue/README.md). This document owns
+[Kelana's catalogue](https://github.com/hara-seihun/kelana/blob/main/research/catalogue/README.md). This document owns
 the engine design and its measured implementation history.
 
 ## The physics, measured on this box
